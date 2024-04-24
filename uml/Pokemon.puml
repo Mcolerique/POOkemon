@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Pokemon {
+    - m_nom: String
+    - m_pv: int
+    - m_pvMax: int
+    - m_attaque: int
+    - element: int
+    + attaquer(p: Pokemon): void
+    + subirDegats(degats: int): void
+    + estVivant(): boolean
+    + afficher(): void
+}
+class Joueur {
+    - m_nom: String
+    - m_pile: Pioche
+    - m_main: Main
+    + ajouterPokemon(p: Pokemon): void
+    + retirerPokemon(): Pokemon
+    + piocherPokemon(): Pokemon
+    + defausser(): void
+}
+class TasdeCartes {
+    - m_liste: List<Pokemon>
+    + ajouter(p: Pokemon): void
+}
+class Pioche {
+    + piocher(): void
+    + retirer(): void
+}
+class Defausse {
+}
+class Main {
+    + piocher(): void
+    + retirer(): void
+}
+class Jeu {
+    - m_j1: Joueur
+    - m_j2: Joueur
+    - m_terrain: Terrain
+    - m_tour: Tour
+    + m_tabElt: int[][]
+    + initialiser(): void
+    + jouer(): void
+    + finirTour(): void
+    + estFini(): boolean
+}
+class Tour {
+    - m_joueur: Joueur
+    + changerJoueur(): void
+    + piocher(): void
+    + defausser(): void
+    + attaquer(): void
+    + finirTour(): void
+}
+class Terrain {
+    + m_cartes_j1: Pokemon[]
+    + m_cartes_j2: Pokemon[]
+    + defausser(): void
+}
+
+Joueur o--> Pioche : possède
+Joueur o--> Pokemon : possède
+Joueur o--> Defausse : possède
+Tour --> Joueur : utilise
+Jeu --> Joueur : contient
+Jeu --> Terrain : contient
+Jeu --> Tour : contient
+Terrain o-->"\nm_cartes_j1\nm_cartes_j2" Pokemon : contient
+TasdeCartes o-->"\nm_liste" Pokemon : contient
+
+'inheritance relationship'
+TasdeCartes <|-- Pioche
+TasdeCartes <|-- Defausse
+TasdeCartes <|-- Main
+
+@enduml
