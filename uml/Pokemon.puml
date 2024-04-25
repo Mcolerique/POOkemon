@@ -2,17 +2,20 @@
 'https://plantuml.com/class-diagram
 
 class Pokemon {
+    + <<constructor>> Pokemon()
     - m_nom: String
     - m_pv: int
     - m_pvMax: int
     - m_attaque: int
-    - element: int
+    - m_element: int
     + attaquer(p: Pokemon): void
     + subirDegats(degats: int): void
     + estVivant(): boolean
     + afficher(): void
 }
+
 class Joueur {
+    + <<constructor>> Joueur(nom: String)
     - m_nom: String
     - m_pile: Pioche
     - m_main: Main
@@ -21,32 +24,41 @@ class Joueur {
     + piocherPokemon(): Pokemon
     + defausser(): void
 }
-class TasdeCartes {
-    - m_liste: List<Pokemon>
-    + ajouter(p: Pokemon): void
+
+class Ordinateur {
 }
+
 class Pioche {
+    + <<constructor>> Pioche()
     + piocher(): void
-    + retirer(): void
 }
+
 class Defausse {
+    + <<constructor>> Defausse()
+    + defausser(): void
 }
+
 class Main {
     + piocher(): void
-    + retirer(): void
+    + poser(): void
 }
+
 class Jeu {
+    + <<constructor>> Jeu()
     - m_j1: Joueur
     - m_j2: Joueur
     - m_terrain: Terrain
     - m_tour: Tour
+    + m_nomMaxPokemon: int
     + m_tabElt: int[][]
-    + initialiser(): void
+    + m_listePokemon: List<Pokemon>
     + jouer(): void
     + finirTour(): void
     + estFini(): boolean
 }
+
 class Tour {
+    + <<constructor>> Tour(j: Joueur)
     - m_joueur: Joueur
     + changerJoueur(): void
     + piocher(): void
@@ -54,25 +66,30 @@ class Tour {
     + attaquer(): void
     + finirTour(): void
 }
+
 class Terrain {
+    + <<constructor>> Terrain()
     + m_cartes_j1: Pokemon[]
     + m_cartes_j2: Pokemon[]
     + defausser(): void
 }
 
-Joueur o--> Pioche : possède
-Joueur o--> Pokemon : possède
-Joueur o--> Defausse : possède
-Tour --> Joueur : utilise
+Joueur o-> Pioche : possède
+Joueur o-> Pokemon : possède
+Joueur o--> Defausse : défausse\n dans
+Joueur --> Terrain : joue sur
+Joueur .> Terrain : utilise
+Tour --> Joueur : appelle
 Jeu --> Joueur : contient
 Jeu --> Terrain : contient
 Jeu --> Tour : contient
 Terrain o-->"\nm_cartes_j1\nm_cartes_j2" Pokemon : contient
-TasdeCartes o-->"\nm_liste" Pokemon : contient
+Main *-->"\nm_tabPokemon" Pokemon : contient
+Pioche *-->"\nm_tabPokemon" Pokemon : contient
+Defausse *-->"\nm_tabPokemon" Pokemon : contient
+Joueur o--> Main : possède
 
 'inheritance relationship'
-TasdeCartes <|-- Pioche
-TasdeCartes <|-- Defausse
-TasdeCartes <|-- Main
+Joueur <|-- Ordinateur
 
 @enduml
