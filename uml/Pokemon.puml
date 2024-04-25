@@ -15,10 +15,10 @@ class Pokemon {
 }
 
 class Joueur {
-    + <<constructor>> Joueur(nom: String)
     - m_nom: String
     - m_pile: Pioche
     - m_main: Main
+    + <<constructor>> Joueur(nom: String)
     + ajouterPokemon(p: Pokemon): void
     + retirerPokemon(): Pokemon
     + piocherPokemon(): Pokemon
