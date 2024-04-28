@@ -6,6 +6,6 @@ public class Jeu {
     private Terrain m_terrain;
     public int m_nomMaxPokemon;
     public int[][] m_tabElt;
-    public ArrayList<Pokemon> m_listPokemon;
+    public ArrayList<String> m_listNomPokemon;
 
 }

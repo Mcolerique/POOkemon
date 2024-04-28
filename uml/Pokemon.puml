@@ -29,8 +29,8 @@ class Ordinateur {
 }
 
 class Pioche {
-    + <<constructor>> Pioche()
-    + piocher(): void
+    + <<constructor>> Pioche(Jeu:jeu, Integer:taille)
+    + piocher(): Pokemon
 }
 
 class Defausse {
