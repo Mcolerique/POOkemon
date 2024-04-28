@@ -69,8 +69,6 @@ class Tour {
 
 class Terrain {
     + <<constructor>> Terrain()
-    + m_cartes_j1: Pokemon[]
-    + m_cartes_j2: Pokemon[]
     + defausser(): void
 }
 
@@ -84,9 +82,9 @@ Jeu --> Joueur : contient
 Jeu --> Terrain : contient
 Jeu --> Tour : contient
 Terrain o-->"\nm_cartes_j1\nm_cartes_j2" Pokemon : contient
-Main *-->"\nm_tabPokemon" Pokemon : contient
-Pioche *-->"\nm_tabPokemon" Pokemon : contient
-Defausse *-->"\nm_tabPokemon" Pokemon : contient
+Main *-->"\nm_main" Pokemon : contient
+Pioche *-->"\nm_pioche" Pokemon : contient
+Defausse *-->"\nm_defausse" Pokemon : contient
 Joueur o--> Main : possède
 
 'inheritance relationship'
