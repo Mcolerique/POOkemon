@@ -1,25 +1,24 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class Tour {
-    private Joueur m_joueur;
+    private final Jeu jeu;
+    private Joueur joueur;
 
-    public Tour(Joueur joueur) {
-        m_joueur = joueur;
+    public Tour(Jeu jeu, Joueur joueur) {
+        this.jeu = jeu;
+        this.joueur = joueur;
     }
 
     public void changerJoueur() {
+        joueur = joueur == jeu.getJoueur1() ? jeu.getJoueur2() : jeu.getJoueur1();
     }
 
     public void piocher() {
+        joueur.piocherPokemon();
     }
 
-    public void defausser(Pokemon p) {
-    }
-
-    public void attaquer(Joueur adversaire) {
-
-    }
-    public void finirTour() {
+    public void defausser(Pokemon pokemon) {
+        joueur.defausser(pokemon);
     }
 
 }

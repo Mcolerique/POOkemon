@@ -6,7 +6,7 @@ public class Pokemon {
   private int m_pv;
   private int m_attaque;
   private int m_element; // Indice de l'élément du Pokémon
-  private static int[][] m_tabElt;
+  private Jeu m_jeu;
 
   public Pokemon(String nom) {
     m_nom = nom;
@@ -16,14 +16,10 @@ public class Pokemon {
     m_attaque = (random.nextInt(5) + 3) * 10;
     m_element = random.nextInt(4); // Choix aléatoire de l'élément
   }
-  public static void initialiserTabElt(int[][] tabElt) {
-    m_tabElt = tabElt;
-  }
 
   public void attaquer(Pokemon pokemonCible) {
     int degats = m_attaque;
-    int advantage = m_tabElt[this.m_element][pokemonCible.m_element];
-
+    int advantage = m_jeu.getTabElt()[this.m_element][pokemonCible.m_element];
     if (advantage == 1) {
       degats += 10; // Avantage d'affinité
     } else if (advantage == -1) {

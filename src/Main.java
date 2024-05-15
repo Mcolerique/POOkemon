@@ -30,4 +30,16 @@ public class Main {
             return null; // or throw an exception
         }
     }
+
+    public void afficher() {
+        int num = 1;
+        for (Pokemon pokemon : m_listePokemon) {
+            System.out.println(num + pokemon.getNom());
+            num++;
+        }
+    }
+
+    public int getNbPokemon() {
+        return m_listePokemon.size();
+    }
 }

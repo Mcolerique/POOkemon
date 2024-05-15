@@ -5,32 +5,25 @@ import java.util.List;
 public class Pioche {
     private List<Pokemon> m_pioche;
 
-    public Pioche(List<String> listeNomPokemon) {
+    public Pioche(Jeu jeu, int taillPioche) {
         m_pioche = new ArrayList<>();
-        // Génération des Pokémon dans la pioche en utilisant la liste de noms de Pokémon
-        genererPokemon(listeNomPokemon);
-        // Mélange aléatoire de la pioche
-        melangerPioche();
-    }
-
-    private void genererPokemon(List<String> listeNomPokemon) {
-        for (int i = 0; i < 20; i++) { // Générer 20 Pokémon dans la pioche
-            String nomPokemon = listeNomPokemon.get(i % listeNomPokemon.size());
-            Pokemon pokemon = new Pokemon(nomPokemon);
-            m_pioche.add(pokemon);
+        for (int i = 0; i < taillPioche; i++) {
+            // prendre un pokemon aléatoire dans la liste des noms de pokemons
+            String nomPokemon = jeu.getListNomPokemon().get((int) (Math.random() * jeu.getListNomPokemon().size()));
+            m_pioche.add(new Pokemon(nomPokemon));
+            // supprimer le pokemon de la liste des noms de pokemons
+            jeu.getListNomPokemon().remove(nomPokemon);
         }
-    }
-
-    private void melangerPioche() {
         Collections.shuffle(m_pioche);
     }
 
-    public void piocherMain(Main main) {
+    public void piocherMain(Main mMain) {
+        // si la pioche n'est pas vide
         if (!m_pioche.isEmpty()) {
-            Pokemon pokemon = m_pioche.remove(0);
-            main.ajouterPokemon(pokemon);
-        } else {
-            System.out.println("La pioche est vide !");
+            // ajouter le premier pokemon de la pioche à la main
+            mMain.ajouterPokemon(m_pioche.get(0));
+            // retirer le premier pokemon de la pioche
+            m_pioche.remove(0);
         }
     }
 }
