@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Pokemon {
+public class Pokemon implements Elements{
   private String m_nom;
   private int m_pvMax;
   private int m_pv;
@@ -18,14 +18,7 @@ public class Pokemon {
   }
 
   public void attaquer(Pokemon pokemonCible) {
-    int degats = m_attaque;
-    int advantage = m_jeu.getTabElt()[this.m_element][pokemonCible.m_element];
-    if (advantage == 1) {
-      degats += 10; // Avantage d'affinité
-    } else if (advantage == -1) {
-      degats -= 10; // Désavantage d'affinité
-    }
-
+    int degats = m_attaque + m_tabElt[this.m_element][pokemonCible.m_element];
     pokemonCible.subirDegats(degats);
   }
 
@@ -55,5 +48,18 @@ public class Pokemon {
 
   public int getElement() {
     return m_element;
+  }
+  public String getElementString(){
+    switch (this.m_element){
+      case 1:
+        return "Terre";
+      case 2:
+        return "Eau";
+      case 3:
+        return "Feu";
+      case 4:
+        return "Air";
+    }
+    return "??";
   }
 }
