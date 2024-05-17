@@ -10,7 +10,7 @@ public class Pioche {
         for (int i = 0; i < taillPioche; i++) {
             // prendre un pokemon aléatoire dans la liste des noms de pokemons
             String nomPokemon = jeu.getListNomPokemon().get((int) (Math.random() * jeu.getListNomPokemon().size()));
-            m_pioche.add(new Pokemon(nomPokemon));
+            m_pioche.add(new Pokemon(nomPokemon, jeu));
             // supprimer le pokemon de la liste des noms de pokemons
             jeu.getListNomPokemon().remove(nomPokemon);
         }

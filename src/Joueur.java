@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Joueur {
     private String m_nom;
     private Pioche m_pioche;
@@ -13,10 +15,6 @@ public class Joueur {
 
     private void piocher() {
         m_pioche.piocherMain(m_main);
-    }
-
-    public void placerPokemons(Terrain terrain, int pokemon) {
-        terrain.placerPokemons(this, pokemon);
     }
 
     public void attaquer(Pokemon attaquant, Pokemon adversaire) {
@@ -50,7 +48,20 @@ public class Joueur {
         m_defausse.defausser(pokemon);
     }
 
-    public Pokemon getPokemon(int pokemonAttaque) {
-        return m_main.getListePokemon().get(pokemonAttaque);
+    public Pokemon getPokemon(int pokemonCible) {
+        List<Pokemon> listePokemon = m_main.getListePokemon();
+        if (pokemonCible >= 0 && pokemonCible < listePokemon.size()) {
+            // Vérifiez que l'index est valide avant d'accéder à la liste
+            Pokemon pokemon = listePokemon.get(pokemonCible);
+            // Supprimez le pokemon de la main seulement s'il existe dans la liste
+            m_main.retirerPokemon(pokemon);
+            return pokemon;
+        } else {
+            // Gérez le cas où l'index est invalide
+            System.out.println("L'index du Pokémon est invalide.");
+            return null;
+        }
     }
+
+
 }

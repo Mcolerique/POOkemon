@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Jeu {
     private Joueur m_j1;
@@ -21,8 +22,8 @@ public class Jeu {
         // 3. le pokemon attaque l'autre pokemon
         // 4. le joueur pioche dans sa main jusqu'à avoir 5 pokemons dans la main
 
-        // Initialisation des joueurs
         this.genererListNomPokemon();
+        // Initialisation des joueurs
         m_j1 = new Joueur("Joueur 1", this, 20);
         m_j2 = new Joueur("Joueur 2", this, 21);
         for (int i=0; i<5; i++) {
@@ -36,30 +37,34 @@ public class Jeu {
             m_j1.getMain().afficher();
             System.out.println("Choisissez un pokemon à placer sur le terrain");
             int pokemonaplacer;
-            try {
-                pokemonaplacer = System.in.read();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            m_j1.placerPokemons(m_terrain, pokemonaplacer);
+            Scanner scanner = new Scanner(System.in);
+            pokemonaplacer = scanner.nextInt() - 1;
+            m_terrain.placerPokemons(m_j1, pokemonaplacer);
+            // afficher le terrain
+            m_terrain.printPokemon(m_j1);
+            pokemonaplacer = 0;
         }
         System.out.println("Tour de " + m_j2.getNom());
         for (int i=0; i<3; i++) {
             m_j2.getMain().afficher();
             System.out.println("Choisissez un pokemon à placer sur le terrain");
             int pokemonaplacer;
-            try {
-                pokemonaplacer = System.in.read();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            m_j2.placerPokemons(m_terrain, pokemonaplacer);
+            Scanner scanner = new Scanner(System.in);
+            pokemonaplacer = scanner.nextInt() - 1;
+            m_terrain.placerPokemons(m_j2, pokemonaplacer);
+            // afficher le terrain
+            m_terrain.printPokemon(m_j2);
+            pokemonaplacer = 0;
         }
 
         // Boucle de jeu
         while (!partieTerminee()) {
             // Joueur 1
             System.out.println("Tour de " + m_j1.getNom());
+            // piocher
+            while (m_j2.getMain().getNbPokemon() < 5) {
+                m_j2.piocherPokemon();
+            }
             m_terrain.printPokemon(m_j1);
             System.out.println("Placer des pokemons sur le terrain");
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
@@ -67,34 +72,25 @@ public class Jeu {
                 // afficher la main du joueur
                 m_j1.getMain().afficher();
                 int pokemonaplacer;
-                try {
-                    pokemonaplacer = System.in.read();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                m_j1.placerPokemons(m_terrain, pokemonaplacer);
+                Scanner scanner = new Scanner(System.in);
+                pokemonaplacer = scanner.nextInt() - 1;
+                m_terrain.placerPokemons(m_j1, pokemonaplacer);
             }
             // attaquer
             System.out.println("Choisissez un pokemon avec lequel attaquer");
             m_terrain.printPokemon(m_j1);
             int pokemonAttaquant;
-            try {
-                pokemonAttaquant = System.in.read();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            Scanner scanner = new Scanner(System.in);
+            pokemonAttaquant = scanner.nextInt() - 1;
             System.out.println("Choisissez un pokemon à attaquer");
             m_terrain.printPokemon(m_j2);
             int pokemonAttaque;
-            try {
-                pokemonAttaque = System.in.read();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            m_j1.attaquer((Pokemon) m_terrain.getPokemon(m_j2), (Pokemon) m_terrain.getPokemon(m_j1));
+            Scanner scanner2 = new Scanner(System.in);
+            pokemonAttaque = scanner2.nextInt() - 1;
+            m_j1.attaquer((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaquant), (Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque));
             // si le pokemon attaqué est mort, le défausser
-            if (((Pokemon) m_terrain.getPokemon(m_j2)).getPv()<=0) {
-                m_j2.defausser((Pokemon) m_terrain.getPokemon(m_j2));
+            if (((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque)).getPv()<=0) {
+                m_j2.defausser((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque));
             }
             // piocher
             while (m_j1.getMain().getNbPokemon() < 5) {
@@ -110,39 +106,27 @@ public class Jeu {
                 // afficher la main du joueur
                 m_j2.getMain().afficher();
                 int pokemonaplacer;
-                try {
-                    pokemonaplacer = System.in.read();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                m_j2.placerPokemons(m_terrain, pokemonaplacer);
+                Scanner scanner3 = new Scanner(System.in);
+                pokemonaplacer = scanner3.nextInt() - 1;
+                m_terrain.placerPokemons(m_j2, pokemonaplacer);
             }
             // attaquer
             System.out.println("Choisissez un pokemon avec lequel attaquer");
             m_terrain.printPokemon(m_j2);
             int pokemonAttaquant2;
-            try {
-                pokemonAttaquant2 = System.in.read();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            Scanner scanner4 = new Scanner(System.in);
+            pokemonAttaquant2 = scanner4.nextInt() - 1;
             System.out.println("Choisissez un pokemon à attaquer");
             m_terrain.printPokemon(m_j1);
             int pokemonAttaque2;
-            try {
-                pokemonAttaque2 = System.in.read();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            m_j2.attaquer((Pokemon) m_terrain.getPokemon(m_j1), (Pokemon) m_terrain.getPokemon(m_j2));
+            Scanner scanner5 = new Scanner(System.in);
+            pokemonAttaque2 = scanner5.nextInt() - 1;
+            m_j2.attaquer((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaquant2), (Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2));
             // si le pokemon attaqué est mort, le défausser
-            if (((Pokemon) m_terrain.getPokemon(m_j1)).getPv()<=0) {
-                m_j1.defausser((Pokemon) m_terrain.getPokemon(m_j1));
+            if (!((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2)).estVivant()) {
+                m_j1.defausser((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2));
             }
-            // piocher
-            while (m_j2.getMain().getNbPokemon() < 5) {
-                m_j2.piocherPokemon();
-            }
+
             partieTerminee();
         }
     }
@@ -214,4 +198,5 @@ public class Jeu {
         this.m_listNomPokemon.add("morphéo");
         this.m_listNomPokemon.add("Zarbi");
     }
+
 }
