@@ -60,15 +60,15 @@ public class Jeu {
         // Boucle de jeu
         while (!partieTerminee()) {
             // Joueur 1
-            System.out.println("Tour de " + m_j1.getNom());
+            System.out.println("Tour de " + m_j1.getNom() + " :\n");
             // piocher
-            while (m_j2.getMain().getNbPokemon() < 5) {
-                m_j2.piocherPokemon();
+            while (m_j1.getMain().getNbPokemon() < 5 && !m_j1.getPioche().estVide()) {
+                m_j1.piocherPokemon();
             }
             m_terrain.printPokemon(m_j1);
             System.out.println("Placer des pokemons sur le terrain");
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (m_terrain.getNbPokemonsJoueur(m_j1) < 3) {
+            while (m_terrain.getNbPokemonsJoueur(m_j1) < 3 && m_j1.getMain().getNbPokemon() > 0){
                 // afficher la main du joueur
                 m_j1.getMain().afficher();
                 int pokemonaplacer;
@@ -90,7 +90,14 @@ public class Jeu {
             m_j1.attaquer((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaquant), (Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque));
             // si le pokemon attaqué est mort, le défausser
             if (((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque)).getPv()<=0) {
+                System.out.println("Le pokemon " + ((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque)).getNom() + " est mort");
                 m_j2.defausser((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque));
+                // retirer le pokemon du terrain
+                m_terrain.retirerPokemon(m_j2, pokemonAttaque);
+                if(m_terrain.getNbPokemonsJoueur((m_j2)) == 0){
+                    System.out.println("Le joueur 1 a gagné");
+                    partieTerminee();
+                }
             }
             // piocher
             while (m_j1.getMain().getNbPokemon() < 5) {
@@ -98,11 +105,14 @@ public class Jeu {
             }
 
             // Joueur 2
-            System.out.println("Tour de " + m_j2.getNom());
+            System.out.println("\nTour de " + m_j2.getNom() + " :\n");
+            while (m_j2.getMain().getNbPokemon() < 5 && !m_j2.getPioche().estVide()) {
+                m_j2.piocherPokemon();
+            }
             m_terrain.printPokemon(m_j2);
             System.out.println("Placer des pokemons sur le terrain");
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (m_terrain.getNbPokemonsJoueur(m_j2) < 3) {
+            while (m_terrain.getNbPokemonsJoueur(m_j2) < 3 && m_j2.getMain().getNbPokemon() > 0){
                 // afficher la main du joueur
                 m_j2.getMain().afficher();
                 int pokemonaplacer;
@@ -124,10 +134,15 @@ public class Jeu {
             m_j2.attaquer((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaquant2), (Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2));
             // si le pokemon attaqué est mort, le défausser
             if (!((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2)).estVivant()) {
+                System.out.println("Le pokemon " + ((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2)).getNom() + " est mort");
                 m_j1.defausser((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2));
+                // retirer le pokemon du terrain
+                m_terrain.retirerPokemon(m_j1, pokemonAttaque2);
+                if(m_terrain.getNbPokemonsJoueur((m_j1)) == 0){
+                    System.out.println("Le joueur 2 a gagné");
+                    partieTerminee();
+                }
             }
-
-            partieTerminee();
         }
     }
 
