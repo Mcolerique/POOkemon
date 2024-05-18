@@ -10,9 +10,10 @@ public class Tour {
     }
     public void nouveauTour(){
         this.m_nbTour++;
-    }
-    public int getM_nbTour(){
-        return this.m_nbTour;
+        Affichage.terrain(this.jeu.getM_terrain(),this.jeu.getJoueur1(), this.jeu.getJoueur2());
+        jeu.jouer(jeu.getJoueur1(), jeu.getJoueur2());
+        jeu.jouer(jeu.getJoueur2(), jeu.getJoueur1());
+        this.nouveauTour();
     }
     public String getM_nbTourString(){
         if(this.m_nbTour == 1){

@@ -20,7 +20,7 @@ public abstract class Joueur {
     public abstract Boolean attaquer(Terrain terrain, Joueur adversaire);
 
     public boolean aPerdu() {
-        return this.m_main.getListePokemon().isEmpty();
+        return this.m_main.getListePokemon().isEmpty() && this.m_pioche.getM_pioche().isEmpty();
     }
 
     public String getNom() {

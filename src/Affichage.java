@@ -8,15 +8,23 @@ public class Affichage {
         char reponse = scanner.next().charAt(0);
         if (reponse == 'o'){
             Jeu jeu = new Jeu();
-            jeu.jouer();
+            jeu.initialisationJeu();
+        }
+        else {
+            System.out.println("Bah casse toi alors");
+            System.exit(0);
         }
     }
     static void terrain(Terrain terrain, Joueur j1, Joueur j2){
         System.out.println(" Pokémon du Joueur 1 : ");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j1));
+        System.out.println("pioche : "+j1.m_pioche.getM_pioche().size() + " cartes");
+        System.out.println("défausse : "+j1.m_defausse.getDefausse().size()+" cartes");
         System.out.println("\n--------------------------------------------------------------------------------");
         System.out.println(" Pokémon du Joueur 2 : ");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j2));
+        System.out.println("pioche : "+j2.m_pioche.getM_pioche().size() + " cartes");
+        System.out.println("défausse : "+j2.m_defausse.getDefausse().size()+" cartes");
 
     }
     static void affichePokemon(List<Pokemon> list){
@@ -54,5 +62,14 @@ public class Affichage {
             System.out.print(String.format("%-" + largeurCase + "s", type));
         }
         System.out.println();
+    }
+    static void finDePartie(Joueur gagnant){
+        if (gagnant.getClass() == Humain.class) {
+            System.out.println("Vous avez gagné !! "+gagnant.m_pioche.getM_pioche().size()+gagnant.m_main.getNbPokemon()+" de vos Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
+        }
+        else {
+            System.out.println("Vous avez perdu !! "+gagnant.m_pioche.getM_pioche().size()+gagnant.m_main.getNbPokemon()+" de ses Pokemon sont en pleine santé, vous êtes vraiment nul");
+        }
+        Affichage.accueil();
     }
 }

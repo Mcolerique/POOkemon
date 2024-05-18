@@ -16,7 +16,7 @@ public class Jeu {
         m_tour = new Tour(this);
     }
 
-    public void jouer() {
+    public void jouer(Joueur j1, Joueur j2) {
         // Fonctionnement d'un tour :
         // 1. le joueur place jusqu'à 3 pokemons sur le terrain, il faut qu'il y en ait 3
         // 2. le joueur choisit un pokemon avec lequel attaquer et 1 pokemon à attaquer
@@ -25,39 +25,25 @@ public class Jeu {
 
 
         // Boucle de jeu
-        this.initialisationJeu();
-        while (!partieTerminee()) {
+        if (!partieTerminee()) {
             System.out.println(this.m_tour.getM_nbTourString()+" tour :");
             // Joueur 1
-            System.out.println("Tour de " + this.m_j1.getNom() + " :\n");
+            System.out.println("Tour de " + j1.getNom() + " :\n");
             // piocher
-            this.m_j1.piocherPokemon();
+            j1.piocherPokemon();
 
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (this.m_terrain.getNbPokemonsJoueur(this.m_j1) < 3 && this.m_j1.getMain().getNbPokemon() > 0){
+            while (this.m_terrain.getNbPokemonsJoueur(j1) < 3 && j1.getMain().getNbPokemon() > 0){
                 System.out.println("Placer des pokemons sur le terrain");
-                this.m_j1.placerPokemon(this.m_terrain);
+                j1.placerPokemon(this.m_terrain);
             }
             // attaquer
-            if(this.m_j1.attaquer(this.m_terrain,this.m_j2)){
+            if(j1.attaquer(this.m_terrain, j2)){
                 partieTerminee();
             }
-
-            // Joueur 2
-            System.out.println("\nTour de " + this.m_j2.getNom() + " :\n");
-            // piocher
-            this.m_j2.piocherPokemon();
-            // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (this.m_terrain.getNbPokemonsJoueur(this.m_j2) < 3 && this.m_j2.getMain().getNbPokemon() > 0){
-                System.out.println("Placer des pokemons sur le terrain");
-                this.m_j2.placerPokemon(this.m_terrain);
-            }
-            // attaquer
-            if(this.m_j2.attaquer(this.m_terrain,this.m_j1)){
-                this.partieTerminee();
-            }
-            Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
-            this.m_tour.nouveauTour();
+        }
+        else if (partieTerminee()){
+            Affichage.finDePartie(j1);
         }
     }
     public void initialisationJeu(){
@@ -90,6 +76,16 @@ public class Jeu {
         for (int i=0; i<3; i++) {
             this.m_j2.placerPokemon(this.m_terrain);
         }
+        //attaque j1
+        if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
+            partieTerminee();
+        }
+        //attaque j2
+        if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
+            partieTerminee();
+        }
+        Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
+        this.m_tour.nouveauTour();
     }
 
     private boolean partieTerminee() {
@@ -110,6 +106,11 @@ public class Jeu {
     public List<String> getListNomPokemon() {
         return this.m_listNomPokemon;
     }
+
+    public Terrain getM_terrain() {
+        return m_terrain;
+    }
+
     public void genererListNomPokemon(){
         this.m_listNomPokemon.add("Pikachu");
         this.m_listNomPokemon.add("Bulbizarre");

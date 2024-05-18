@@ -59,7 +59,6 @@ public class Ordinateur extends Joueur {
                 // retirer le pokemon du terrain
                 terrain.retirerPokemon(adversaire, pokemonAttaque);
                 if(terrain.estVide(adversaire)){
-                    System.out.println("Le "+this.m_nom+" a gagné");
                     return true;
                 }
             }
