@@ -27,15 +27,17 @@ public class Jeu {
         // Boucle de jeu
         this.initialisationJeu();
         while (!partieTerminee()) {
+            System.out.println(this.m_tour.getM_nbTourString()+" tour :");
             // Joueur 1
             System.out.println("Tour de " + this.m_j1.getNom() + " :\n");
             // piocher
             this.m_j1.piocherPokemon();
             this.m_terrain.printPokemon(this.m_j1);
 
-            System.out.println("Placer des pokemons sur le terrain");
+
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
             while (this.m_terrain.getNbPokemonsJoueur(this.m_j1) < 3 && this.m_j1.getMain().getNbPokemon() > 0){
+                System.out.println("Placer des pokemons sur le terrain");
                 this.m_j1.placerPokemon(this.m_terrain);
             }
             // attaquer
@@ -48,16 +50,16 @@ public class Jeu {
             this.m_j2.piocherPokemon();
             this.m_terrain.printPokemon(this.m_j1);
 
-            System.out.println("Placer des pokemons sur le terrain");
+
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
             while (this.m_terrain.getNbPokemonsJoueur(this.m_j2) < 3 && this.m_j2.getMain().getNbPokemon() > 0){
+                System.out.println("Placer des pokemons sur le terrain");
                 this.m_j2.placerPokemon(this.m_terrain);
             }
             // attaquer
             if(this.m_j2.attaquer(this.m_terrain,this.m_j1)){
                 this.partieTerminee();
             }
-
             this.m_tour.nouveauTour();
         }
     }
@@ -68,53 +70,48 @@ public class Jeu {
         // Initialisation des joueurs
         if(randomInt == 0){
             System.out.println("Vous êtes le joueur 1");
-            m_j1 = new Humain("Joueur 1", this, 20);
-            m_j2 = new Ordinateur("Joueur 2", this, 21);
+            this.m_j1 = new Humain("Joueur 1", this, 20);
+            this.m_j2 = new Ordinateur("Joueur 2", this, 21);
         }
         else {
             System.out.println("Vous êtes le joueur 2");
-            m_j1 = new Ordinateur("Joueur 1", this, 20);
-            m_j2 = new Humain("Joueur 2", this, 21);
+            this.m_j1 = new Ordinateur("Joueur 1", this, 20);
+            this.m_j2 = new Humain("Joueur 2", this, 21);
         }
         for (int i=0; i<5; i++) {
-            m_j1.piocherPokemon();
-            m_j2.piocherPokemon();
+            this.m_j1.piocherPokemon();
+            this.m_j2.piocherPokemon();
         }
 
         // Initlalisaiton de la partie, chaque joueur pose 3 pokemons sur le terrain
         System.out.println(this.m_tour.getM_nbTourString()+" tour :");
-        System.out.println("Tour de " + m_j1.getNom());
+        System.out.println("Tour de " + this.m_j1.getNom());
         for (int i=0; i<3; i++) {
-            m_j1.placerPokemon(this.m_terrain);
+            this.m_j1.placerPokemon(this.m_terrain);
         }
-        System.out.println("Tour de " + m_j2.getNom());
+        System.out.println("Tour de " + this.m_j2.getNom());
         for (int i=0; i<3; i++) {
-            m_j2.placerPokemon(this.m_terrain);
+            this.m_j2.placerPokemon(this.m_terrain);
         }
     }
 
     private boolean partieTerminee() {
-        return m_j1.aPerdu() || m_j2.aPerdu();
+        return this.m_j1.aPerdu() || this.m_j2.aPerdu();
     }
 
     public List<String> getM_listNomPokemon() {
-        return m_listNomPokemon;
-    }
-
-    public static void main(String[] args) {
-        Jeu jeu = new Jeu();
-        jeu.jouer();
+        return this.m_listNomPokemon;
     }
 
     public Joueur getJoueur1() {
-        return m_j1;
+        return this.m_j1;
     }
     public Joueur getJoueur2() {
-        return m_j2;
+        return this.m_j2;
     }
 
     public List<String> getListNomPokemon() {
-        return m_listNomPokemon;
+        return this.m_listNomPokemon;
     }
     public void genererListNomPokemon(){
         this.m_listNomPokemon.add("Pikachu");

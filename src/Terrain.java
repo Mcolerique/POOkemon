@@ -119,7 +119,7 @@ public class Terrain {
 
         System.out.println("\n --------------------------------------------------------------------------------------\n");
 
-        System.out.println("Pokémon du Joueur 2 :    " +  this.m_pokemonsJoueur2.get(0).getNom() + "                 "+ this.m_pokemonsJoueur2.get(1).getNom()+ "                 "+ this.m_pokemonsJoueur2.get(2).getNom());
+        System.out.println("Pokémon du Joueur 2 : " +  this.m_pokemonsJoueur2.get(0).getNom() + "                 "+ this.m_pokemonsJoueur2.get(1).getNom()+ "                 "+ this.m_pokemonsJoueur2.get(2).getNom());
         System.out.println("                 pv : "+ this.m_pokemonsJoueur2.get(0).getPv()+"/"+ this.m_pokemonsJoueur2.get(0).getPvMax()+"               pv : "+ this.m_pokemonsJoueur2.get(1).getPv()+"/"+ this.m_pokemonsJoueur2.get(1).getPvMax()+"               pv : "+ this.m_pokemonsJoueur2.get(2).getPv()+"/"+ this.m_pokemonsJoueur2.get(2).getPvMax());
         System.out.println("            attaque : "+ this.m_pokemonsJoueur2.get(0).getAttaque()+"             attaque : "+ this.m_pokemonsJoueur2.get(1).getAttaque()+"             attaque : "+ this.m_pokemonsJoueur2.get(2).getAttaque());
         System.out.println("               type : "+ this.m_pokemonsJoueur2.get(0).getElementString()+"                type : "+ this.m_pokemonsJoueur2.get(1).getElementString()+"                type : "+ this.m_pokemonsJoueur2.get(2).getElementString());

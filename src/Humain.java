@@ -22,7 +22,7 @@ public class Humain extends Joueur{
     {
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
         pokeQuiAttaque.addAll(terrain.getM_pokemonsJoueur(this));
-        for (int i = 0; i<terrain.getM_pokemonsJoueur(this).size();i++)
+        for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
             System.out.print("Choisissez un pokemon avec lequel attaquer (");
             for (int j = 0; j<pokeQuiAttaque.size();j++)
@@ -44,6 +44,7 @@ public class Humain extends Joueur{
             Scanner scanner2 = new Scanner(System.in);
             pokemonAttaque = scanner2.nextInt() - 1;
             terrain.getPokemon(this,pokemonAttaquant).attaquer(terrain.getPokemon(adversaire,pokemonAttaque));
+            System.out.println(terrain.getPokemon(this,i).getNom()+" a attaquer "+terrain.getPokemon(adversaire,pokemonAttaque).getNom());
             // si le pokemon attaqué est mort, le défausser
             if (!(terrain.getPokemon(adversaire, pokemonAttaque)).estVivant()) {
                 System.out.println("Le pokemon " + (terrain.getPokemon(adversaire, pokemonAttaque)).getNom() + " est mort");
