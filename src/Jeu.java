@@ -1,148 +1,95 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Random;
 
 public class Jeu {
     private Joueur m_j1;
     private Joueur m_j2;
-    private Terrain m_terrain;
+    private final Terrain m_terrain;
+    private final Tour m_tour;
 
-    private List<String> m_listNomPokemon;
+    private final List<String> m_listNomPokemon;
 
     public Jeu() {
         m_terrain = new Terrain();
         m_listNomPokemon = new ArrayList<>();
+        m_tour = new Tour(this);
     }
 
     public void jouer() {
-        // fonctionnement d'un tour :
+        // Fonctionnement d'un tour :
         // 1. le joueur place jusqu'à 3 pokemons sur le terrain, il faut qu'il y en ait 3
         // 2. le joueur choisit un pokemon avec lequel attaquer et 1 pokemon à attaquer
         // 3. le pokemon attaque l'autre pokemon
         // 4. le joueur pioche dans sa main jusqu'à avoir 5 pokemons dans la main
 
+
+        // Boucle de jeu
+        this.initialisationJeu();
+        while (!partieTerminee()) {
+            // Joueur 1
+            System.out.println("Tour de " + this.m_j1.getNom() + " :\n");
+            // piocher
+            this.m_j1.piocherPokemon();
+            this.m_terrain.printPokemon(this.m_j1);
+
+            System.out.println("Placer des pokemons sur le terrain");
+            // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
+            while (this.m_terrain.getNbPokemonsJoueur(this.m_j1) < 3 && this.m_j1.getMain().getNbPokemon() > 0){
+                this.m_j1.placerPokemon(this.m_terrain);
+            }
+            // attaquer
+            if(this.m_j1.attaquer(this.m_terrain,this.m_j2)){
+                partieTerminee();
+            }
+            // Joueur 2
+            System.out.println("\nTour de " + this.m_j2.getNom() + " :\n");
+            // piocher
+            this.m_j2.piocherPokemon();
+            this.m_terrain.printPokemon(this.m_j1);
+
+            System.out.println("Placer des pokemons sur le terrain");
+            // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
+            while (this.m_terrain.getNbPokemonsJoueur(this.m_j2) < 3 && this.m_j2.getMain().getNbPokemon() > 0){
+                this.m_j2.placerPokemon(this.m_terrain);
+            }
+            // attaquer
+            if(this.m_j2.attaquer(this.m_terrain,this.m_j1)){
+                this.partieTerminee();
+            }
+
+            this.m_tour.nouveauTour();
+        }
+    }
+    public void initialisationJeu(){
         this.genererListNomPokemon();
+        Random random = new Random();
+        int randomInt = random.nextInt(2);
         // Initialisation des joueurs
-        m_j1 = new Joueur("Joueur 1", this, 20);
-        m_j2 = new Joueur("Joueur 2", this, 21);
+        if(randomInt == 0){
+            System.out.println("Vous êtes le joueur 1");
+            m_j1 = new Humain("Joueur 1", this, 20);
+            m_j2 = new Ordinateur("Joueur 2", this, 21);
+        }
+        else {
+            System.out.println("Vous êtes le joueur 2");
+            m_j1 = new Ordinateur("Joueur 1", this, 20);
+            m_j2 = new Humain("Joueur 2", this, 21);
+        }
         for (int i=0; i<5; i++) {
             m_j1.piocherPokemon();
             m_j2.piocherPokemon();
         }
 
         // Initlalisaiton de la partie, chaque joueur pose 3 pokemons sur le terrain
+        System.out.println(this.m_tour.getM_nbTourString()+" tour :");
         System.out.println("Tour de " + m_j1.getNom());
         for (int i=0; i<3; i++) {
-            m_j1.getMain().afficher();
-            System.out.println("Choisissez un pokemon à placer sur le terrain");
-            int pokemonaplacer;
-            Scanner scanner = new Scanner(System.in);
-            pokemonaplacer = scanner.nextInt() - 1;
-            m_terrain.placerPokemons(m_j1, pokemonaplacer);
-            // afficher le terrain
-            m_terrain.printPokemon(m_j1);
-            pokemonaplacer = 0;
+            m_j1.placerPokemon(this.m_terrain);
         }
         System.out.println("Tour de " + m_j2.getNom());
         for (int i=0; i<3; i++) {
-            m_j2.getMain().afficher();
-            System.out.println("Choisissez un pokemon à placer sur le terrain");
-            int pokemonaplacer;
-            Scanner scanner = new Scanner(System.in);
-            pokemonaplacer = scanner.nextInt() - 1;
-            m_terrain.placerPokemons(m_j2, pokemonaplacer);
-            // afficher le terrain
-            m_terrain.printPokemon(m_j2);
-            pokemonaplacer = 0;
-        }
-
-        // Boucle de jeu
-        while (!partieTerminee()) {
-            // Joueur 1
-            System.out.println("Tour de " + m_j1.getNom() + " :\n");
-            // piocher
-            while (m_j1.getMain().getNbPokemon() < 5 && !m_j1.getPioche().estVide()) {
-                m_j1.piocherPokemon();
-            }
-            m_terrain.printPokemon(m_j1);
-            System.out.println("Placer des pokemons sur le terrain");
-            // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (m_terrain.getNbPokemonsJoueur(m_j1) < 3 && m_j1.getMain().getNbPokemon() > 0){
-                // afficher la main du joueur
-                m_j1.getMain().afficher();
-                int pokemonaplacer;
-                Scanner scanner = new Scanner(System.in);
-                pokemonaplacer = scanner.nextInt() - 1;
-                m_terrain.placerPokemons(m_j1, pokemonaplacer);
-            }
-            // attaquer
-            System.out.println("Choisissez un pokemon avec lequel attaquer");
-            m_terrain.printPokemon(m_j1);
-            int pokemonAttaquant;
-            Scanner scanner = new Scanner(System.in);
-            pokemonAttaquant = scanner.nextInt() - 1;
-            System.out.println("Choisissez un pokemon à attaquer");
-            m_terrain.printPokemon(m_j2);
-            int pokemonAttaque;
-            Scanner scanner2 = new Scanner(System.in);
-            pokemonAttaque = scanner2.nextInt() - 1;
-            m_j1.attaquer((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaquant), (Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque));
-            // si le pokemon attaqué est mort, le défausser
-            if (((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque)).getPv()<=0) {
-                System.out.println("Le pokemon " + ((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque)).getNom() + " est mort");
-                m_j2.defausser((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaque));
-                // retirer le pokemon du terrain
-                m_terrain.retirerPokemon(m_j2, pokemonAttaque);
-                if(m_terrain.getNbPokemonsJoueur((m_j2)) == 0){
-                    System.out.println("Le joueur 1 a gagné");
-                    partieTerminee();
-                }
-            }
-            // piocher
-            while (m_j1.getMain().getNbPokemon() < 5) {
-                m_j1.piocherPokemon();
-            }
-
-            // Joueur 2
-            System.out.println("\nTour de " + m_j2.getNom() + " :\n");
-            while (m_j2.getMain().getNbPokemon() < 5 && !m_j2.getPioche().estVide()) {
-                m_j2.piocherPokemon();
-            }
-            m_terrain.printPokemon(m_j2);
-            System.out.println("Placer des pokemons sur le terrain");
-            // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (m_terrain.getNbPokemonsJoueur(m_j2) < 3 && m_j2.getMain().getNbPokemon() > 0){
-                // afficher la main du joueur
-                m_j2.getMain().afficher();
-                int pokemonaplacer;
-                Scanner scanner3 = new Scanner(System.in);
-                pokemonaplacer = scanner3.nextInt() - 1;
-                m_terrain.placerPokemons(m_j2, pokemonaplacer);
-            }
-            // attaquer
-            System.out.println("Choisissez un pokemon avec lequel attaquer");
-            m_terrain.printPokemon(m_j2);
-            int pokemonAttaquant2;
-            Scanner scanner4 = new Scanner(System.in);
-            pokemonAttaquant2 = scanner4.nextInt() - 1;
-            System.out.println("Choisissez un pokemon à attaquer");
-            m_terrain.printPokemon(m_j1);
-            int pokemonAttaque2;
-            Scanner scanner5 = new Scanner(System.in);
-            pokemonAttaque2 = scanner5.nextInt() - 1;
-            m_j2.attaquer((Pokemon) m_terrain.getPokemon(m_j2, pokemonAttaquant2), (Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2));
-            // si le pokemon attaqué est mort, le défausser
-            if (!((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2)).estVivant()) {
-                System.out.println("Le pokemon " + ((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2)).getNom() + " est mort");
-                m_j1.defausser((Pokemon) m_terrain.getPokemon(m_j1, pokemonAttaque2));
-                // retirer le pokemon du terrain
-                m_terrain.retirerPokemon(m_j1, pokemonAttaque2);
-                if(m_terrain.getNbPokemonsJoueur((m_j1)) == 0){
-                    System.out.println("Le joueur 2 a gagné");
-                    partieTerminee();
-                }
-            }
+            m_j2.placerPokemon(this.m_terrain);
         }
     }
 

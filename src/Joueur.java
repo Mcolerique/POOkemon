@@ -1,10 +1,10 @@
 import java.util.List;
 
-public class Joueur {
-    private String m_nom;
-    private Pioche m_pioche;
-    private Main m_main;
-    private Defausse m_defausse;
+public abstract class Joueur {
+    protected String m_nom;
+    protected Pioche m_pioche;
+    protected Main m_main;
+    protected Defausse m_defausse;
 
     public Joueur(String nom, Jeu jeu, int taillePioche) {
         m_nom = nom;
@@ -17,9 +17,7 @@ public class Joueur {
         m_pioche.piocherMain(m_main);
     }
 
-    public void attaquer(Pokemon attaquant, Pokemon adversaire) {
-        attaquant.attaquer(adversaire);
-    }
+    public abstract Boolean attaquer(Terrain terrain, Joueur adversaire);
 
     public boolean aPerdu() {
         return m_main.estVide();
@@ -41,7 +39,9 @@ public class Joueur {
     }
 
     public void piocherPokemon() {
-        m_pioche.piocherMain(m_main);
+        while (this.m_main.getNbPokemon() < 5 && !this.m_pioche.getM_pioche().isEmpty()) {
+            this.m_pioche.piocherMain(this.m_main);
+        }
     }
 
     public void defausser(Pokemon pokemon) {
@@ -62,6 +62,6 @@ public class Joueur {
             return null;
         }
     }
-
+    public abstract void placerPokemon(Terrain terrain);
 
 }

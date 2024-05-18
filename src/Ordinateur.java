@@ -4,4 +4,13 @@ public class Ordinateur extends Joueur {
         super(nom, jeu, taillePioche);
     }
 
+    @Override
+    public void placerPokemon(Terrain terrain) {
+        terrain.placerPokemons(this, 0);
+    }
+
+    @Override
+    public Boolean attaquer(Terrain terrain, Joueur adversaire) {
+        return null;
+    }
 }

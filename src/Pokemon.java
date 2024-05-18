@@ -6,7 +6,6 @@ public class Pokemon implements Elements{
   private int m_pv;
   private int m_attaque;
   private int m_element; // Indice de l'élément du Pokémon
-  private Jeu m_jeu;
 
   public Pokemon(String nom, Jeu jeu) {
     m_nom = nom;
@@ -14,8 +13,7 @@ public class Pokemon implements Elements{
     m_pvMax = (random.nextInt(11) + 10) * 10;
     m_pv = m_pvMax;
     m_attaque = (random.nextInt(5) + 3) * 10;
-    m_element = random.nextInt(4); // Choix aléatoire de l'élément
-    m_jeu = jeu;
+    m_element = random.nextInt(4) + 1; // Choix aléatoire de l'élément
   }
 
   public void attaquer(Pokemon pokemonCible) {

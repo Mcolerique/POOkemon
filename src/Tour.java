@@ -1,24 +1,25 @@
-import java.util.Scanner;
+
 
 public class Tour {
     private final Jeu jeu;
-    private Joueur joueur;
+    private int m_nbTour;
 
-    public Tour(Jeu jeu, Joueur joueur) {
+    public Tour(Jeu jeu) {
         this.jeu = jeu;
-        this.joueur = joueur;
+        this.m_nbTour = 1;
     }
-
-    public void changerJoueur() {
-        joueur = joueur == jeu.getJoueur1() ? jeu.getJoueur2() : jeu.getJoueur1();
+    public void nouveauTour(){
+        this.m_nbTour++;
     }
-
-    public void piocher() {
-        joueur.piocherPokemon();
+    public int getM_nbTour(){
+        return this.m_nbTour;
     }
-
-    public void defausser(Pokemon pokemon) {
-        joueur.defausser(pokemon);
+    public String getM_nbTourString(){
+        if(this.m_nbTour == 1){
+            return this.m_nbTour+"er";
+        }
+        else {
+            return this.m_nbTour+"eme";
+        }
     }
-
 }
