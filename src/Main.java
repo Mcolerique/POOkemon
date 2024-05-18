@@ -28,14 +28,6 @@ public class Main {
         }
     }
 
-    public void afficher() {
-        int num = 1;
-        for (Pokemon pokemon : this.m_listePokemon) {
-            System.out.println(num + pokemon.getNom());
-            num++;
-        }
-    }
-
     public int getNbPokemon() {
         return this.m_listePokemon.size();
     }

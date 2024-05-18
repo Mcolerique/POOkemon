@@ -32,8 +32,6 @@ public class Jeu {
             System.out.println("Tour de " + this.m_j1.getNom() + " :\n");
             // piocher
             this.m_j1.piocherPokemon();
-            this.m_terrain.printPokemon(this.m_j1);
-
 
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
             while (this.m_terrain.getNbPokemonsJoueur(this.m_j1) < 3 && this.m_j1.getMain().getNbPokemon() > 0){
@@ -44,13 +42,11 @@ public class Jeu {
             if(this.m_j1.attaquer(this.m_terrain,this.m_j2)){
                 partieTerminee();
             }
+
             // Joueur 2
             System.out.println("\nTour de " + this.m_j2.getNom() + " :\n");
             // piocher
             this.m_j2.piocherPokemon();
-            this.m_terrain.printPokemon(this.m_j1);
-
-
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
             while (this.m_terrain.getNbPokemonsJoueur(this.m_j2) < 3 && this.m_j2.getMain().getNbPokemon() > 0){
                 System.out.println("Placer des pokemons sur le terrain");
@@ -60,6 +56,7 @@ public class Jeu {
             if(this.m_j2.attaquer(this.m_terrain,this.m_j1)){
                 this.partieTerminee();
             }
+            Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
             this.m_tour.nouveauTour();
         }
     }

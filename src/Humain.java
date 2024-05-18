@@ -7,14 +7,22 @@ public class Humain extends Joueur{
         super(nom, jeu, taillePioche);
     }
     public void placerPokemon(Terrain terrain){
-        this.m_main.afficher();
         System.out.println("Choisissez un pokemon à placer sur le terrain");
+        for (int j = 0; j<this.m_main.getListePokemon().size();j++)
+        {
+            if (j != this.m_main.getListePokemon().size()-1)
+            {
+                System.out.print((j+1)+"."+this.m_main.getListePokemon().get(j).getNom() + " / ");
+            }
+            else {System.out.println((j+1)+"."+this.m_main.getListePokemon().get(j).getNom());}
+        }
+        Affichage.affichePokemon(this.m_main.getListePokemon());
         int pokemonaplacer;
         Scanner scanner = new Scanner(System.in);
         pokemonaplacer = scanner.nextInt() - 1;
         terrain.placerPokemons(this, pokemonaplacer);
         // afficher le terrain
-        terrain.printPokemon(this);
+        Affichage.affichePokemon(terrain.getM_pokemonsJoueur(this));
     }
 
     @Override
@@ -33,13 +41,13 @@ public class Humain extends Joueur{
                 }
                 else {System.out.println((j+1)+"."+pokeQuiAttaque.get(j).getNom()+")");}
             }
-            terrain.printPokemon(this);
+            Affichage.affichePokemon(terrain.getM_pokemonsJoueur(this));
             int pokemonAttaquant;
             Scanner scanner = new Scanner(System.in);
             pokemonAttaquant = scanner.nextInt() - 1;
             pokeQuiAttaque.remove(pokemonAttaquant);
             System.out.println("Choisissez un pokemon à attaquer");
-            terrain.printPokemon(adversaire);
+            Affichage.affichePokemon(terrain.getM_pokemonsJoueur(adversaire));
             int pokemonAttaque;
             Scanner scanner2 = new Scanner(System.in);
             pokemonAttaque = scanner2.nextInt() - 1;

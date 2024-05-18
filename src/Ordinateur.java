@@ -63,6 +63,7 @@ public class Ordinateur extends Joueur {
                     return true;
                 }
             }
+            pokemonAttaquer.clear();
         }
         return false;
     }
