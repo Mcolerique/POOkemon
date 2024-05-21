@@ -77,10 +77,12 @@ public class Jeu {
             this.m_j2.placerPokemon(this.m_terrain);
         }
         //attaque j1
+        System.out.println((this.m_j1.m_nom+" attaque :"));
         if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
             partieTerminee();
         }
         //attaque j2
+        System.out.println((this.m_j2.m_nom+" attaque :"));
         if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
             partieTerminee();
         }

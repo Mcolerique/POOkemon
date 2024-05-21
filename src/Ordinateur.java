@@ -53,7 +53,9 @@ public class Ordinateur extends Joueur {
             }
 
             // si le pokemon attaqué est mort, le défausser
-            return adversaire.mort(terrain, pokemonAttaque);
+            if (adversaire.mort(terrain, pokemonAttaque)) {
+                return true;
+            }
         }
         return false;
     }

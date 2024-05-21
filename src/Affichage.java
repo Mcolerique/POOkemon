@@ -16,15 +16,15 @@ public class Affichage {
         }
     }
     static void terrain(Terrain terrain, Joueur j1, Joueur j2){
-        System.out.println(" Pokémon du Joueur 1 : ");
+        System.out.println(" \nPokémon du Joueur 1 : ");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j1));
         System.out.println("pioche : "+j1.m_pioche.getM_pioche().size() + " cartes");
         System.out.println("défausse : "+j1.m_defausse.getDefausse().size()+" cartes");
-        System.out.println("\n--------------------------------------------------------------------------------");
+        System.out.println("\n--------------------------------------------------------------------------------\n");
         System.out.println(" Pokémon du Joueur 2 : ");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j2));
         System.out.println("pioche : "+j2.m_pioche.getM_pioche().size() + " cartes");
-        System.out.println("défausse : "+j2.m_defausse.getDefausse().size()+" cartes");
+        System.out.println("défausse : "+j2.m_defausse.getDefausse().size()+" cartes\n");
 
     }
     static void affichePokemon(List<Pokemon> list){
