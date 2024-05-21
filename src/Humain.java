@@ -54,16 +54,7 @@ public class Humain extends Joueur{
             terrain.getPokemon(this,pokemonAttaquant).attaquer(terrain.getPokemon(adversaire,pokemonAttaque));
             System.out.println(terrain.getPokemon(this,i).getNom()+" a attaquer "+terrain.getPokemon(adversaire,pokemonAttaque).getNom());
             // si le pokemon attaqué est mort, le défausser
-            if (!(terrain.getPokemon(adversaire, pokemonAttaque)).estVivant()) {
-                System.out.println("Le pokemon " + (terrain.getPokemon(adversaire, pokemonAttaque)).getNom() + " est mort");
-                adversaire.defausser(terrain.getPokemon(adversaire, pokemonAttaque));
-                // retirer le pokemon du terrain
-                terrain.retirerPokemon(adversaire, pokemonAttaque);
-                if(terrain.estVide(adversaire)){
-                    return true;
-                }
-
-            }
+            return adversaire.mort(terrain, pokemonAttaque);
         }
         return false;
     }

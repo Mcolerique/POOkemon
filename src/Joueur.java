@@ -62,6 +62,18 @@ public abstract class Joueur {
             return null;
         }
     }
+    public boolean mort(Terrain terrain, int attaque) {
+        if (!(terrain.getPokemon(this, attaque)).estVivant()) {
+            System.out.println("Le pokemon " + (terrain.getPokemon(this, attaque)).getNom() + " est mort");
+            this.defausser(terrain.getPokemon(this, attaque));
+            // retirer le pokemon du terrain
+            terrain.retirerPokemon(this, attaque);
+            if (terrain.estVide(this)) {
+                return true;
+            }
+        }
+    return false;
+    }
     public abstract void placerPokemon(Terrain terrain);
 
 }

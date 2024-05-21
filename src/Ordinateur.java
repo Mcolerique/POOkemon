@@ -53,16 +53,7 @@ public class Ordinateur extends Joueur {
             }
 
             // si le pokemon attaqué est mort, le défausser
-            if (!(terrain.getPokemon(adversaire, pokemonAttaque)).estVivant()) {
-                System.out.println("Le pokemon " + (terrain.getPokemon(adversaire, pokemonAttaque)).getNom() + " est mort");
-                adversaire.defausser(terrain.getPokemon(adversaire, pokemonAttaque));
-                // retirer le pokemon du terrain
-                terrain.retirerPokemon(adversaire, pokemonAttaque);
-                if(terrain.estVide(adversaire)){
-                    return true;
-                }
-            }
-            pokemonAttaquer.clear();
+            return adversaire.mort(terrain, pokemonAttaque);
         }
         return false;
     }
