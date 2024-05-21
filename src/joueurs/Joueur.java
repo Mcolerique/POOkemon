@@ -1,10 +1,15 @@
+package joueurs;
+
+import pokemon.Pokemon;
+import jeu.Jeu;
+
 import java.util.List;
 
 public abstract class Joueur {
-    protected String m_nom;
-    protected Pioche m_pioche;
-    protected Main m_main;
-    protected Defausse m_defausse;
+    public String m_nom;
+    public Pioche m_pioche;
+    public Main m_main;
+    public Defausse m_defausse;
 
     public Joueur(String nom, Jeu jeu, int taillePioche) {
         this.m_nom = nom;

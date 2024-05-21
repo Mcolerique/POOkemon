@@ -1,3 +1,5 @@
+package pokemon;
+
 public abstract class Pouvoir {
     private String m_nom;
     private boolean m_utilisableChaqueTour;

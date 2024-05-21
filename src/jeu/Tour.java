@@ -1,4 +1,6 @@
+package jeu;
 
+import affichage.Affichage;
 
 public class Tour {
     private final Jeu jeu;
@@ -10,7 +12,7 @@ public class Tour {
     }
     public void nouveauTour(){
         this.m_nbTour++;
-        System.out.println("Tour n°"+this.m_nbTour+" :\n\n");
+        System.out.println("jeu.Tour n°"+this.m_nbTour+" :\n\n");
         Affichage.terrain(this.jeu.getM_terrain(),this.jeu.getJoueur1(), this.jeu.getJoueur2());
         jeu.jouer(jeu.getJoueur1(), jeu.getJoueur2());
         jeu.jouer(jeu.getJoueur2(), jeu.getJoueur1());

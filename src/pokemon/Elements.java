@@ -1,3 +1,5 @@
+package pokemon;
+
 public interface Elements {
     /*terre = 1
       eau = 2

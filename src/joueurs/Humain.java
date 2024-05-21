@@ -1,3 +1,9 @@
+package joueurs;
+
+import affichage.Affichage;
+import pokemon.Pokemon;
+import jeu.Jeu;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

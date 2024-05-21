@@ -67,13 +67,13 @@ Chaque joueur a à sa disposition :
 
 À son tour, le joueur humain :
 
-1. **Pioche** des Pokémons jusqu'à en avoir 5 en main ou que sa pioche soit vide.
+1. **joueurs.Pioche** des Pokémons jusqu'à en avoir 5 en main ou que sa pioche soit vide.
 1. **Place** un Pokémon de sa main face visible sur chaque emplacement vide sur son terrain.
 1. **Peut attaquer** une fois avec chacun des Pokémons de son terrain, dans l'ordre de son choix.
 
 À son tour, l'ordinateur :
 
-1. **Pioche** des Pokémons jusqu'à en avoir 5 en main ou que sa pioche soit vide.
+1. **joueurs.Pioche** des Pokémons jusqu'à en avoir 5 en main ou que sa pioche soit vide.
 1. **Place** un Pokémon de sa main face visible sur chaque emplacement vide sur son terrain, **dans l'ordre de sa main**.
 1. **Attaque** une fois avec chacun des Pokémons de son terrain **dans l'ordre de ses terrains**.
 
@@ -133,12 +133,12 @@ Elle doit :
 
 ```console
 ********************************************************************************
-Tour 3:
-                                    Joueur 2
+jeu.Tour 3:
+                                    joueurs.Joueur 2
 
 ********************************************************************************
 
-                                    Joueur 1
+                                    joueurs.Joueur 1
 
 pioche: 15 pokemons
 defausse: 0 pokemons
@@ -168,7 +168,7 @@ En main:
 - Papilusion, Air, Vie: 120, Attaque: 20
 - Roucool, Air, Vie: 150, Attaque: 30
 
-                                    Joueur 2
+                                    joueurs.Joueur 2
 
 Quel pokemon souhaitez-vous jouer? (Dracaufeu/Bulbizarre/Pikachu):
 ```
