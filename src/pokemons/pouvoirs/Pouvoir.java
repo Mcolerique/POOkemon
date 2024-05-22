@@ -1,4 +1,4 @@
-package pokemon;
+package pokemons.pouvoirs;
 
 public abstract class Pouvoir {
     private String m_nom;

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import jeu.*;
 import joueurs.*;
-import pokemon.*;
+import pokemons.*;
 
 public class Affichage {
     public static void accueil(){

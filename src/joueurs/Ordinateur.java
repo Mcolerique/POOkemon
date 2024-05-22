@@ -23,7 +23,7 @@ public class Ordinateur extends Joueur {
         int pokemonAttaque;
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++){
             for (int j = 0; j<terrain.getNbPokemonsJoueur(adversaire);j++){
-                if (terrain.getPokemon(this,i).estAvantager(terrain.getPokemon(adversaire,j))){
+                if (terrain.getPokemon(this,i).avantageSur(terrain.getPokemon(adversaire,j))){
                     pokemonAttaquer.add(j);
                 }
             }

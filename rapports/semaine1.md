@@ -4,8 +4,8 @@ Dans le cadre de ce projet de développement de jeu basé sur le concept de Pok�
 
 #### Classes Principales
 
-1. **`pokemon.Pokemon` :**
-   - **Attributs Significatifs :** Nous avons choisi d'attribuer à la classe `pokemon.Pokemon` des caractéristiques telles que les points de vie (`m_pv`), l'attaque (`m_attaque`), et l'élément (`m_element`) pour représenter les principales propriétés d'un Pokémon dans un combat.
+1. **`pokemons.Pokemon` :**
+   - **Attributs Significatifs :** Nous avons choisi d'attribuer à la classe `pokemons.Pokemon` des caractéristiques telles que les points de vie (`m_pv`), l'attaque (`m_attaque`), et l'élément (`m_element`) pour représenter les principales propriétés d'un Pokémon dans un combat.
    - **Méthodes Fonctionnelles :** Les méthodes `attaquer`, `subirDegats`, et `estVivant` sont nécessaires pour la simulation des interactions entre les Pokémon pendant un combat.
 
 2. **`joueurs.Joueur` :**

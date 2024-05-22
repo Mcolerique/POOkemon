@@ -1,7 +1,7 @@
 package joueurs;
 
 import affichage.Affichage;
-import pokemon.Pokemon;
+import pokemons.Pokemon;
 import jeu.Jeu;
 
 import java.util.ArrayList;

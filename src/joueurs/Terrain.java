@@ -1,6 +1,6 @@
 package joueurs;
 
-import pokemon.Pokemon;
+import pokemons.Pokemon;
 
 import java.util.ArrayList;
 import java.util.List;

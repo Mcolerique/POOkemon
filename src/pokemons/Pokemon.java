@@ -1,13 +1,13 @@
-package pokemon;
+package pokemons;
 
 import java.util.Random;
 
-public class Pokemon implements Elements{
+public class Pokemon {
   private final String m_nom;
   private final int m_pvMax;
   private int m_pv;
   private final int m_attaque;
-  private final int m_element; // Indice de l'élément du Pokémon
+  private final Elements m_element; // Indice de l'élément du Pokémon
 
   public Pokemon(String nom) {
     this.m_nom = nom;
@@ -15,12 +15,12 @@ public class Pokemon implements Elements{
     this.m_pvMax = (random.nextInt(11) + 10) * 10;
     this.m_pv = this.m_pvMax;
     this.m_attaque = (random.nextInt(5) + 3) * 10;
-    this.m_element = random.nextInt(4) + 1; // Choix aléatoire de l'élément
-  }
+    Elements[] tabAffinite = {Elements.AIR, Elements.EAU, Elements.FEU, Elements.TERRE};
+    this.m_element = tabAffinite[random.nextInt(4)];  }
 
   public void attaquer(Pokemon pokemonCible) {
-    int degats = this.m_attaque + m_tabElt[this.m_element][pokemonCible.m_element];
-    pokemonCible.subirDegats(degats);
+    int attaqueAffinite = m_element.getAttaqueAffinite(m_element, pokemonCible.m_element, this);
+    pokemonCible.subirDegats(attaqueAffinite);
   }
 
   public void subirDegats(int degats) {
@@ -48,24 +48,10 @@ public class Pokemon implements Elements{
   }
 
   public String getElementString(){
-    switch (this.m_element){
-      case 1:
-        return "Terre";
-      case 2:
-        return "Eau";
-      case 3:
-        return "Feu";
-      case 4:
-        return "Air";
-    }
-    return "??";
+    return m_element.name();
   }
-  public  boolean estAvantager(Pokemon pokemon){
-    if(m_tabElt[this.m_element][pokemon.m_element]>0){
-      return true;
-    }
-    else {
-      return false;
-    }
+
+  public boolean avantageSur(Pokemon pokemon) {
+    return this.m_element.getAvantage().equals(pokemon.m_element.toString());
   }
 }

@@ -170,7 +170,7 @@ En main:
 
                                     joueurs.Joueur 2
 
-Quel pokemon souhaitez-vous jouer? (Dracaufeu/Bulbizarre/Pikachu):
+Quel pokemons souhaitez-vous jouer? (Dracaufeu/Bulbizarre/Pikachu):
 ```
 
 Il n'est pas nécessaire de reproduire le visuel tel quel mais toutes les informations doivent être présentes.
