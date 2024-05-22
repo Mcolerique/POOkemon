@@ -25,7 +25,7 @@ public class ListePokemons {
     }
 
     // Getters
-    private static int getIndexAleatoire() {
+    public static int getIndexAleatoire() {
         if (m_nomsDisponibles.isEmpty()) {
             throw new IllegalStateException("Il n'y a plus de noms de Pokémon disponibles.");
         }

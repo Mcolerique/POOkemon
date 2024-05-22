@@ -68,6 +68,14 @@ public class Affichage {
             System.out.print(String.format("%-" + largeurCase + "s", type));
         }
         System.out.println();
+
+        // affichage.Affichage des pouvoirs des pokemons
+        System.out.print("             pouvoir : ");
+        for (int i = 0; i < nombrePokemons; i++) {
+            String type = list.get(i).getNomPouvoir();
+            System.out.print(String.format("%-" + largeurCase + "s", type));
+        }
+        System.out.println();
     }
     public static void finDePartie(Joueur gagnant){
         if (gagnant.getClass() == Humain.class) {

@@ -11,4 +11,7 @@ public abstract class Pouvoir {
         this.m_utilisableChaqueTour = utilisableChaqueTour;
         this.m_utilise = false;
     }
+    public String getM_nom(){
+        return this.m_nom;
+    }
 }
