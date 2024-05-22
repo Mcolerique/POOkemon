@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Humain extends Joueur{
-    public Humain(String nom, Jeu jeu, int taillePioche){
-        super(nom, jeu, taillePioche);
+    public Humain(String nom, int taillePioche){
+        super(nom, taillePioche);
     }
     public void placerPokemon(Terrain terrain){
         System.out.println("Choisissez un pokemon à placer sur le terrain");

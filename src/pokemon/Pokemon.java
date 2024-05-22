@@ -9,8 +9,8 @@ public class Pokemon implements Elements{
   private final int m_attaque;
   private final int m_element; // Indice de l'élément du Pokémon
 
-  public Pokemon(String nom) {
-    this.m_nom = nom;
+  public Pokemon() {
+    this.m_nom = ListePokemons.getNom();
     Random random = new Random();
     this.m_pvMax = (random.nextInt(11) + 10) * 10;
     this.m_pv = this.m_pvMax;
