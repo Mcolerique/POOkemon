@@ -16,11 +16,9 @@ public class Jeu {
     private final Terrain m_terrain;
     private final Tour m_tour;
 
-    private final List<String> m_listNomPokemon;
 
     public Jeu() {
         m_terrain = new Terrain();
-        m_listNomPokemon = new ArrayList<>();
         m_tour = new Tour(this);
     }
 
@@ -55,19 +53,18 @@ public class Jeu {
         }
     }
     public void initialisationJeu(){
-        this.genererListNomPokemon();
         Random random = new Random();
         int randomInt = random.nextInt(2);
         // Initialisation des joueurs
         if(randomInt == 0){
             System.out.println("Vous êtes le joueur 1");
-            this.m_j1 = new Humain("joueurs.Joueur 1", this, 20);
-            this.m_j2 = new Ordinateur("joueurs.Joueur 2", this, 21);
+            this.m_j1 = new Humain("joueurs.Joueur 1", 20);
+            this.m_j2 = new Ordinateur("joueurs.Joueur 2", 21);
         }
         else {
             System.out.println("Vous êtes le joueur 2");
-            this.m_j1 = new Ordinateur("joueurs.Joueur 1", this, 20);
-            this.m_j2 = new Humain("joueurs.Joueur 2", this, 21);
+            this.m_j1 = new Ordinateur("joueurs.Joueur 1", 20);
+            this.m_j2 = new Humain("joueurs.Joueur 2", 21);
         }
         for (int i=0; i<5; i++) {
             this.m_j1.piocherPokemon();
@@ -102,10 +99,6 @@ public class Jeu {
         return this.m_j1.aPerdu() || this.m_j2.aPerdu();
     }
 
-    public List<String> getM_listNomPokemon() {
-        return this.m_listNomPokemon;
-    }
-
     public Joueur getJoueur1() {
         return this.m_j1;
     }
@@ -113,57 +106,7 @@ public class Jeu {
         return this.m_j2;
     }
 
-    public List<String> getListNomPokemon() {
-        return this.m_listNomPokemon;
-    }
-
     public Terrain getM_terrain() {
         return m_terrain;
     }
-
-    public void genererListNomPokemon(){
-        this.m_listNomPokemon.add("Pikachu");
-        this.m_listNomPokemon.add("Bulbizarre");
-        this.m_listNomPokemon.add("Salamèche");
-        this.m_listNomPokemon.add("Carapuce");
-        this.m_listNomPokemon.add("Rattata");
-        this.m_listNomPokemon.add("Abo");
-        this.m_listNomPokemon.add("Piafabec");
-        this.m_listNomPokemon.add("Ptitard");
-        this.m_listNomPokemon.add("Miaouss");
-        this.m_listNomPokemon.add("Racaillou");
-        this.m_listNomPokemon.add("Nosferapti");
-        this.m_listNomPokemon.add("Machoc");
-        this.m_listNomPokemon.add("Mystherbe");
-        this.m_listNomPokemon.add("Tentacool");
-        this.m_listNomPokemon.add("Racaillou");
-        this.m_listNomPokemon.add("Rapasdepic");
-        this.m_listNomPokemon.add("Amonita");
-        this.m_listNomPokemon.add("Porygon");
-        this.m_listNomPokemon.add("Amonistar");
-        this.m_listNomPokemon.add("Kabuto");
-        this.m_listNomPokemon.add("Kabutops");
-        this.m_listNomPokemon.add("Artikodin");
-        this.m_listNomPokemon.add("Electhor");
-        this.m_listNomPokemon.add("Sulfura");
-        this.m_listNomPokemon.add("Minidraco");
-        this.m_listNomPokemon.add("Draco");
-        this.m_listNomPokemon.add("Dracolosse");
-        this.m_listNomPokemon.add("Mewtwo");
-        this.m_listNomPokemon.add("Mew");
-        this.m_listNomPokemon.add("Germignon");
-        this.m_listNomPokemon.add("Héricendre");
-        this.m_listNomPokemon.add("Kaiminus");
-        this.m_listNomPokemon.add("Méganium");
-        this.m_listNomPokemon.add("Typhlosion");
-        this.m_listNomPokemon.add("Feraligatr");
-        this.m_listNomPokemon.add("Cizayox");
-        this.m_listNomPokemon.add("roucarnage");
-        this.m_listNomPokemon.add("Feurisson");
-        this.m_listNomPokemon.add("Insolourdo");
-        this.m_listNomPokemon.add("Ronflex");
-        this.m_listNomPokemon.add("morphéo");
-        this.m_listNomPokemon.add("Zarbi");
-    }
-
 }

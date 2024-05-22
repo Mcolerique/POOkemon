@@ -10,14 +10,10 @@ import java.util.List;
 public class Pioche {
     private final List<Pokemon> m_pioche;
 
-    public Pioche(Jeu jeu, int taillePioche) {
+    public Pioche(int taillePioche) {
         this.m_pioche = new ArrayList<>();
         for (int i = 0; i < taillePioche; i++) {
-            // prendre un pokemon aléatoire dans la liste des noms de pokemons
-            String nomPokemon = jeu.getListNomPokemon().get((int) (Math.random() * jeu.getListNomPokemon().size()));
-            this.m_pioche.add(new Pokemon(nomPokemon));
-            // supprimer le pokemon de la liste des noms de pokemons
-            jeu.getListNomPokemon().remove(nomPokemon);
+            this.m_pioche.add(new Pokemon());
         }
         Collections.shuffle(m_pioche);
     }

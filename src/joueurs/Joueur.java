@@ -11,9 +11,9 @@ public abstract class Joueur {
     public Main m_main;
     public Defausse m_defausse;
 
-    public Joueur(String nom, Jeu jeu, int taillePioche) {
+    public Joueur(String nom, int taillePioche) {
         this.m_nom = nom;
-        this.m_pioche = new Pioche(jeu, taillePioche);
+        this.m_pioche = new Pioche(taillePioche);
         this.m_main = new Main();
         this.m_defausse = new Defausse();
     }

@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class Ordinateur extends Joueur {
 
-    public Ordinateur(String nom, Jeu jeu, int taillePioche) {
-        super(nom, jeu, taillePioche);
+    public Ordinateur(String nom, int taillePioche) {
+        super(nom, taillePioche);
     }
 
     @Override
