@@ -10,12 +10,14 @@ public abstract class Joueur {
     public Pioche m_pioche;
     public Main m_main;
     public Defausse m_defausse;
+    public int m_tailleTerrain;
 
     public Joueur(String nom, int taillePioche) {
         this.m_nom = nom;
         this.m_pioche = new Pioche(taillePioche);
         this.m_main = new Main();
         this.m_defausse = new Defausse();
+        this.m_tailleTerrain = 3;
     }
 
     private void piocher() {
@@ -79,6 +81,27 @@ public abstract class Joueur {
         }
     return false;
     }
+    public boolean mort(Terrain terrain) {
+        for (int i = 0; i < this.m_tailleTerrain; i++) {
+            if (!(terrain.getPokemon(this, i)).estVivant()) {
+                System.out.println("Le pokemon " + (terrain.getPokemon(this, i)).getNom() + " est mort");
+                this.defausser(terrain.getPokemon(this, i));
+                // retirer le pokemon du terrain
+                terrain.retirerPokemon(this, i);
+                if (terrain.estVide(this)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public abstract void placerPokemon(Terrain terrain);
+    public void ajouterPlaceTerrain(){
+        this.m_tailleTerrain++;
+    }
+    public void enleverPlaceTerrain(){
+        this.m_tailleTerrain--;
+    }
+    public abstract boolean utiliserPouvoir(Terrain terrain, Joueur adversaire);
 
 }

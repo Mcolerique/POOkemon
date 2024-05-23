@@ -1,6 +1,7 @@
 package joueurs;
 
 import jeu.Jeu;
+import pokemons.Pokemon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,28 @@ public class Ordinateur extends Joueur {
 
             // si le pokemon attaqué est mort, le défausser
             if (adversaire.mort(terrain, pokemonAttaque)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean utiliserPouvoir(Terrain terrain, Joueur adversaire) {
+        List<Pokemon> pokeQuiAttaque = new ArrayList<>();
+        Random random = new Random();
+        for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
+        {
+            if (terrain.getM_pokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun")
+            {
+                pokeQuiAttaque.add(terrain.getM_pokemonsJoueur(this).get(i));
+            }
+        }
+        for (int i = 0; i<pokeQuiAttaque.size();i++){
+            int pokemonAttaquant = random.nextInt(pokeQuiAttaque.size());
+            pokeQuiAttaque.remove(pokemonAttaquant);
+            pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+            if (this.mort(terrain)|| adversaire.mort(terrain)){
                 return true;
             }
         }

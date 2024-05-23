@@ -10,7 +10,7 @@ import java.util.Random;
 public class ListePouvoirs {
 
     // Attributs
-    private static ArrayList<Pouvoir> m_nomsPouvoirs = new ArrayList<>(Arrays.asList(new ExtensionTerritoire("Extension du territoire", false)));
+    private static ArrayList<Pouvoir> m_nomsPouvoirs = new ArrayList<>(Arrays.asList(new ExtensionTerritoire()));
     private static ArrayList<Pouvoir> m_pouvoirsUtilises = new ArrayList<>();
 
     // Methodes

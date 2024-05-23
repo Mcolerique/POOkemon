@@ -67,4 +67,7 @@ public class Pokemon {
       return this.m_pouvoir.getM_nom();
     }
   }
+  public Pouvoir getM_pouvoir(){
+    return this.m_pouvoir;
+  }
 }

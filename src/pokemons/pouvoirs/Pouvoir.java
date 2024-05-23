@@ -1,5 +1,9 @@
 package pokemons.pouvoirs;
 
+import joueurs.Joueur;
+import joueurs.Terrain;
+import pokemons.Pokemon;
+
 public abstract class Pouvoir {
     private String m_nom;
     private boolean m_utilisableChaqueTour;
@@ -14,4 +18,5 @@ public abstract class Pouvoir {
     public String getM_nom(){
         return this.m_nom;
     }
+    public abstract void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon);
 }

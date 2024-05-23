@@ -39,9 +39,13 @@ public class Jeu {
             j1.piocherPokemon();
 
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (this.m_terrain.getNbPokemonsJoueur(j1) < 3 && j1.getMain().getNbPokemon() > 0){
+            while (this.m_terrain.getNbPokemonsJoueur(j1) < j1.m_tailleTerrain && j1.getMain().getNbPokemon() > 0){
                 System.out.println("Placer des pokemons sur le terrain");
                 j1.placerPokemon(this.m_terrain);
+            }
+            // utilisation des pouvoir
+            if(j1.utiliserPouvoir(this.m_terrain,j2)){
+                partieTerminee();
             }
             // attaquer
             if(j1.attaquer(this.m_terrain, j2)){
