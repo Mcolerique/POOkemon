@@ -71,10 +71,13 @@ public class Ordinateur extends Joueur {
         Random random = new Random();
         for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
-            if (terrain.getM_pokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun")
+            if (terrain.getM_pokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getM_pokemonsJoueur(this).get(i).getM_pouvoir().getM_utilise())
             {
                 pokeQuiAttaque.add(terrain.getM_pokemonsJoueur(this).get(i));
             }
+        }
+        if(pokeQuiAttaque.isEmpty()){
+            return false;
         }
         for (int i = 0; i<pokeQuiAttaque.size();i++){
             int pokemonAttaquant = random.nextInt(pokeQuiAttaque.size());

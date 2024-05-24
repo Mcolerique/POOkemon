@@ -6,17 +6,19 @@ import pokemons.Pokemon;
 
 public abstract class Pouvoir {
     private String m_nom;
-    private boolean m_utilisableChaqueTour;
-    private boolean m_utilise;
+    protected boolean m_utilise;
     private String m_desc;
 
-    public Pouvoir(String nom, boolean utilisableChaqueTour) {
+    public Pouvoir(String nom) {
         this.m_nom = nom;
-        this.m_utilisableChaqueTour = utilisableChaqueTour;
         this.m_utilise = false;
     }
     public String getM_nom(){
         return this.m_nom;
     }
     public abstract void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon);
+    public abstract void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon);
+    public boolean getM_utilise(){
+        return this.m_utilise;
+    }
 }

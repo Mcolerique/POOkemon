@@ -6,7 +6,7 @@ import pokemons.Pokemon;
 
 public class Confusion extends Pouvoir{
     public Confusion() {
-        super("Confusion", true);
+        super("Confusion");
     }
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
@@ -15,5 +15,10 @@ public class Confusion extends Pouvoir{
         adversaire.viderMain();
         // remplir la main de l'adversaire
         adversaire.remplirMain();
+    }
+
+    @Override
+    public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
+
     }
 }

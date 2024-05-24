@@ -72,10 +72,13 @@ public class Humain extends Joueur{
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
         for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
-            if (terrain.getM_pokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun")
+            if (terrain.getM_pokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun"&& !terrain.getM_pokemonsJoueur(this).get(i).getM_pouvoir().getM_utilise())
             {
                 pokeQuiAttaque.add(terrain.getM_pokemonsJoueur(this).get(i));
             }
+        }
+        if(pokeQuiAttaque.isEmpty()){
+            return false;
         }
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
         {

@@ -70,4 +70,12 @@ public class Pokemon {
   public Pouvoir getM_pouvoir(){
     return this.m_pouvoir;
   }
+  public void soigner(int soin){
+    if(this.m_pv+soin > this.m_pvMax){
+      this.m_pv = this.m_pvMax;
+    }
+    else {
+      this.m_pv+=soin;
+    }
+  }
 }

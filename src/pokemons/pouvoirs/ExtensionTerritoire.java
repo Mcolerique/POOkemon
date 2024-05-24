@@ -6,13 +6,14 @@ import pokemons.Pokemon;
 
 public class ExtensionTerritoire extends Pouvoir{
     public ExtensionTerritoire() {
-        super("Extension du territoire", false);
+        super("Extension du territoire");
     }
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon){
         allie.ajouterPlaceTerrain();
         allie.placerPokemon(terrain);
+        this.m_utilise=true;
     }
-    public void annulerPouvoir(Joueur joueur){
-        joueur.enleverPlaceTerrain();
+    public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon){
+        allie.enleverPlaceTerrain();
     }
 }

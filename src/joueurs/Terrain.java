@@ -1,18 +1,22 @@
 package joueurs;
 
 import pokemons.Pokemon;
+import pokemons.pouvoirs.Pouvoir;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 public class Terrain {
     private final List<Pokemon> m_pokemonsJoueur1;
     private final List<Pokemon> m_pokemonsJoueur2;
+    private final Hashtable<Pouvoir,Pokemon> m_pouvoirUtiliser;
 
     public Terrain() {
         // Initialisation des listes de Pokemons pour les deux joueurs
         this.m_pokemonsJoueur1 = new ArrayList<>();
         this.m_pokemonsJoueur2 = new ArrayList<>();
+        this.m_pouvoirUtiliser = new Hashtable<>();
     }
 
     public void placerPokemons(Joueur joueur, int pokemon) {
