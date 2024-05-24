@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Jeu {
+    private static Hashtable<Pokemon, Pouvoir> m_pokemonAvecPouvoir;
     private Joueur m_j1;
     private Joueur m_j2;
     private final Terrain m_terrain;
     private final Tour m_tour;
-    private static Hashtable<Pokemon, Pouvoir> m_pokemonAvecPouvoir;
 
 
     public Jeu() {

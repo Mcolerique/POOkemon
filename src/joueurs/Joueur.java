@@ -6,11 +6,11 @@ import jeu.Jeu;
 import java.util.List;
 
 public abstract class Joueur {
-    private String m_nom;
-    private Pioche m_pioche;
-    private Main m_main;
-    private Defausse m_defausse;
-    private int m_tailleTerrain;
+    protected String m_nom;
+    protected Pioche m_pioche;
+    protected Main m_main;
+    protected Defausse m_defausse;
+    protected int m_tailleTerrain;
 
     public Joueur(String nom, int taillePioche) {
         this.m_nom = nom;

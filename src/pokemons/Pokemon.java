@@ -22,7 +22,9 @@ public class Pokemon {
     Elements[] tabAffinite = {Elements.AIR, Elements.EAU, Elements.FEU, Elements.TERRE};
     this.m_element = tabAffinite[random.nextInt(4)];
     this.m_pouvoir = ListePouvoirs.getPouvoir();
-    Jeu.getM_pokemonAvecPouvoir().put(this, this.m_pouvoir);
+    if(this.m_pouvoir != null){
+      Jeu.getM_pokemonAvecPouvoir().put(this,this.m_pouvoir);
+    }
   }
 
   public void attaquer(Pokemon pokemonCible) {
