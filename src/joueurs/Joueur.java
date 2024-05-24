@@ -95,6 +95,31 @@ public abstract class Joueur {
         }
         return false;
     }
+    public void viderMain()
+    {
+        // fonction qui vide la main pour la remettre dans la pioche
+        for (int i = 0; i < this.m_main.getListePokemon().size(); i++)
+        {
+            // mettre le pokemon de la main vers la pioche
+            this.m_pioche.getM_pioche().add(this.m_main.getListePokemon().get(i));
+        }
+        melangerPioche();
+    }
+    public void remplirMain() {
+        // fonction qui remplit la main avec la pioche
+        while (this.m_main.getNbPokemon() < 5 && !this.m_pioche.getM_pioche().isEmpty()) {
+            this.m_pioche.piocherMain(this.m_main);
+        }
+    }
+    public void melangerPioche() {
+        for (int i = 0; i < this.m_pioche.getM_pioche().size(); i++)
+        {
+            int random = (int) (Math.random() * this.m_pioche.getM_pioche().size());
+            Pokemon temp = this.m_pioche.getM_pioche().get(i);
+            this.m_pioche.getM_pioche().set(i, this.m_pioche.getM_pioche().get(random));
+            this.m_pioche.getM_pioche().set(random, temp);
+        }
+    }
     public abstract void placerPokemon(Terrain terrain);
     public void ajouterPlaceTerrain(){
         this.m_tailleTerrain++;
@@ -103,5 +128,6 @@ public abstract class Joueur {
         this.m_tailleTerrain--;
     }
     public abstract boolean utiliserPouvoir(Terrain terrain, Joueur adversaire);
+
 
 }

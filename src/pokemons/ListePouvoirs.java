@@ -1,7 +1,6 @@
 package pokemons;
 
-import pokemons.pouvoirs.ExtensionTerritoire;
-import pokemons.pouvoirs.Pouvoir;
+import pokemons.pouvoirs.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +9,12 @@ import java.util.Random;
 public class ListePouvoirs {
 
     // Attributs
-    private static ArrayList<Pouvoir> m_nomsPouvoirs = new ArrayList<>(Arrays.asList(new ExtensionTerritoire()));
+    private static ArrayList<Pouvoir> m_nomsPouvoirs = new ArrayList<>();
     private static ArrayList<Pouvoir> m_pouvoirsUtilises = new ArrayList<>();
+
+    public ListePouvoirs() {
+        m_nomsPouvoirs.addAll(Arrays.asList(new ExtensionTerritoire(), new Confusion()));
+    }
 
     // Methodes
     public static void reinitialiser() {

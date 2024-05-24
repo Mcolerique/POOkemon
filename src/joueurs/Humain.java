@@ -79,7 +79,7 @@ public class Humain extends Joueur{
         }
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
-            System.out.print("Choisissez un pouvoir a utilisé (");
+            System.out.print("Choisissez un pouvoir a utiliser (");
             for (int j = 0; j<pokeQuiAttaque.size();j++)
             {
                 if (j != pokeQuiAttaque.size()-1)
