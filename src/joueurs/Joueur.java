@@ -6,11 +6,11 @@ import jeu.Jeu;
 import java.util.List;
 
 public abstract class Joueur {
-    public String m_nom;
-    public Pioche m_pioche;
-    public Main m_main;
-    public Defausse m_defausse;
-    public int m_tailleTerrain;
+    private String m_nom;
+    private Pioche m_pioche;
+    private Main m_main;
+    private Defausse m_defausse;
+    private int m_tailleTerrain;
 
     public Joueur(String nom, int taillePioche) {
         this.m_nom = nom;
@@ -18,10 +18,6 @@ public abstract class Joueur {
         this.m_main = new Main();
         this.m_defausse = new Defausse();
         this.m_tailleTerrain = 3;
-    }
-
-    private void piocher() {
-        this.m_pioche.piocherMain(this.m_main);
     }
 
     public abstract Boolean attaquer(Terrain terrain, Joueur adversaire);
@@ -128,6 +124,9 @@ public abstract class Joueur {
         this.m_tailleTerrain--;
     }
     public abstract boolean utiliserPouvoir(Terrain terrain, Joueur adversaire);
-
+    public abstract int selection(List<Pokemon> list);
+    public int getM_tailleTerrain(){
+        return this.m_tailleTerrain;
+    }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class Terrain {
     private final List<Pokemon> m_pokemonsJoueur1;
     private final List<Pokemon> m_pokemonsJoueur2;
-    private final Hashtable<Pouvoir,Pokemon> m_pouvoirUtiliser;
+    private static Hashtable<Pouvoir,Pokemon> m_pouvoirUtiliser;
 
     public Terrain() {
         // Initialisation des listes de Pokemons pour les deux joueurs
@@ -69,5 +69,9 @@ public class Terrain {
         else{
             return this.m_pokemonsJoueur2.isEmpty();
         }
+    }
+
+    public static Hashtable<Pouvoir, Pokemon> getM_pouvoirUtiliser() {
+        return m_pouvoirUtiliser;
     }
 }

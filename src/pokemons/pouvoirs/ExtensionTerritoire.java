@@ -1,5 +1,6 @@
 package pokemons.pouvoirs;
 
+import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
 import pokemons.Pokemon;
@@ -15,5 +16,6 @@ public class ExtensionTerritoire extends Pouvoir{
     }
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon){
         allie.enleverPlaceTerrain();
+        Jeu.getM_pokemonAvecPouvoir().remove(pokemon);
     }
 }

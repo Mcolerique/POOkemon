@@ -39,14 +39,7 @@ public class Humain extends Joueur{
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
             System.out.print("Choisissez un pokemon avec lequel attaquer (");
-            for (int j = 0; j<pokeQuiAttaque.size();j++)
-            {
-                if (j != pokeQuiAttaque.size()-1)
-                {
-                    System.out.print((j+1)+"."+pokeQuiAttaque.get(j).getNom() + "/");
-                }
-                else {System.out.println((j+1)+"."+pokeQuiAttaque.get(j).getNom()+")");}
-            }
+            Affichage.selectionPokemon(pokeQuiAttaque);
             Affichage.affichePokemon(terrain.getM_pokemonsJoueur(this));
             int pokemonAttaquant;
             Scanner scanner = new Scanner(System.in);
@@ -83,14 +76,7 @@ public class Humain extends Joueur{
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
             System.out.print("Choisissez un pouvoir a utiliser (");
-            for (int j = 0; j<pokeQuiAttaque.size();j++)
-            {
-                if (j != pokeQuiAttaque.size()-1)
-                {
-                    System.out.print((j+1)+"."+pokeQuiAttaque.get(j).getNom() + "/");
-                }
-                else {System.out.println((j+1)+"."+pokeQuiAttaque.get(j).getNom()+")");}
-            }
+            Affichage.selectionPokemon(pokeQuiAttaque);
             Affichage.affichePokemon(terrain.getM_pokemonsJoueur(this));
             int pokemonAttaquant;
             Scanner scanner = new Scanner(System.in);
@@ -98,9 +84,18 @@ public class Humain extends Joueur{
             pokeQuiAttaque.remove(pokemonAttaquant);
             pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             if (this.mort(terrain)|| adversaire.mort(terrain)){
+                if(Jeu.getM_pokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
+                    pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public int selection(List<Pokemon> list) {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt() - 1;
     }
 }

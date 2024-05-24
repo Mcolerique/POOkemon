@@ -86,4 +86,14 @@ public class Affichage {
         }
         Affichage.accueil();
     }
+    public static void selectionPokemon(List<Pokemon> list){
+        for (int j = 0; j<list.size();j++)
+        {
+            if (j != list.size()-1)
+            {
+                System.out.print((j+1)+"."+list.get(j).getNom() + "/");
+            }
+            else {System.out.println((j+1)+"."+list.get(j).getNom()+")");}
+        }
+    }
 }

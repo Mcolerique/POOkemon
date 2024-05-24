@@ -6,6 +6,7 @@ import pokemons.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Ordinateur extends Joueur {
 
@@ -84,9 +85,18 @@ public class Ordinateur extends Joueur {
             pokeQuiAttaque.remove(pokemonAttaquant);
             pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             if (this.mort(terrain)|| adversaire.mort(terrain)){
+                if(Jeu.getM_pokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
+                    pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public int selection(List<Pokemon> list) {
+        Random random = new Random();
+        return random.nextInt(list.size());
     }
 }

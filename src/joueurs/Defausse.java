@@ -1,5 +1,6 @@
 package joueurs;
 
+import jeu.Jeu;
 import pokemons.Pokemon;
 
 import java.util.ArrayList;
@@ -12,12 +13,8 @@ public class Defausse {
         m_defausse = new ArrayList<>();
     }
 
-    public void defausser(Pokemon pokemon) {
-        m_defausse.add(pokemon);
-    }
+    public void defausser(Pokemon pokemon) {m_defausse.add(pokemon);}
 
     // Méthode supplémentaire pour récupérer tous les Pokémon dans la défausse
-    public List<Pokemon> getDefausse() {
-        return m_defausse;
-    }
+    public List<Pokemon> getDefausse() {return m_defausse;}
 }

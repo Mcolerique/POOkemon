@@ -5,8 +5,11 @@ import joueurs.Humain;
 import joueurs.Joueur;
 import joueurs.Ordinateur;
 import joueurs.Terrain;
+import pokemons.Pokemon;
+import pokemons.pouvoirs.Pouvoir;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
@@ -15,11 +18,13 @@ public class Jeu {
     private Joueur m_j2;
     private final Terrain m_terrain;
     private final Tour m_tour;
+    private static Hashtable<Pokemon, Pouvoir> m_pokemonAvecPouvoir;
 
 
     public Jeu() {
-        m_terrain = new Terrain();
-        m_tour = new Tour(this);
+        this.m_terrain = new Terrain();
+        this.m_tour = new Tour(this);
+        m_pokemonAvecPouvoir = new Hashtable<>();
     }
 
     public void jouer(Joueur j1, Joueur j2) {
@@ -39,7 +44,7 @@ public class Jeu {
             j1.piocherPokemon();
 
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (this.m_terrain.getNbPokemonsJoueur(j1) < j1.m_tailleTerrain && j1.getMain().getNbPokemon() > 0){
+            while (this.m_terrain.getNbPokemonsJoueur(j1) < j1.getM_tailleTerrain() && j1.getMain().getNbPokemon() > 0){
                 System.out.println("Placer des pokemons sur le terrain");
                 j1.placerPokemon(this.m_terrain);
             }
@@ -86,12 +91,12 @@ public class Jeu {
             this.m_j2.placerPokemon(this.m_terrain);
         }
         //attaque j1
-        System.out.println((this.m_j1.m_nom+" attaque :"));
+        System.out.println((this.m_j1.getNom()+" attaque :"));
         if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
             partieTerminee();
         }
         //attaque j2
-        System.out.println((this.m_j2.m_nom+" attaque :"));
+        System.out.println((this.m_j2.getNom()+" attaque :"));
         if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
             partieTerminee();
         }
@@ -112,5 +117,9 @@ public class Jeu {
 
     public Terrain getM_terrain() {
         return m_terrain;
+    }
+
+    public static Hashtable<Pokemon, Pouvoir> getM_pokemonAvecPouvoir() {
+        return m_pokemonAvecPouvoir;
     }
 }

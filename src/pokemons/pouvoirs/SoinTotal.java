@@ -1,6 +1,7 @@
 package pokemons.pouvoirs;
 
 import affichage.Affichage;
+import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
 import pokemons.Pokemon;
@@ -18,23 +19,15 @@ public class SoinTotal extends Pouvoir{
         ArrayList<Pokemon> pokeSoigner = new ArrayList<>();
         pokeSoigner.addAll(terrain.getM_pokemonsJoueur(allie));
         System.out.print("choisissez un pokemon a soigner");
-        for (int j = 0; j<pokeSoigner.size();j++)
-        {
-            if (j != pokeSoigner.size()-1)
-            {
-                System.out.print((j+1)+"."+pokeSoigner.get(j).getNom() + "/");
-            }
-            else {System.out.println((j+1)+"."+pokeSoigner.get(j).getNom()+")");}
-        }
+        Affichage.selectionPokemon(pokeSoigner);
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(allie));
-        int pokemonSoigner;
-        Scanner scanner = new Scanner(System.in);
-        pokemonSoigner = scanner.nextInt() - 1;
-        pokeSoigner.get(pokemonSoigner).soigner(pokeSoigner.get(pokemonSoigner).getPvMax());
+        int pokemonSoigne = allie.selection(pokeSoigner);
+        pokeSoigner.get(pokemonSoigne).soigner(pokeSoigner.get(pokemonSoigne).getPvMax());
         this.m_utilise = true;
     }
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
+        Jeu.getM_pokemonAvecPouvoir().remove(pokemon);
     }
 }

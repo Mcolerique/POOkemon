@@ -1,5 +1,6 @@
 package pokemons;
 
+import jeu.Jeu;
 import pokemons.pouvoirs.Pouvoir;
 
 import java.util.Random;
@@ -8,7 +9,7 @@ public class Pokemon {
   private final String m_nom;
   private final int m_pvMax;
   private int m_pv;
-  private final int m_attaque;
+  private int m_attaque;
   private final Elements m_element; // Indice de l'élément du Pokémon
   private final Pouvoir m_pouvoir;
 
@@ -21,6 +22,7 @@ public class Pokemon {
     Elements[] tabAffinite = {Elements.AIR, Elements.EAU, Elements.FEU, Elements.TERRE};
     this.m_element = tabAffinite[random.nextInt(4)];
     this.m_pouvoir = ListePouvoirs.getPouvoir();
+    Jeu.getM_pokemonAvecPouvoir().put(this, this.m_pouvoir);
   }
 
   public void attaquer(Pokemon pokemonCible) {
@@ -77,5 +79,8 @@ public class Pokemon {
     else {
       this.m_pv+=soin;
     }
+  }
+  public void boostAttaque(int boost) {
+    this.m_attaque += boost;
   }
 }

@@ -1,5 +1,6 @@
 package pokemons.pouvoirs;
 
+import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
 import pokemons.Pokemon;
@@ -19,6 +20,6 @@ public class Confusion extends Pouvoir{
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
-
+        Jeu.getM_pokemonAvecPouvoir().remove(pokemon);
     }
 }
