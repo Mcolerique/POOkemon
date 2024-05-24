@@ -16,7 +16,7 @@ public abstract class Pouvoir {
     public String getM_nom(){
         return this.m_nom;
     }
-    public abstract void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon);
+    public abstract void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon);
     public abstract void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon);
     public boolean getM_utilise(){
         return this.m_utilise;

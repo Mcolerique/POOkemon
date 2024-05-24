@@ -10,17 +10,11 @@ import java.util.Scanner;
 
 public class Kamikaze extends Pouvoir{
     public Kamikaze() {
-        super("Kamikaze", false);
+        super("Kamikaze");
     }
 
     @Override
-    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
-        System.out.println("Kamikaze !");
-        System.out.println("Choisissez un pokemon à sacrifier");
-        Affichage.affichePokemon(terrain.getM_pokemonsJoueur(allie));
-        int pokemonSacrifie;
-        Scanner scanner = new Scanner(System.in);
-        pokemonSacrifie = scanner.nextInt() - 1;
+    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
 
         System.out.println("Choisissez un pokemon à attaquer");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(adversaire));
@@ -29,8 +23,12 @@ public class Kamikaze extends Pouvoir{
         pokemonAttaque = scanner2.nextInt() - 1;
 
         // défausser les 2 pokemons avec retirerPokemon()
-        terrain.retirerPokemon(allie, pokemonSacrifie);
+        terrain.retirerPokemon(allie, intPokemon);
         terrain.retirerPokemon(adversaire, pokemonAttaque);
+    }
+
+    @Override
+    public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
 
     }
 }

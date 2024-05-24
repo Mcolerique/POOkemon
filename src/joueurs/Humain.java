@@ -96,7 +96,7 @@ public class Humain extends Joueur{
             Scanner scanner = new Scanner(System.in);
             pokemonAttaquant = scanner.nextInt() - 1;
             pokeQuiAttaque.remove(pokemonAttaquant);
-            pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+            pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             if (this.mort(terrain)|| adversaire.mort(terrain)){
                 return true;
             }

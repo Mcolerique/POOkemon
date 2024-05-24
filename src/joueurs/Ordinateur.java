@@ -82,7 +82,7 @@ public class Ordinateur extends Joueur {
         for (int i = 0; i<pokeQuiAttaque.size();i++){
             int pokemonAttaquant = random.nextInt(pokeQuiAttaque.size());
             pokeQuiAttaque.remove(pokemonAttaquant);
-            pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+            pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             if (this.mort(terrain)|| adversaire.mort(terrain)){
                 return true;
             }

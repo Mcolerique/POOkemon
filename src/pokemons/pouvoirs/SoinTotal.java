@@ -14,7 +14,7 @@ public class SoinTotal extends Pouvoir{
     }
 
     @Override
-    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
+    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon) {
         ArrayList<Pokemon> pokeSoigner = new ArrayList<>();
         pokeSoigner.addAll(terrain.getM_pokemonsJoueur(allie));
         System.out.print("choisissez un pokemon a soigner");

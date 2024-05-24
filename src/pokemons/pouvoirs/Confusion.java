@@ -9,7 +9,7 @@ public class Confusion extends Pouvoir{
         super("Confusion");
     }
     @Override
-    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
+    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon) {
         System.out.println("Confusion !");
         // vider la main de l'adversaire et la mettre dans la pioche de l'adversaire
         adversaire.viderMain();
