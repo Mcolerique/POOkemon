@@ -69,7 +69,6 @@ public class Ordinateur extends Joueur {
     @Override
     public boolean utiliserPouvoir(Terrain terrain, Joueur adversaire) {
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
-        Random random = new Random();
         for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
             if (terrain.getM_pokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getM_pokemonsJoueur(this).get(i).getM_pouvoir().getM_utilise())
@@ -81,7 +80,7 @@ public class Ordinateur extends Joueur {
             return false;
         }
         for (int i = 0; i<pokeQuiAttaque.size();i++){
-            int pokemonAttaquant = random.nextInt(pokeQuiAttaque.size());
+            int pokemonAttaquant = selection(pokeQuiAttaque);
             pokeQuiAttaque.remove(pokemonAttaquant);
             pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             if (this.mort(terrain)|| adversaire.mort(terrain)){

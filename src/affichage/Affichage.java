@@ -22,12 +22,12 @@ public class Affichage {
         }
     }
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
-        System.out.println(" \nPokémon du joueurs.Joueur 1 : ");
+        System.out.println(" \nPokémon du Joueur 1 : ");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j1));
         System.out.println("pioche : "+j1.getPioche().getM_pioche().size() + " cartes");
         System.out.println("défausse : "+j1.getDefausse().getDefausse().size()+" cartes");
         System.out.println("\n--------------------------------------------------------------------------------\n");
-        System.out.println(" Pokémon du joueurs.Joueur 2 : ");
+        System.out.println(" Pokémon du Joueur 2 : ");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j2));
         System.out.println("pioche : "+j2.getPioche().getM_pioche().size() + " cartes");
         System.out.println("défausse : "+j2.getDefausse().getDefausse().size()+" cartes\n");

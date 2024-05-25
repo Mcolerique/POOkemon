@@ -23,9 +23,7 @@ public class Humain extends Joueur{
             else {System.out.println((j+1)+"."+this.m_main.getListePokemon().get(j).getNom());}
         }
         Affichage.affichePokemon(this.m_main.getListePokemon());
-        int pokemonaplacer;
-        Scanner scanner = new Scanner(System.in);
-        pokemonaplacer = scanner.nextInt() - 1;
+        int pokemonaplacer = selection(this.m_main.getListePokemon());
         terrain.placerPokemons(this, pokemonaplacer);
         // afficher le terrain
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(this));
@@ -41,15 +39,11 @@ public class Humain extends Joueur{
             System.out.print("Choisissez un pokemon avec lequel attaquer (");
             Affichage.selectionPokemon(pokeQuiAttaque);
             Affichage.affichePokemon(terrain.getM_pokemonsJoueur(this));
-            int pokemonAttaquant;
-            Scanner scanner = new Scanner(System.in);
-            pokemonAttaquant = scanner.nextInt() - 1;
+            int pokemonAttaquant = selection(pokeQuiAttaque);
             pokeQuiAttaque.remove(pokemonAttaquant);
             System.out.println("Choisissez un pokemon à attaquer");
             Affichage.affichePokemon(terrain.getM_pokemonsJoueur(adversaire));
-            int pokemonAttaque;
-            Scanner scanner2 = new Scanner(System.in);
-            pokemonAttaque = scanner2.nextInt() - 1;
+            int pokemonAttaque = selection(pokeQuiAttaque);
             terrain.getPokemon(this,pokemonAttaquant).attaquer(terrain.getPokemon(adversaire,pokemonAttaque));
             System.out.println(terrain.getPokemon(this,i).getNom()+" a attaquer "+terrain.getPokemon(adversaire,pokemonAttaque).getNom());
             // si le pokemon attaqué est mort, le défausser
@@ -78,9 +72,7 @@ public class Humain extends Joueur{
             System.out.print("Choisissez un pouvoir a utiliser (");
             Affichage.selectionPokemon(pokeQuiAttaque);
             Affichage.affichePokemon(terrain.getM_pokemonsJoueur(this));
-            int pokemonAttaquant;
-            Scanner scanner = new Scanner(System.in);
-            pokemonAttaquant = scanner.nextInt() - 1;
+            int pokemonAttaquant = selection(pokeQuiAttaque);
             pokeQuiAttaque.remove(pokemonAttaquant);
             pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             if (this.mort(terrain)|| adversaire.mort(terrain)){
