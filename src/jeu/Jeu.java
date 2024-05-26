@@ -5,12 +5,16 @@ import joueurs.Humain;
 import joueurs.Joueur;
 import joueurs.Ordinateur;
 import joueurs.Terrain;
+import pokemons.Pokemon;
+import pokemons.pouvoirs.Pouvoir;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
 public class Jeu {
+    private static Hashtable<Pokemon, Pouvoir> m_pokemonAvecPouvoir;
     private Joueur m_j1;
     private Joueur m_j2;
     private final Terrain m_terrain;
@@ -18,8 +22,9 @@ public class Jeu {
 
 
     public Jeu() {
-        m_terrain = new Terrain();
-        m_tour = new Tour(this);
+        this.m_terrain = new Terrain();
+        this.m_tour = new Tour(this);
+        m_pokemonAvecPouvoir = new Hashtable<>();
     }
 
     public void jouer(Joueur j1, Joueur j2) {
@@ -34,14 +39,17 @@ public class Jeu {
         if (!partieTerminee()) {
             System.out.println(this.m_tour.getM_nbTourString()+" tour :");
             // joueurs.Joueur 1
-            System.out.println("jeu.Tour de " + j1.getNom() + " :\n");
+            System.out.println("Tour de " + j1.getNom() + " :\n");
             // piocher
             j1.piocherPokemon();
 
             // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (this.m_terrain.getNbPokemonsJoueur(j1) < 3 && j1.getMain().getNbPokemon() > 0){
-                System.out.println("Placer des pokemons sur le terrain");
+            while (this.m_terrain.getNbPokemonsJoueur(j1) < j1.getM_tailleTerrain() && j1.getMain().getNbPokemon() > 0){
                 j1.placerPokemon(this.m_terrain);
+            }
+            // utilisation des pouvoir
+            if(j1.utiliserPouvoir(this.m_terrain,j2)){
+                partieTerminee();
             }
             // attaquer
             if(j1.attaquer(this.m_terrain, j2)){
@@ -58,13 +66,13 @@ public class Jeu {
         // Initialisation des joueurs
         if(randomInt == 0){
             System.out.println("Vous êtes le joueur 1");
-            this.m_j1 = new Humain("joueurs.Joueur 1", 20);
-            this.m_j2 = new Ordinateur("joueurs.Joueur 2", 21);
+            this.m_j1 = new Humain("Joueur 1", 20);
+            this.m_j2 = new Ordinateur("Joueur 2", 21);
         }
         else {
             System.out.println("Vous êtes le joueur 2");
-            this.m_j1 = new Ordinateur("joueurs.Joueur 1", 20);
-            this.m_j2 = new Humain("joueurs.Joueur 2", 21);
+            this.m_j1 = new Ordinateur("Joueur 1", 20);
+            this.m_j2 = new Humain("Joueur 2", 21);
         }
         for (int i=0; i<5; i++) {
             this.m_j1.piocherPokemon();
@@ -73,11 +81,11 @@ public class Jeu {
 
         // Initlalisaiton de la partie, chaque joueur pose 3 pokemons sur le terrain
         System.out.println(this.m_tour.getM_nbTourString()+" tour :");
-        System.out.println("jeu.Tour de " + this.m_j1.getNom());
+        System.out.println("Tour de " + this.m_j1.getNom());
         for (int i=0; i<3; i++) {
             this.m_j1.placerPokemon(this.m_terrain);
         }
-        System.out.println("jeu.Tour de " + this.m_j2.getNom());
+        System.out.println("Tour de " + this.m_j2.getNom());
         for (int i=0; i<3; i++) {
             this.m_j2.placerPokemon(this.m_terrain);
         }
@@ -108,5 +116,9 @@ public class Jeu {
 
     public Terrain getM_terrain() {
         return m_terrain;
+    }
+
+    public static Hashtable<Pokemon, Pouvoir> getM_pokemonAvecPouvoir() {
+        return m_pokemonAvecPouvoir;
     }
 }

@@ -22,15 +22,15 @@ public class Affichage {
         }
     }
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
-        System.out.println(" \nPokémon du joueurs.Joueur 1 : ");
+        System.out.println(" \nPokémon du Joueur 1 : ");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j1));
-        System.out.println("pioche : "+j1.m_pioche.getM_pioche().size() + " cartes");
-        System.out.println("défausse : "+j1.m_defausse.getDefausse().size()+" cartes");
+        System.out.println("pioche : "+j1.getPioche().getM_pioche().size() + " cartes");
+        System.out.println("défausse : "+j1.getDefausse().getDefausse().size()+" cartes");
         System.out.println("\n--------------------------------------------------------------------------------\n");
-        System.out.println(" Pokémon du joueurs.Joueur 2 : ");
+        System.out.println(" Pokémon du Joueur 2 : ");
         Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j2));
-        System.out.println("pioche : "+j2.m_pioche.getM_pioche().size() + " cartes");
-        System.out.println("défausse : "+j2.m_defausse.getDefausse().size()+" cartes\n");
+        System.out.println("pioche : "+j2.getPioche().getM_pioche().size() + " cartes");
+        System.out.println("défausse : "+j2.getDefausse().getDefausse().size()+" cartes\n");
 
     }
     public static void affichePokemon(List<Pokemon> list){
@@ -68,14 +68,32 @@ public class Affichage {
             System.out.print(String.format("%-" + largeurCase + "s", type));
         }
         System.out.println();
+
+        // affichage.Affichage des pouvoirs des pokemons
+        System.out.print("             pouvoir : ");
+        for (int i = 0; i < nombrePokemons; i++) {
+            String type = list.get(i).getNomPouvoir();
+            System.out.print(String.format("%-" + largeurCase + "s", type));
+        }
+        System.out.println();
     }
     public static void finDePartie(Joueur gagnant){
         if (gagnant.getClass() == Humain.class) {
-            System.out.println("Vous avez gagné !! "+gagnant.m_pioche.getM_pioche().size()+gagnant.m_main.getNbPokemon()+" de vos pokemon.Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
+            System.out.println("Vous avez gagné !! "+gagnant.getPioche().getM_pioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemon.Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
         }
         else {
-            System.out.println("Vous avez perdu !! "+gagnant.m_pioche.getM_pioche().size()+gagnant.m_main.getNbPokemon()+" de ses pokemon.Pokemon sont en pleine santé, vous êtes vraiment nul");
+            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getM_pioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon.Pokemon sont en pleine santé, vous êtes vraiment nul");
         }
         Affichage.accueil();
+    }
+    public static void selectionPokemon(List<Pokemon> list){
+        for (int j = 0; j<list.size();j++)
+        {
+            if (j != list.size()-1)
+            {
+                System.out.print((j+1)+"."+list.get(j).getNom() + "/");
+            }
+            else {System.out.println((j+1)+"."+list.get(j).getNom()+")");}
+        }
     }
 }

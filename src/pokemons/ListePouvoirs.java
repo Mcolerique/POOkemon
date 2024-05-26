@@ -1,5 +1,7 @@
 package pokemons;
 
+import pokemons.pouvoirs.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -7,9 +9,12 @@ import java.util.Random;
 public class ListePouvoirs {
 
     // Attributs
-    private static ArrayList<String> m_nomsPouvoirs = new ArrayList<String>(Arrays.asList(
-            "Extension du territoire", "Confusion", "Kamikaze"));
-    private static ArrayList<String> m_pouvoirsUtilises = new ArrayList<String>();
+    private static ArrayList<Pouvoir> m_nomsPouvoirs = new ArrayList<>();
+    private static ArrayList<Pouvoir> m_pouvoirsUtilises = new ArrayList<>();
+
+    public ListePouvoirs() {
+        m_nomsPouvoirs.addAll(Arrays.asList(new ExtensionTerritoire(), new Confusion()));
+    }
 
     // Methodes
     public static void reinitialiser() {
@@ -18,7 +23,7 @@ public class ListePouvoirs {
     }
 
     // Getters
-    private static int getIndexAleatoire() {
+    public static int getIndexAleatoire() {
         if (m_nomsPouvoirs.isEmpty()) {
             return -1;
         }
@@ -26,11 +31,17 @@ public class ListePouvoirs {
         return random.nextInt(m_nomsPouvoirs.size());
     }
 
-    public static String getNom() {
+    public static Pouvoir getPouvoir() {
         int index = getIndexAleatoire();
-        String nom = m_nomsPouvoirs.get(index);
-        m_pouvoirsUtilises.add(nom);
-        m_nomsPouvoirs.remove(index);
-        return nom;
+        if(index == -1)
+        {
+            return null;
+        }
+        else {
+            Pouvoir pouvoir = m_nomsPouvoirs.get(index);
+            m_pouvoirsUtilises.add(pouvoir);
+            m_nomsPouvoirs.remove(index);
+            return pouvoir;
+        }
     }
 }

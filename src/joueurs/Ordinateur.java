@@ -1,10 +1,12 @@
 package joueurs;
 
 import jeu.Jeu;
+import pokemons.Pokemon;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Ordinateur extends Joueur {
 
@@ -62,5 +64,38 @@ public class Ordinateur extends Joueur {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean utiliserPouvoir(Terrain terrain, Joueur adversaire) {
+        List<Pokemon> pokeQuiAttaque = new ArrayList<>();
+        for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
+        {
+            if (terrain.getM_pokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getM_pokemonsJoueur(this).get(i).getM_pouvoir().getM_utilise())
+            {
+                pokeQuiAttaque.add(terrain.getM_pokemonsJoueur(this).get(i));
+            }
+        }
+        if(pokeQuiAttaque.isEmpty()){
+            return false;
+        }
+        for (int i = 0; i<pokeQuiAttaque.size();i++){
+            int pokemonAttaquant = selection(pokeQuiAttaque);
+            pokeQuiAttaque.remove(pokemonAttaquant);
+            pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
+            if (this.mort(terrain)|| adversaire.mort(terrain)){
+                if(Jeu.getM_pokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
+                    pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int selection(List<Pokemon> list) {
+        Random random = new Random();
+        return random.nextInt(list.size());
     }
 }

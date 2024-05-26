@@ -1,0 +1,25 @@
+package pokemons.pouvoirs;
+
+import jeu.Jeu;
+import joueurs.Joueur;
+import joueurs.Terrain;
+import pokemons.Pokemon;
+
+public class Confusion extends Pouvoir{
+    public Confusion() {
+        super("Confusion");
+    }
+    @Override
+    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon) {
+        System.out.println("Confusion !");
+        // vider la main de l'adversaire et la mettre dans la pioche de l'adversaire
+        adversaire.viderMain();
+        // remplir la main de l'adversaire
+        adversaire.remplirMain();
+    }
+
+    @Override
+    public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
+        Jeu.getM_pokemonAvecPouvoir().remove(pokemon);
+    }
+}
