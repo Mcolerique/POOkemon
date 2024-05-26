@@ -6,11 +6,15 @@ import jeu.Jeu;
 import java.util.List;
 
 public abstract class Joueur {
-    public String m_nom;
-    public Pioche m_pioche;
-    public Main m_main;
-    public Defausse m_defausse;
 
+    //Attributs
+    protected String m_nom;
+    protected Pioche m_pioche;
+    protected Main m_main;
+    protected Defausse m_defausse;
+
+
+    //Constructeur
     public Joueur(String nom, int taillePioche) {
         this.m_nom = nom;
         this.m_pioche = new Pioche(taillePioche);
@@ -18,16 +22,41 @@ public abstract class Joueur {
         this.m_defausse = new Defausse();
     }
 
-    private void piocher() {
-        this.m_pioche.piocherMain(this.m_main);
-    }
+
+    //Methodes
+    public abstract void placerPokemon(Terrain terrain);
 
     public abstract Boolean attaquer(Terrain terrain, Joueur adversaire);
+
+    public void piocherPokemon() {
+        while (this.m_main.getNbPokemon() < 5 && !this.m_pioche.getM_pioche().isEmpty()) {
+            this.m_pioche.piocherMain(this.m_main);
+        }
+    }
 
     public boolean aPerdu() {
         return this.m_main.getListePokemon().isEmpty() && this.m_pioche.getM_pioche().isEmpty();
     }
 
+    public void defausser(Pokemon pokemon) {
+        m_defausse.defausser(pokemon);
+    }
+
+    public boolean mort(Terrain terrain, int attaque) {
+        if (!(terrain.getPokemon(this, attaque)).estVivant()) {
+            System.out.println("Le pokemon " + (terrain.getPokemon(this, attaque)).getNom() + " est mort");
+            this.defausser(terrain.getPokemon(this, attaque));
+            // retirer le pokemon du terrain
+            terrain.retirerPokemon(this, attaque);
+            if (terrain.estVide(this)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    //Getters
     public String getNom() {
         return this.m_nom;
     }
@@ -39,18 +68,9 @@ public abstract class Joueur {
     public Pioche getPioche() {
         return this.m_pioche;
     }
+
     public Defausse getDefausse() {
         return this.m_defausse;
-    }
-
-    public void piocherPokemon() {
-        while (this.m_main.getNbPokemon() < 5 && !this.m_pioche.getM_pioche().isEmpty()) {
-            this.m_pioche.piocherMain(this.m_main);
-        }
-    }
-
-    public void defausser(Pokemon pokemon) {
-        m_defausse.defausser(pokemon);
     }
 
     public Pokemon getPokemon(int pokemonCible) {
@@ -67,18 +87,4 @@ public abstract class Joueur {
             return null;
         }
     }
-    public boolean mort(Terrain terrain, int attaque) {
-        if (!(terrain.getPokemon(this, attaque)).estVivant()) {
-            System.out.println("Le pokemon " + (terrain.getPokemon(this, attaque)).getNom() + " est mort");
-            this.defausser(terrain.getPokemon(this, attaque));
-            // retirer le pokemon du terrain
-            terrain.retirerPokemon(this, attaque);
-            if (terrain.estVide(this)) {
-                return true;
-            }
-        }
-    return false;
-    }
-    public abstract void placerPokemon(Terrain terrain);
-
 }
