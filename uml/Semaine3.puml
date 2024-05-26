@@ -8,164 +8,267 @@ hide empty members
 skinparam classFontSyle Bold
 
 
+package affichage {
+
+    class Affichage {
+        + {static} accueil()
+        + {static} terrain(terrain: Terrain, j1: Joueur, j2: Joueur)
+        + {static} affichePokemon(list: Pokemon[0..*])
+        + {static} finDePartie(gagnant: Joueur)
+        + {static} selectionPokemon(list:Pokemon[0..*])
+    }
+}
+
+package jeu {
+
+    class Jeu {
+        - {static} m_pokemonAvecPouvoir: Pokemon[Pouvoir[0..*]]
+        - m_j1: Joueur
+        - m_j2: Joueur
+        - m_terrain: Terrain
+        - m_tour: Tour
+        + <<Create>> Jeu()
+        + jouer(j1: Joueur, j2: Joueur)
+        + initialisationJeu()
+        + partieTerminee(): Boolean
+        + getJoueur1(): Joueur
+        + getJoueur2(): Joueur
+        + getTerrain(): Terrain
+        + getPokemonAvecPouvoir(): Pokemon[Pouvoir[0..*]]
+    }
+
+    class Start {
+        + {static} main(args: String[])
+    }
+
+    class Tour {
+        - jeu: Jeu
+        - m_nbTour: Integer
+        + <<Create>> Tour(jeu: Jeu)
+        + nouveauTour()
+        + getNbTourString(): String
+    }
+}
+
 package joueurs {
+
+    class Defausse {
+        - m_defausse: Pokemon[0..*]
+        + <<Create>> Defausse()
+        + defausser(pokemon: Pokemon)
+        + getDefausse(): Pokemon[0..*]
+    }
+
+    class Humain extends Joueur {
+        + <<Create>> Humain(nom: String, taillePioche: Integer)
+        + placerPokemon(terrain: Terrain)
+        + attaquer(terrain: Terrain, adversaire: Joueur): Boolean {redefines attaquer()}
+        + utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean {redefines utiliserPouvoir()}
+        + selection(list:Pokemon[0..*]): Integer {redefines selection()}
+    }
+    
+
     abstract class Joueur <<abstract>> {
         ~ m_nom: String
         ~ m_pioche: Pioche
         ~ m_main: Main
         ~ m_defausse: Defausse
-        + <<Create>> Joueur(nom: String, taillePioche: int)
-        + {abstract} placerPokemon(terrain: Terrain): void
+        ~ m_tailleTerrain: Integer
+        + <<Create>> Joueur(nom: String, taillePioche: Integer)
         + {abstract} attaquer(terrain: Terrain, adversaire: Joueur): Boolean
-        + piocherPokemon(): void
-        + aPerdu(): boolean
-        + defausser(pokemon: Pokemon): void
-        + mort(terrain: Terrain, attaque: int): Boolean
+        + {abstract} utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean
+        + {abstract} selection(list:Pokemon[0..*]): Integer
+        + {abstract} placerPokemon(terrain: Terrain)
+        + piocherPokemon()
+        + defausser(pokemon: Pokemon)
+        + mort(terrain: Terrain, attaque: Integer): Boolean
+        + mort(terrain: Terrain): Boolean
+        + viderMain()
+        + remplirMain()
+        + melangerPioche()
+        + ajouterPlaceTerrain()
+        + enleverPlaceTerrain()
+        + aPerdu(): Boolean
         + getNom(): String
         + getMain(): Main
         + getPioche(): Pioche
         + getDefausse(): Defausse
-        + getPokemon(pokemonCible: int): Pokemon
+        + getTailleTerrain(): Integer
+        + getPokemon(pokemonCible: Integer): Pokemon
+    }
+
+    class Main {
+        - m_listePokemon: Pokemon[0..*]
+        + <<Create>> Main()
+        + ajouterPokemon(pokemon: Pokemon)
+        + retirerPokemon(pokemon: Pokemon)
+        + getListePokemon(): Pokemon[0..*]
+        + getNbPokemon(): Integer
+    }
+
+    class Ordinateur extends Joueur {
+        + <<Create>> Ordinateur(nom: String, taillePioche: Integer)
+        + placerPokemon(terrain: Terrain) {redefines placerPokemon()}
+        + attaquer(terrain: Terrain, adversaire: Joueur): Boolean {redefines attaquer()}
+        + utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean {redefines utiliserPouvoir()}
+        + selection(list:Pokemon[0..*]): Integer {redefines selection()}
+    }
+
+    class Pioche {
+        - m_pioche: Pokemon[0..*]
+        + <<Create>> Pioche(taillePioche: Integer)
+        + piocherMain(main: Main)
+        + getPioche(): Pokemon[0..*]
+    }
+
+    class Terrain {
+        - m_pokemonsJoueur1: Pokemon[0..*]
+        - m_pokemonsJoueur2: Pokemon[0..*]
+        - {static} m_pouvoirsUtilises: Pouvoir[Pokemon[0..*]]
+        + <<Create>> Terrain()
+        + placerPokemons(joueur: Joueur, pokemon: Integer)
+        + retirerPokemon(joueur: Joueur, pokemon: Integer)
+        + estVide(joueur: Joueur): Boolean
+        + getPokemon(j: Joueur, pokemon: Integer): Pokemon
+        + getNbPokemonsJoueur(mJ1: Joueur): Integer
+        + getPokemonsJoueur(joueur: Joueur): Pokemon[0..*]
+        + {static} getPouvoirsUtilises(): Pouvoir[Pokemon[0..*]]
+    }
+}
+
+package pokemons {
+
+    package pouvoirs {
+
+        class Confusion extends Pouvoir {
+            + <<Create>> Confusion()
+            + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines utiliser()}
+            + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines annulerPouvoir()}
+        }
+
+        class ExtensionTerritoire extends Pouvoir {
+            + <<Create>> ExtensionTerritoire()
+            + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines utiliser()}
+            + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines annulerPouvoir()}
+        }
+
+        class FerveurGuerriere extends Pouvoir {
+            + <<Create>> FerveurGuerriere()
+            + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines utiliser()}
+            + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines annulerPouvoir()}
+        }
+
+        class Kamikaze extends Pouvoir {
+            + <<Create>> Kamikaze()
+            + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines utiliser()}
+            + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines annulerPouvoir()}
+        }
+
+        abstract class Pouvoir <<abstract>> {
+            - m_nom: String
+            ~ m_utilise: Boolean
+            - m_desc: String
+            + <<Create>> Pouvoir(nom: String)
+            + {abstract} utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines utiliser()}
+            + {abstract} annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines annulerPouvoir()}
+            + getNom(): String
+            + getUtilise: Boolean
+        }
+
+        class SoinDeZone extends Pouvoir {
+           + <<Create>> SoinDeZone()
+           + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines utiliser()}
+           + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines annulerPouvoir()}
+       }
+
+       class SoinTotal extends Pouvoir {
+           + <<Create>> SoinTotal()
+           + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines utiliser()}
+           + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines annulerPouvoir()}
+       }
+    }
+
+    enum Elements {
+        EAU
+        FEU
+        TERRE
+        AIR
+        - m_element: String
+        - m_avantage: String
+        - m_desavantage: String
+        + Elements(element: String, avantage: String, desavantage: String)
+        + getAttaqueAffinite(elementAttaquant: Elements, elementEnnemi: Elements, pokemon: Pokemon): Integer
+        + getElement(): String
+        + getAvantage(): String
+        + getDesavantage(): String
+    }
+
+    class ListePokemons {
+        - {static} m_nomsDisponibles: String[0..*]
+        - {static} m_nomsUtilises: String[0..*]
+        + {static} reinitialiser()
+        + {static} getIndexAleatoire() : Integer
+        + {static} getNom(): String
+    }
+
+    class ListePouvoirs {
+        + ListePouvoirs()
+        + {static} reinitialiser()
+        + {static} getIndexAleatoire() : Integer
+        + {static} getPouvoir(): Pouvoir
+    }
+
+    class Pokemon {
+        - m_nom: String
+        - m_pvMax: Integer
+        - m_pv: Integer
+        - m_attaque: Integer
+        - m_element: Elements
+        - m_pouvoir: Pouvoir
+        + <<Create>> Pokemon()
+        + attaquer(pokemonCible: Pokemon)
+        + subirDegats(degats: Integer)
+        + estVivant(): Boolean
+        + avantageSur(pokemon: Pokemon): Boolean
+        + soigner(soin: Integer)
+        + boostAttaque(boost: Integer)
+        + getNom(): String
+        + getPv(): Integer
+        + getPvMax(): Integer
+        + getAttaque(): Integer
+        + getElementString(): String
+        + getNomPouvoir(): String
+        + getPouvoir(): Pouvoir
     }
 }
 
 
 
-interface Elements {
-    int[][] m_tabElt
-}
 
-class Pokemon {
-    - m_nom: String
-    - m_pv: int
-    - m_pvMax: int
-    - m_attaque: int
-    - m_element: int
-    + <<constructor>> Pokemon(nom: String)
-    + attaquer(pokemonCible: Pokemon): void
-    + subirDegats(degats: int): void
-    + estVivant(): boolean
-    + getNom(): String
-    + getPv(): int
-    + getPvMax(): int
-    + getAttaque(): int
-    + getElementString(): String
-    + estAvantager(pokemon: Pokemon): boolean
-}
+Start .> Affichage : <<uses>>
+Affichage ..> Jeu : <<uses>>
+Jeu *-u--> "1  \n" Tour : > contient
 
-class Joueur {
-    - m_nom: String
-    - m_pioche: Pioche
-    - m_main: Main
-    - m_defausse: Defausse
-    + <<constructor>> Joueur(nom: String, jeu: Jeu, taillePioche: int)
-    + piocherPokemon(): void
-    + attaquer(terrain: Terrain, adversaire: Joueur): Boolean
-    + aPerdu(): boolean
-    + getNom(): String
-    + getMain(): Main
-    + getPioche(): Pioche
-    + getDefausse(): Defausse
-    + defausser(pokemon: Pokemon): void
-    + getPokemon(pokemonCible: int): Pokemon
-    + placerPokemon(terrain: Terrain): abstract void
-}
 
-class Humain {
-    + <<constructor>> Humain(nom: String, jeu: Jeu, taillePioche: int)
-    + placerPokemon(terrain: Terrain): void
-    + attaquer(terrain: Terrain, adversaire: Joueur): Boolean
-}
+Pokemon -[dashed]--> "1\n- m_nomsDisponibles\n- m_nomsUtilises"ListePokemons : uses
+Pokemon -[dashed]--> "1\n- m_nomsPouvoirs\n- m_pouvoirsUtilises" ListePouvoirs : uses
+Pokemon "1  " *---> Elements : > est du type
+Pokemon "1  " *---> Pouvoir : > possède
 
-class Ordinateur {
-    + <<constructor>> Ordinateur(nom: String, jeu: Jeu, taillePioche: int)
-    + placerPokemon(terrain: Terrain): void
-    + attaquer(terrain: Terrain, adversaire: Joueur): Boolean
-}
+Terrain "3" o---> "-m_pokemonsJoueur1\n-m_pokemonsJoueur2\n-m_pouvoirsUtilises\n [3]" Pokemon : > est constitué de
+Main "1" o---> "-m_listePokemon\n [0..5]" Pokemon : > est constitué de
+Pioche "1" o---> "-m_pioche\n [0..21] "Pokemon : > est constitué de
+Defausse "1" o---> "-m_defausse\n [0..21] "Pokemon : > est constitué de
 
-class Pioche {
-    - m_pioche: List<Pokemon>
-    + <<constructor>> Pioche(jeu: Jeu, taille: int)
-    + piocherMain(main: Main): void
-    + getM_pioche(): List<Pokemon>
-}
+Joueur "1" *---> Pioche : > possède
+Joueur "1" *---> Main : > possède
+Joueur "1" *---> Defausse: > possède
+Joueur "1" *---> Terrain : > possède
 
-class Defausse {
-    - m_defausse: List<Pokemon>
-    + <<constructor>> Defausse()
-    + defausser(pokemon: Pokemon): void
-    + getDefausse(): List<Pokemon>
-}
-
-class Main {
-    - m_listePokemon: List<Pokemon>
-    + <<constructor>> Main()
-    + ajouterPokemon(pokemon: Pokemon): void
-    + retirerPokemon(pokemon: Pokemon): void
-    + getListePokemon(): List<Pokemon>
-    + getPokemon(): Pokemon
-    + getNbPokemon(): int
-}
-
-class Jeu {
-    - m_j1: Joueur
-    - m_j2: Joueur
-    - m_terrain: Terrain
-    - m_tour: Tour
-    - m_listNomPokemon: List<String>
-    + <<constructor>> Jeu()
-    + jouer(): void
-    + initialisationJeu(): void
-    + partieTerminee(): boolean
-    + getM_listNomPokemon(): List<String>
-    + getJoueur1(): Joueur
-    + getJoueur2(): Joueur
-    + getListNomPokemon(): List<String>
-    + getM_terrain(): Terrain
-    + genererListNomPokemon(): void
-}
-
-class Tour {
-    - jeu: Jeu
-    - m_nbTour: int
-    + <<constructor>> Tour(jeu: Jeu)
-    + nouveauTour(): void
-    + getM_nbTourString(): String
-}
-
-class Terrain {
-    - m_pokemonsJoueur1: List<Pokemon>
-    - m_pokemonsJoueur2: List<Pokemon>
-    + <<constructor>> Terrain()
-    + placerPokemons(joueur: Joueur, pokemon: int): void
-    + getPokemon(j: Joueur, pokemon: int): Pokemon
-    + getNbPokemonsJoueur(mJ1: Joueur): int
-    + getM_pokemonsJoueur(joueur: Joueur): List<Pokemon>
-    + retirerPokemon(joueur: Joueur, pokemon: int): void
-    + estVide(joueur: Joueur): boolean
-}
-
-Joueur <|-- Humain
-Joueur <|-- Ordinateur
-
-Joueur o-> Pioche : possède
-Joueur o-> Pokemon : possède
-Joueur o--> Defausse : défausse\n dans
-Joueur --> Terrain : joue sur
-Joueur .> Terrain : utilise
-Tour --> Joueur : appelle
-Jeu --> Joueur : contient
-Jeu --> Terrain : contient
-Jeu --> Tour : contient
-Terrain o-->"\nm_pokemons_j1\nm_pokemons_j2" Pokemon : contient
-Main *-->"\nm_liste_pokemon" Pokemon : contient
-Pioche *-->"\nm_pioche" Pokemon : contient
-Defausse *-->"\nm_defausse" Pokemon : contient
-Joueur o--> Main : possède
-
-'inheritance relationship'
-Joueur <|-- Humain
-Joueur <|-- Ordinateur
+Joueur o-> Pokemon : > possède
+Tour *--> Joueur : > appelle
+Jeu *--> Joueur : > contient
+Jeu *--> Terrain : > contient
 
 @enduml
 
