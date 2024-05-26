@@ -8,12 +8,12 @@ import joueurs.Terrain;
 import pokemons.Pokemon;
 import pokemons.pouvoirs.Pouvoir;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Random;
 
 public class Jeu {
+
+    //Attributs
     private static Hashtable<Pokemon, Pouvoir> m_pokemonAvecPouvoir;
     private Joueur m_j1;
     private Joueur m_j2;
@@ -21,12 +21,15 @@ public class Jeu {
     private final Tour m_tour;
 
 
+    //Constructeur
     public Jeu() {
         this.m_terrain = new Terrain();
         this.m_tour = new Tour(this);
         m_pokemonAvecPouvoir = new Hashtable<>();
     }
 
+
+    //Methodes
     public void jouer(Joueur j1, Joueur j2) {
         // Fonctionnement d'un tour :
         // 1. le joueur place jusqu'à 3 pokemons sur le terrain, il faut qu'il y en ait 3
@@ -35,23 +38,23 @@ public class Jeu {
         // 4. le joueur pioche dans sa main jusqu'à avoir 5 pokemons dans la main
 
 
-        // Boucle de jeu
+        //Boucle de jeu
         if (!partieTerminee()) {
-            System.out.println(this.m_tour.getM_nbTourString()+" tour :");
-            // joueurs.Joueur 1
+            System.out.println(this.m_tour.getNbTourString()+" tour :");
+            //joueurs.Joueur 1
             System.out.println("Tour de " + j1.getNom() + " :\n");
-            // piocher
+            //Piocher
             j1.piocherPokemon();
 
-            // tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            while (this.m_terrain.getNbPokemonsJoueur(j1) < j1.getM_tailleTerrain() && j1.getMain().getNbPokemon() > 0){
+            //Tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
+            while (this.m_terrain.getNbPokemonsJoueur(j1) < j1.getTailleTerrain() && j1.getMain().getNbPokemon() > 0){
                 j1.placerPokemon(this.m_terrain);
             }
-            // utilisation des pouvoir
+            //Utilisation des pouvoir
             if(j1.utiliserPouvoir(this.m_terrain,j2)){
                 partieTerminee();
             }
-            // attaquer
+            //Attaquer
             if(j1.attaquer(this.m_terrain, j2)){
                 partieTerminee();
             }
@@ -60,10 +63,11 @@ public class Jeu {
             Affichage.finDePartie(j1);
         }
     }
+
     public void initialisationJeu(){
         Random random = new Random();
         int randomInt = random.nextInt(2);
-        // Initialisation des joueurs
+        //Initialisation des joueurs
         if(randomInt == 0){
             System.out.println("Vous êtes le joueur 1");
             this.m_j1 = new Humain("Joueur 1", 20);
@@ -79,8 +83,8 @@ public class Jeu {
             this.m_j2.piocherPokemon();
         }
 
-        // Initlalisaiton de la partie, chaque joueur pose 3 pokemons sur le terrain
-        System.out.println(this.m_tour.getM_nbTourString()+" tour :");
+        //Initlalisaiton de la partie, chaque joueur pose 3 pokemons sur le terrain
+        System.out.println(this.m_tour.getNbTourString()+" tour :");
         System.out.println("Tour de " + this.m_j1.getNom());
         for (int i=0; i<3; i++) {
             this.m_j1.placerPokemon(this.m_terrain);
@@ -89,12 +93,12 @@ public class Jeu {
         for (int i=0; i<3; i++) {
             this.m_j2.placerPokemon(this.m_terrain);
         }
-        //attaque j1
+        //Attaque j1
         System.out.println((this.m_j1.getNom()+" attaque :"));
         if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
             partieTerminee();
         }
-        //attaque j2
+        //Attaque j2
         System.out.println((this.m_j2.getNom()+" attaque :"));
         if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
             partieTerminee();
@@ -107,18 +111,21 @@ public class Jeu {
         return this.m_j1.aPerdu() || this.m_j2.aPerdu();
     }
 
+
+    //Getters
     public Joueur getJoueur1() {
         return this.m_j1;
     }
+
     public Joueur getJoueur2() {
         return this.m_j2;
     }
 
-    public Terrain getM_terrain() {
+    public Terrain getTerrain() {
         return m_terrain;
     }
 
-    public static Hashtable<Pokemon, Pouvoir> getM_pokemonAvecPouvoir() {
+    public static Hashtable<Pokemon, Pouvoir> getPokemonAvecPouvoir() {
         return m_pokemonAvecPouvoir;
     }
 }

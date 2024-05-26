@@ -1,7 +1,6 @@
 package pokemons;
 
 import pokemons.pouvoirs.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -12,15 +11,19 @@ public class ListePouvoirs {
     private static ArrayList<Pouvoir> m_nomsPouvoirs = new ArrayList<>();
     private static ArrayList<Pouvoir> m_pouvoirsUtilises = new ArrayList<>();
 
+
+    //Constructeur
     public ListePouvoirs() {
         m_nomsPouvoirs.addAll(Arrays.asList(new ExtensionTerritoire(), new Confusion()));
     }
+
 
     // Methodes
     public static void reinitialiser() {
         m_nomsPouvoirs.addAll(m_pouvoirsUtilises);
         m_pouvoirsUtilises.clear();
     }
+
 
     // Getters
     public static int getIndexAleatoire() {

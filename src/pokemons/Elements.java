@@ -11,15 +11,17 @@ enum Elements {
     private String m_avantage;
     private String m_desavantage;
 
+
     //Constructeurs
-    private Elements(String element, String avantage, String desavantage){
-        m_element = element;
-        m_avantage = avantage;
-        m_desavantage = desavantage;
+    Elements(String element, String avantage, String desavantage){
+        this.m_element = element;
+        this.m_avantage = avantage;
+        this.m_desavantage = desavantage;
     }
 
-    //Methodes
-    int getAttaqueAffinite(Elements elementAttaquant, Elements elementEnnemi, Pokemon pokemon) {
+
+    //Getters
+    public int getAttaqueAffinite(Elements elementAttaquant, Elements elementEnnemi, Pokemon pokemon) {
         if(elementAttaquant.getAvantage().equals(elementEnnemi.toString()))
             return pokemon.getAttaque()+10;
         else if(elementAttaquant.getDesavantage().equals(elementEnnemi.toString()))
@@ -28,18 +30,13 @@ enum Elements {
             return pokemon.getAttaque();
     }
 
-    //Getters
-    String getAvantage(){
+    public String getElement() { return this.m_element; }
+
+    public String getAvantage(){
         return new String(m_avantage);
     }
 
-    String getDesavantage(){
+    public String getDesavantage(){
         return new String(m_desavantage);
-    }
-
-    //Affichage
-    @Override
-    public String toString(){
-        return m_element;
     }
 }

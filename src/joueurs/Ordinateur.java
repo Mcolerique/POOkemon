@@ -2,25 +2,26 @@ package joueurs;
 
 import jeu.Jeu;
 import pokemons.Pokemon;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Ordinateur extends Joueur {
 
+    //Constructeur
     public Ordinateur(String nom, int taillePioche) {
         super(nom, taillePioche);
     }
 
+
+    //Methodes refefinies
     @Override
     public void placerPokemon(Terrain terrain) {
         terrain.placerPokemons(this, 0);
     }
 
     @Override
-    public Boolean attaquer(Terrain terrain, Joueur adversaire) {
+    public boolean attaquer(Terrain terrain, Joueur adversaire) {
         List<Integer> pokemonAttaquer = new ArrayList<>();
         int pokemonAttaque;
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++){
@@ -58,7 +59,7 @@ public class Ordinateur extends Joueur {
                 terrain.getPokemon(this,i).attaquer(terrain.getPokemon(adversaire,pokemonAttaque));
             }
 
-            // si le pokemon attaqué est mort, le défausser
+            //Si le pokemon attaqué est mort, le défausser
             if (adversaire.mort(terrain, pokemonAttaque)) {
                 return true;
             }
@@ -71,9 +72,9 @@ public class Ordinateur extends Joueur {
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
         for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
-            if (terrain.getM_pokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getM_pokemonsJoueur(this).get(i).getM_pouvoir().getM_utilise())
+            if (terrain.getPokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getPokemonsJoueur(this).get(i).getPouvoir().getUtilise())
             {
-                pokeQuiAttaque.add(terrain.getM_pokemonsJoueur(this).get(i));
+                pokeQuiAttaque.add(terrain.getPokemonsJoueur(this).get(i));
             }
         }
         if(pokeQuiAttaque.isEmpty()){
@@ -82,10 +83,10 @@ public class Ordinateur extends Joueur {
         for (int i = 0; i<pokeQuiAttaque.size();i++){
             int pokemonAttaquant = selection(pokeQuiAttaque);
             pokeQuiAttaque.remove(pokemonAttaquant);
-            pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
+            pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             if (this.mort(terrain)|| adversaire.mort(terrain)){
-                if(Jeu.getM_pokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
-                    pokeQuiAttaque.get(pokemonAttaquant).getM_pouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+                if(Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
+                    pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
                 }
                 return true;
             }

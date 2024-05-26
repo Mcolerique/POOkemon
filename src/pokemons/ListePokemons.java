@@ -18,11 +18,13 @@ public class ListePokemons {
             "Mysdibule", "Girafarig", "Wattouat", "Toudoudou", "Tarsal", "Evoli"));
     private static ArrayList<String> m_nomsUtilises = new ArrayList<String>();
 
+
     // Methodes
     public static void reinitialiser() {
         m_nomsDisponibles.addAll(m_nomsUtilises);
         m_nomsUtilises.clear();
     }
+
 
     // Getters
     public static int getIndexAleatoire() {

@@ -7,20 +7,23 @@ import joueurs.Terrain;
 import pokemons.Pokemon;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class SoinTotal extends Pouvoir{
+public class SoinTotal extends Pouvoir {
+
+    //Constructeur
     public SoinTotal(){
         super("Soin total");
     }
 
+
+    //Methodes redefinies
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon) {
         ArrayList<Pokemon> pokeSoigner = new ArrayList<>();
-        pokeSoigner.addAll(terrain.getM_pokemonsJoueur(allie));
+        pokeSoigner.addAll(terrain.getPokemonsJoueur(allie));
         System.out.print("choisissez un pokemon a soigner");
         Affichage.selectionPokemon(pokeSoigner);
-        Affichage.affichePokemon(terrain.getM_pokemonsJoueur(allie));
+        Affichage.affichePokemon(terrain.getPokemonsJoueur(allie));
         int pokemonSoigne = allie.selection(pokeSoigner);
         pokeSoigner.get(pokemonSoigne).soigner(pokeSoigner.get(pokemonSoigne).getPvMax());
         this.m_utilise = true;
@@ -28,6 +31,6 @@ public class SoinTotal extends Pouvoir{
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
-        Jeu.getM_pokemonAvecPouvoir().remove(pokemon);
+        Jeu.getPokemonAvecPouvoir().remove(pokemon);
     }
 }

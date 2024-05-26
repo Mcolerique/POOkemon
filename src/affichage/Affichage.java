@@ -2,12 +2,13 @@ package affichage;
 
 import java.util.List;
 import java.util.Scanner;
-
 import jeu.*;
 import joueurs.*;
 import pokemons.*;
 
 public class Affichage {
+
+    //Methodes
     public static void accueil(){
         System.out.println("Nouvelle partie ?(o/n)");
         Scanner scanner = new Scanner(System.in);
@@ -21,18 +22,19 @@ public class Affichage {
             System.exit(0);
         }
     }
+
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
         System.out.println(" \nPokémon du Joueur 1 : ");
-        Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j1));
-        System.out.println("pioche : "+j1.getPioche().getM_pioche().size() + " cartes");
+        Affichage.affichePokemon(terrain.getPokemonsJoueur(j1));
+        System.out.println("pioche : "+j1.getPioche().getPioche().size() + " cartes");
         System.out.println("défausse : "+j1.getDefausse().getDefausse().size()+" cartes");
         System.out.println("\n--------------------------------------------------------------------------------\n");
         System.out.println(" Pokémon du Joueur 2 : ");
-        Affichage.affichePokemon(terrain.getM_pokemonsJoueur(j2));
-        System.out.println("pioche : "+j2.getPioche().getM_pioche().size() + " cartes");
+        Affichage.affichePokemon(terrain.getPokemonsJoueur(j2));
+        System.out.println("pioche : "+j2.getPioche().getPioche().size() + " cartes");
         System.out.println("défausse : "+j2.getDefausse().getDefausse().size()+" cartes\n");
-
     }
+
     public static void affichePokemon(List<Pokemon> list){
         int nombrePokemons = list.size();
         int largeurCase = 20; // Largeur de chaque case
@@ -53,7 +55,7 @@ public class Affichage {
         }
         System.out.println();
 
-        // affichage.Affichage des attaques des Pokémon
+        //Affichage.Affichage des attaques des Pokémon
         System.out.print("             attaque : ");
         for (int i = 0; i < nombrePokemons; i++) {
             String attaque = String.valueOf(list.get(i).getAttaque());
@@ -61,7 +63,7 @@ public class Affichage {
         }
         System.out.println();
 
-        // affichage.Affichage des types des Pokémon
+        //Affichage.Affichage des types des Pokémon
         System.out.print("                type : ");
         for (int i = 0; i < nombrePokemons; i++) {
             String type = list.get(i).getElementString();
@@ -69,7 +71,7 @@ public class Affichage {
         }
         System.out.println();
 
-        // affichage.Affichage des pouvoirs des pokemons
+        //Affichage.Affichage des pouvoirs des pokemons
         System.out.print("             pouvoir : ");
         for (int i = 0; i < nombrePokemons; i++) {
             String type = list.get(i).getNomPouvoir();
@@ -77,15 +79,17 @@ public class Affichage {
         }
         System.out.println();
     }
+
     public static void finDePartie(Joueur gagnant){
         if (gagnant.getClass() == Humain.class) {
-            System.out.println("Vous avez gagné !! "+gagnant.getPioche().getM_pioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemon.Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
+            System.out.println("Vous avez gagné !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemon.Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
         }
         else {
-            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getM_pioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon.Pokemon sont en pleine santé, vous êtes vraiment nul");
+            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon.Pokemon sont en pleine santé, vous êtes vraiment nul");
         }
         Affichage.accueil();
     }
+
     public static void selectionPokemon(List<Pokemon> list){
         for (int j = 0; j<list.size();j++)
         {

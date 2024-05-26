@@ -1,17 +1,22 @@
 package joueurs;
 
 import pokemons.Pokemon;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
+    //Attributs
     private final List<Pokemon> m_listePokemon;
 
+
+    //Constructeur
     public Main() {
         this.m_listePokemon = new ArrayList<>();
     }
 
+
+    //Methodes
     public void ajouterPokemon(Pokemon pokemon) {
         this.m_listePokemon.add(pokemon);
     }
@@ -20,6 +25,8 @@ public class Main {
         this.m_listePokemon.remove(pokemon);
     }
 
+
+    //Getters
     public List<Pokemon> getListePokemon() {
         return this.m_listePokemon;
     }
@@ -28,7 +35,7 @@ public class Main {
         if (!this.m_listePokemon.isEmpty()) {
             return this.m_listePokemon.getFirst();
         } else {
-            return null; // or throw an exception
+            return null;
         }
     }
 
