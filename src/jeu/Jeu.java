@@ -25,7 +25,6 @@ public class Jeu {
     public Jeu() {
         this.m_terrain = new Terrain();
         this.m_tour = new Tour(this);
-        m_pokemonAvecPouvoir = new Hashtable<>();
     }
 
 
@@ -127,5 +126,13 @@ public class Jeu {
 
     public static Hashtable<Pokemon, Pouvoir> getPokemonAvecPouvoir() {
         return m_pokemonAvecPouvoir;
+    }
+    public static void reinitialiserNom() {
+        Pokemon.getM_nomsDisponibles().addAll(Pokemon.getM_nomsUtilises());
+        Pokemon.getM_nomsUtilises().clear();
+    }
+    public static void reinitialiserPouvoir() {
+        Pokemon.getM_nomsPouvoirs().addAll(Pokemon.getM_pouvoirsUtilises());
+        Pokemon.getM_pouvoirsUtilises().clear();
     }
 }
