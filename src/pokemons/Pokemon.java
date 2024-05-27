@@ -142,7 +142,7 @@ public class Pokemon {
     try {
       m_nomsPouvoirs.get(index);
     }
-    catch (ArrayIndexOutOfBoundsException e) {
+    catch (IndexOutOfBoundsException e) {
       return -1;
     }
     return index;
