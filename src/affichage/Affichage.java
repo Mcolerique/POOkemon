@@ -14,11 +14,23 @@ public class Affichage {
         Scanner scanner = new Scanner(System.in);
         char reponse = scanner.next().charAt(0);
         if (reponse == 'o'){
+            System.out.println("\t\t\t\t\t\t\t\t                  ,'\\\n" +
+                    "\t\t\t\t    _.----._       ____         ,'  _\\   ___    ___     ____\n" +
+                    "\t\t\t\t_,/         \\     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
+                    "\t\t\t\t\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
+                    "\t\t\t\t \\.    \\ \\    | __  |  |/    ,','_  `.  |          | __  |    \\|  |\n" +
+                    "\t\t\t\t   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n" +
+                    "\t\t\t\t    \\     ,-'/  / \\ \\   ,'   |  \\/ / ,`.|         /  / \\ \\  |     |\n" +
+                    "\t\t\t\t     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\n" +
+                    "\t\t\t\t      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n" +
+                    "\t\t\t\t       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
+                    "\t\t\t\t\t    \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
+                    "\t\t\t\t\t\t\t\t                                              '-._|\n");
             Jeu jeu = new Jeu();
             jeu.initialisationJeu();
         }
         else {
-            System.out.println("Bah casse toi alors");
+            System.out.println("Merci d'être venu sur notre jeu Pokemon");
             System.exit(0);
         }
     }
@@ -37,9 +49,9 @@ public class Affichage {
 
     public static void affichePokemon(List<Pokemon> list){
         int nombrePokemons = list.size();
-        int largeurCase = 20; // Largeur de chaque case
+        int largeurCase = 20; //Largeur de chaque case
 
-        // affichage.Affichage des noms des Pokémon
+        //Affichage.Affichage des noms des Pokémon
         System.out.print("                       ");
         for (int i = 0; i < nombrePokemons; i++) {
             String nom = list.get(i).getNom();
@@ -47,7 +59,7 @@ public class Affichage {
         }
         System.out.println();
 
-        // affichage.Affichage des PV des Pokémon
+        //Affichage.Affichage des PV des Pokémon
         System.out.print("                  pv : ");
         for (int i = 0; i < nombrePokemons; i++) {
             String pv = list.get(i).getPv() + "/" + list.get(i).getPvMax();
