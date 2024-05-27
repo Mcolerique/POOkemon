@@ -52,13 +52,6 @@ package jeu {
 
 package joueurs {
 
-    class Defausse {
-        - m_defausse: Pokemon[0..*]
-        + <<Create>> Defausse()
-        + defausser(pokemon: Pokemon)
-        + getDefausse(): Pokemon[0..*]
-    }
-
     class Humain extends Joueur {
         + <<Create>> Humain(nom: String, taillePioche: Integer)
         + placerPokemon(terrain: Terrain)
@@ -66,7 +59,6 @@ package joueurs {
         + utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean {redefines utiliserPouvoir()}
         + selection(list:Pokemon[0..*]): Integer {redefines selection()}
     }
-    
 
     abstract class Joueur <<abstract>> {
         ~ m_nom: String
@@ -97,8 +89,13 @@ package joueurs {
         + getPokemon(pokemonCible: Integer): Pokemon
     }
 
+    class Defausse {
+        + <<Create>> Defausse()
+        + defausser(pokemon: Pokemon)
+        + getDefausse(): Pokemon[0..*]
+    }
+
     class Main {
-        - m_listePokemon: Pokemon[0..*]
         + <<Create>> Main()
         + ajouterPokemon(pokemon: Pokemon)
         + retirerPokemon(pokemon: Pokemon)
@@ -106,25 +103,13 @@ package joueurs {
         + getNbPokemon(): Integer
     }
 
-    class Ordinateur extends Joueur {
-        + <<Create>> Ordinateur(nom: String, taillePioche: Integer)
-        + placerPokemon(terrain: Terrain) {redefines placerPokemon()}
-        + attaquer(terrain: Terrain, adversaire: Joueur): Boolean {redefines attaquer()}
-        + utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean {redefines utiliserPouvoir()}
-        + selection(list:Pokemon[0..*]): Integer {redefines selection()}
-    }
-
     class Pioche {
-        - m_pioche: Pokemon[0..*]
-        + <<Create>> Pioche(taillePioche: Integer)
+       + <<Create>> Pioche(taillePioche: Integer)
         + piocherMain(main: Main)
         + getPioche(): Pokemon[0..*]
     }
 
     class Terrain {
-        - m_pokemonsJoueur1: Pokemon[0..*]
-        - m_pokemonsJoueur2: Pokemon[0..*]
-        - {static} m_pouvoirsUtilises: Pouvoir[Pokemon[0..*]]
         + <<Create>> Terrain()
         + placerPokemons(joueur: Joueur, pokemon: Integer)
         + retirerPokemon(joueur: Joueur, pokemon: Integer)
@@ -133,6 +118,14 @@ package joueurs {
         + getNbPokemonsJoueur(mJ1: Joueur): Integer
         + getPokemonsJoueur(joueur: Joueur): Pokemon[0..*]
         + {static} getPouvoirsUtilises(): Pouvoir[Pokemon[0..*]]
+    }
+
+    class Ordinateur extends Joueur {
+        + <<Create>> Ordinateur(nom: String, taillePioche: Integer)
+        + placerPokemon(terrain: Terrain) {redefines placerPokemon()}
+        + attaquer(terrain: Terrain, adversaire: Joueur): Boolean {redefines attaquer()}
+        + utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean {redefines utiliserPouvoir()}
+        + selection(list:Pokemon[0..*]): Integer {redefines selection()}
     }
 }
 
@@ -188,6 +181,23 @@ package pokemons {
        }
     }
 
+    class ListePokemons {
+        - {static} m_nomsDisponibles: String[0..*]
+        - {static} m_nomsUtilises: String[0..*]
+        + {static} reinitialiser()
+        + {static} getIndexAleatoire() : Integer
+        + {static} getNom(): String
+    }
+
+    class ListePouvoirs {
+        - m_nomsPouvoirs: String[0..*]
+        - m_pouvoirsUtilises: String[0..*]
+        + ListePouvoirs()
+        + {static} reinitialiser()
+        + {static} getIndexAleatoire() : Integer
+        + {static} getPouvoir(): Pouvoir
+    }
+
     enum Elements {
         EAU
         FEU
@@ -201,21 +211,6 @@ package pokemons {
         + getElement(): String
         + getAvantage(): String
         + getDesavantage(): String
-    }
-
-    class ListePokemons {
-        - {static} m_nomsDisponibles: String[0..*]
-        - {static} m_nomsUtilises: String[0..*]
-        + {static} reinitialiser()
-        + {static} getIndexAleatoire() : Integer
-        + {static} getNom(): String
-    }
-
-    class ListePouvoirs {
-        + ListePouvoirs()
-        + {static} reinitialiser()
-        + {static} getIndexAleatoire() : Integer
-        + {static} getPouvoir(): Pouvoir
     }
 
     class Pokemon {
@@ -248,27 +243,27 @@ package pokemons {
 Start .> Affichage : <<uses>>
 Affichage ..> Jeu : <<uses>>
 Jeu *-u--> "1  \n" Tour : > contient
+Jeu ..> Tour : <<uses>>
+Tour ..> Jeu : <<uses>>
 
 
-Pokemon -[dashed]--> "1\n- m_nomsDisponibles\n- m_nomsUtilises"ListePokemons : uses
-Pokemon -[dashed]--> "1\n- m_nomsPouvoirs\n- m_pouvoirsUtilises" ListePouvoirs : uses
+
+Pokemon -[dashed]--> ListePokemons : uses
+Pokemon -[dashed]--> ListePouvoirs : uses
 Pokemon "1  " *---> Elements : > est du type
-Pokemon "1  " *---> Pouvoir : > possède
+Pokemon "1  " *----> Pouvoir : > possède
 
 Terrain "3" o---> "-m_pokemonsJoueur1\n-m_pokemonsJoueur2\n-m_pouvoirsUtilises\n [3]" Pokemon : > est constitué de
-Main "1" o---> "-m_listePokemon\n [0..5]" Pokemon : > est constitué de
-Pioche "1" o---> "-m_pioche\n [0..21] "Pokemon : > est constitué de
-Defausse "1" o---> "-m_defausse\n [0..21] "Pokemon : > est constitué de
+Main "1" o----> "-m_listePokemon\n [0..5]" Pokemon : > est constitué de
+Pioche "1" o----> "-m_pioche\n [0..21] "Pokemon : > est constitué de
+Defausse "1" o----> "-m_defausse\n [0..21] "Pokemon : > est constitué de
 
-Joueur "1" *---> Pioche : > possède
 Joueur "1" *---> Main : > possède
+Joueur "1" *---> Pioche : > possède
 Joueur "1" *---> Defausse: > possède
-Joueur "1" *---> Terrain : > possède
 
-Joueur o-> Pokemon : > possède
-Tour *--> Joueur : > appelle
-Jeu *--> Joueur : > contient
-Jeu *--> Terrain : > contient
+Jeu *---> Joueur : > contient
+Jeu *---> Terrain : > contient
 
 @enduml
 
