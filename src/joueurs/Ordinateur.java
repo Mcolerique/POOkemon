@@ -53,7 +53,7 @@ public class Ordinateur extends Joueur {
 
                 if (pokemonAttaquer.size() > 1) {
                     Random random = new Random();
-                    int randomIndex = random.nextInt(pokemonAttaquer.size());
+                    int randomIndex = random.nextInt(pokemonAttaquer.size()-1);
                     pokemonAttaque = attaqueJoueur(randomIndex, i, terrain, adversaire, pokemonAttaquer);
                 } else {
                     pokemonAttaque = attaqueJoueur(0, i, terrain, adversaire, pokemonAttaquer);
