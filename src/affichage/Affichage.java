@@ -1,8 +1,6 @@
 package affichage;
 
 import java.util.List;
-import java.util.Scanner;
-import jeu.*;
 import joueurs.*;
 import pokemons.*;
 
@@ -23,7 +21,8 @@ public class Affichage {
                     "\t\t\t\t\t    \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
                     "\t\t\t\t\t\t\t\t                                              '-._|\n");
     }
-    public static void affichage(String message){
+
+    public static void afficher(String message){
         System.out.println(message);
     }
 
@@ -99,9 +98,9 @@ public class Affichage {
         {
             if (j != list.size()-1)
             {
-                System.out.print((j+1)+"."+list.get(j).getNom() + "/");
+                System.out.print((j+1)+"."+list.get(j).getNom() + " / ");
             }
-            else {System.out.println((j+1)+"."+list.get(j).getNom()+")");}
+            else {System.out.println((j+1)+"."+list.get(j).getNom()+"");}
         }
     }
 }
