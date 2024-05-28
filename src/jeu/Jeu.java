@@ -30,6 +30,76 @@ public class Jeu {
 
 
     //Methodes
+    public void initialisationJeu(){
+        Scanner scan = new Scanner(System.in);
+        Affichage.afficher("Nouvelle partie ?(o/n)");
+        char reponse = scan.next().charAt(0);
+
+        if (reponse == 'o'){
+            Affichage.accueil();
+
+            //Initialisation des joueurs
+            initialiserJoueur();
+
+            // remplissage des mains des joueurs
+            m_j1.piocherPokemon();
+            m_j2.piocherPokemon();
+            try {
+                Thread.sleep(2000);
+                //Chaque joueur pose 3 pokemons sur le terrain
+                Affichage.afficher(this.m_tour.getNbTourString() + " tour :");
+                Affichage.afficher("C'est à votre tour !");
+                this.m_j1.placerPokemon(this.m_terrain);
+
+                Affichage.afficher("C'est au tour de l'ordinateur !");
+                this.m_j2.placerPokemon(this.m_terrain);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            //Attaque j1
+            Affichage.afficher(this.m_j1.getNom()+ " attaque : ");
+            if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
+                partieTerminee();
+            }
+            //Attaque j2
+            System.out.println((this.m_j2.getNom()+" attaque :"));
+            if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
+                partieTerminee();
+            }
+            Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
+            this.m_tour.nouveauTour();
+        }
+        else {
+            System.out.println("Merci d'être venu sur notre jeu Pokemon");
+            System.exit(0);
+        }
+    }
+
+    public void initialiserJoueur() {
+        try {
+            Affichage.afficher("Tirage au sort des joueurs...");
+            Thread.sleep(2000);
+            Random random = new Random();
+            int randomInt = random.nextInt(2);
+            if (randomInt == 0) {
+                Affichage.afficher("Vous êtes le joueur 1");
+                this.m_j1 = new Humain("Joueur 1", 20);
+                this.m_j2 = new Ordinateur("Joueur 2", 21);
+            } else {
+                Affichage.afficher("Vous êtes le joueur 2");
+                this.m_j1 = new Ordinateur("Joueur 1", 20);
+                this.m_j2 = new Humain("Joueur 2", 21);
+            }
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     public void jouer(Joueur j1, Joueur j2) {
         //Boucle de jeu
         if (!partieTerminee()) {
@@ -57,59 +127,8 @@ public class Jeu {
         }
     }
 
-    public void initialisationJeu(){
-        Scanner scan = new Scanner(System.in);
-        Affichage.affichage("Nouvelle partie ?(o/n)");
-        char reponse = scan.next().charAt(0);
-        if (reponse == 'o'){
-            Affichage.accueil();
-            //Initialisation des joueurs
-            initialiserJoueur();
 
-            // remplissage des mains des joueurs
-            m_j1.piocherPokemon();
-            m_j2.piocherPokemon();
 
-            //Initlalisaiton de la partie, chaque joueur pose 3 pokemons sur le terrain
-            System.out.println(this.m_tour.getNbTourString()+" tour :");
-            System.out.println("Tour de " + this.m_j1.getNom());
-            this.m_j1.placerPokemon(this.m_terrain);
-
-            System.out.println("Tour de " + this.m_j2.getNom());
-            this.m_j2.placerPokemon(this.m_terrain);
-
-            //Attaque j1
-            System.out.println((this.m_j1.getNom()+" attaque :"));
-            if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
-                partieTerminee();
-            }
-            //Attaque j2
-            System.out.println((this.m_j2.getNom()+" attaque :"));
-            if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
-                partieTerminee();
-            }
-            Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
-            this.m_tour.nouveauTour();
-        }
-        else {
-            System.out.println("Merci d'être venu sur notre jeu Pokemon");
-            System.exit(0);
-        }
-    }
-    public void initialiserJoueur() {
-        Random random = new Random();
-        int randomInt = random.nextInt(2);
-        if(randomInt == 0){
-            System.out.println("Vous êtes le joueur 1");
-            this.m_j1 = new Humain("Joueur 1", 20);
-            this.m_j2 = new Ordinateur("Joueur 2", 21);
-        }
-        else {
-            System.out.println("Vous êtes le joueur 2");
-            this.m_j1 = new Ordinateur("Joueur 1", 20);
-            this.m_j2 = new Humain("Joueur 2", 21);
-        }
-    }
 
 
     public boolean partieTerminee() {

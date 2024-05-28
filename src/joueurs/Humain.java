@@ -18,13 +18,19 @@ public class Humain extends Joueur{
     //Methodes
     public void placerPokemon(Terrain terrain){
         for (int i = 0; i < this.m_tailleTerrain; i++) {
-            System.out.println("Choisissez un pokemon à placer sur le terrain");
-            Affichage.selectionPokemon(this.m_main.getListePokemon());
-            Affichage.affichePokemon(this.m_main.getListePokemon());
-            int pokemonaplacer = selection(this.m_main.getListePokemon());
-            terrain.placerPokemons(this, pokemonaplacer);
-            //Afficher le terrain
-            Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
+            try {
+                Thread.sleep(2000);
+                Affichage.afficher("Choisissez un pokemon à placer sur le terrain");
+                Affichage.selectionPokemon(this.m_main.getListePokemon());
+                Affichage.affichePokemon(this.m_main.getListePokemon());
+                int pokemonaplacer = selection(this.m_main.getListePokemon());
+                terrain.placerPokemons(this, pokemonaplacer);
+                //Afficher le terrain
+                Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

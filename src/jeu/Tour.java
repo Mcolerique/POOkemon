@@ -30,7 +30,7 @@ public class Tour {
     }
 
     public boolean attaquer(Joueur joueur, Joueur adversaire){
-        Affichage.affichage((joueur.getNom()+" attaque :"));
+        Affichage.afficher((joueur.getNom()+" attaque :"));
         if(joueur.attaquer(this.m_jeu.getTerrain(), adversaire)){
             this.m_jeu.partieTerminee();
         }
