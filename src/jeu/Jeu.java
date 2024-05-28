@@ -123,7 +123,7 @@ public class Jeu {
             }
         }
         else if (partieTerminee()){
-            Affichage.finDePartie(j1);
+            Affichage.finDePartie(this.getVainqueur());
         }
     }
 
@@ -159,5 +159,13 @@ public class Jeu {
     public static void reinitialiserPouvoir() {
         Pokemon.getM_nomsPouvoirs().addAll(Pokemon.getM_pouvoirsUtilises());
         Pokemon.getM_pouvoirsUtilises().clear();
+    }
+
+    public Joueur getVainqueur() {
+        if (this.m_j1.aPerdu()) {
+            return this.m_j2;
+        } else {
+            return this.m_j1;
+        }
     }
 }
