@@ -16,6 +16,7 @@ public class Pokemon {
   private int m_attaque;
   private final Affinite m_element; //Indice de l'élément du Pokémon
   private final Pouvoir m_pouvoir;
+  private int m_defense;
   private static ArrayList<String> m_nomsDisponibles = new ArrayList<String>(Arrays.asList(
           "Pikachu", "Bulbizarre", "Carapuce", "Salamèche", "Herbizarre",
           "Dracaufeu", "Tortank", "Raichu", "Carabaffe", "Reptincel",
@@ -42,6 +43,7 @@ public class Pokemon {
     if(this.m_pouvoir != null){
       Jeu.getPokemonAvecPouvoir().put(this,this.m_pouvoir);
     }
+    this.m_defense=0;
   }
 
 
@@ -161,7 +163,9 @@ public class Pokemon {
       return pouvoir;
     }
   }
-
+  public void modifDefense(int defense){
+    this.m_defense+=defense;
+  }
   public static ArrayList<Pouvoir> getM_nomsPouvoirs() {
     return m_nomsPouvoirs;
   }
@@ -169,4 +173,5 @@ public class Pokemon {
   public static ArrayList<Pouvoir> getM_pouvoirsUtilises() {
     return m_pouvoirsUtilises;
   }
+
 }
