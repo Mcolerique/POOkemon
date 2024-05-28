@@ -50,9 +50,7 @@ public abstract class Joueur {
             this.defausser(terrain.getPokemon(this, attaque));
             //Retire le pokemon du terrain
             terrain.retirerPokemon(this, attaque);
-            if (terrain.estVide(this)) {
-                return true;
-            }
+            return terrain.estVide(this);
         }
         return false;
     }

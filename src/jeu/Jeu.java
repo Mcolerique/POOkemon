@@ -10,6 +10,7 @@ import pokemons.pouvoirs.Pouvoir;
 
 import java.util.Hashtable;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Jeu {
 
@@ -30,13 +31,6 @@ public class Jeu {
 
     //Methodes
     public void jouer(Joueur j1, Joueur j2) {
-        // Fonctionnement d'un tour :
-        // 1. le joueur place jusqu'à 3 pokemons sur le terrain, il faut qu'il y en ait 3
-        // 2. le joueur choisit un pokemon avec lequel attaquer et 1 pokemon à attaquer
-        // 3. le pokemon attaque l'autre pokemon
-        // 4. le joueur pioche dans sa main jusqu'à avoir 5 pokemons dans la main
-
-
         //Boucle de jeu
         if (!partieTerminee()) {
             System.out.println(this.m_tour.getNbTourString()+" tour :");
@@ -54,8 +48,8 @@ public class Jeu {
                 partieTerminee();
             }
             //Attaquer
-            if(j1.attaquer(this.m_terrain, j2)){
-                partieTerminee();
+            if (!partieTerminee()) {
+                m_tour.attaquer(j1,j2);
             }
         }
         else if (partieTerminee()){
@@ -64,9 +58,47 @@ public class Jeu {
     }
 
     public void initialisationJeu(){
+        Scanner scan = new Scanner(System.in);
+        Affichage.affichage("Nouvelle partie ?(o/n)");
+        char reponse = scan.next().charAt(0);
+        if (reponse == 'o'){
+            Affichage.accueil();
+            //Initialisation des joueurs
+            initialiserJoueur();
+
+            // remplissage des mains des joueurs
+            m_j1.piocherPokemon();
+            m_j2.piocherPokemon();
+
+            //Initlalisaiton de la partie, chaque joueur pose 3 pokemons sur le terrain
+            System.out.println(this.m_tour.getNbTourString()+" tour :");
+            System.out.println("Tour de " + this.m_j1.getNom());
+            this.m_j1.placerPokemon(this.m_terrain);
+
+            System.out.println("Tour de " + this.m_j2.getNom());
+            this.m_j2.placerPokemon(this.m_terrain);
+
+            //Attaque j1
+            System.out.println((this.m_j1.getNom()+" attaque :"));
+            if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
+                partieTerminee();
+            }
+            //Attaque j2
+            System.out.println((this.m_j2.getNom()+" attaque :"));
+            if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
+                partieTerminee();
+            }
+            Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
+            this.m_tour.nouveauTour();
+        }
+        else {
+            System.out.println("Merci d'être venu sur notre jeu Pokemon");
+            System.exit(0);
+        }
+    }
+    public void initialiserJoueur() {
         Random random = new Random();
         int randomInt = random.nextInt(2);
-        //Initialisation des joueurs
         if(randomInt == 0){
             System.out.println("Vous êtes le joueur 1");
             this.m_j1 = new Humain("Joueur 1", 20);
@@ -77,36 +109,10 @@ public class Jeu {
             this.m_j1 = new Ordinateur("Joueur 1", 20);
             this.m_j2 = new Humain("Joueur 2", 21);
         }
-        for (int i=0; i<5; i++) {
-            this.m_j1.piocherPokemon();
-            this.m_j2.piocherPokemon();
-        }
-
-        //Initlalisaiton de la partie, chaque joueur pose 3 pokemons sur le terrain
-        System.out.println(this.m_tour.getNbTourString()+" tour :");
-        System.out.println("Tour de " + this.m_j1.getNom());
-        for (int i=0; i<3; i++) {
-            this.m_j1.placerPokemon(this.m_terrain);
-        }
-        System.out.println("Tour de " + this.m_j2.getNom());
-        for (int i=0; i<3; i++) {
-            this.m_j2.placerPokemon(this.m_terrain);
-        }
-        //Attaque j1
-        System.out.println((this.m_j1.getNom()+" attaque :"));
-        if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
-            partieTerminee();
-        }
-        //Attaque j2
-        System.out.println((this.m_j2.getNom()+" attaque :"));
-        if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
-            partieTerminee();
-        }
-        Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
-        this.m_tour.nouveauTour();
     }
 
-    private boolean partieTerminee() {
+
+    public boolean partieTerminee() {
         return this.m_j1.aPerdu() || this.m_j2.aPerdu();
     }
 

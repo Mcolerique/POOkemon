@@ -10,11 +10,7 @@ public class Affichage {
 
     //Methodes
     public static void accueil(){
-        System.out.println("Nouvelle partie ?(o/n)");
-        Scanner scanner = new Scanner(System.in);
-        char reponse = scanner.next().charAt(0);
-        if (reponse == 'o'){
-            System.out.println("\t\t\t\t\t\t\t\t                  ,'\\\n" +
+        System.out.println("\t\t\t\t\t\t\t\t                  ,'\\\n" +
                     "\t\t\t\t    _.----._       ____         ,'  _\\   ___    ___     ____\n" +
                     "\t\t\t\t_,/         \\     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
                     "\t\t\t\t\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
@@ -26,13 +22,9 @@ public class Affichage {
                     "\t\t\t\t       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
                     "\t\t\t\t\t    \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
                     "\t\t\t\t\t\t\t\t                                              '-._|\n");
-            Jeu jeu = new Jeu();
-            jeu.initialisationJeu();
-        }
-        else {
-            System.out.println("Merci d'être venu sur notre jeu Pokemon");
-            System.exit(0);
-        }
+    }
+    public static void affichage(String message){
+        System.out.println(message);
     }
 
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
