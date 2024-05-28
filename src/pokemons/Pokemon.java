@@ -14,7 +14,7 @@ public class Pokemon {
   private final int m_pvMax;
   private int m_pv;
   private int m_attaque;
-  private final Elements m_element; //Indice de l'élément du Pokémon
+  private final Affinite m_element; //Indice de l'élément du Pokémon
   private final Pouvoir m_pouvoir;
   private static ArrayList<String> m_nomsDisponibles = new ArrayList<String>(Arrays.asList(
           "Pikachu", "Bulbizarre", "Carapuce", "Salamèche", "Herbizarre",
@@ -37,7 +37,7 @@ public class Pokemon {
     this.m_pv = this.m_pvMax;
     this.m_attaque = (random.nextInt(5) + 3) * 10;
     Elements[] tabAffinite = {Elements.AIR, Elements.EAU, Elements.FEU, Elements.TERRE};
-    this.m_element = tabAffinite[random.nextInt(4)];
+    this.m_element = new Affinite(tabAffinite[random.nextInt(4)]);
     this.m_pouvoir = Pokemon.AttribuerPouvoir();
     if(this.m_pouvoir != null){
       Jeu.getPokemonAvecPouvoir().put(this,this.m_pouvoir);
@@ -95,7 +95,7 @@ public class Pokemon {
   }
 
   public String getElementString(){
-    return m_element.name();
+    return this.m_element.getElement();
   }
 
   public String getNomPouvoir(){
