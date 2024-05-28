@@ -10,7 +10,7 @@ public class Necromancie extends Pouvoir {
 
     //Constructeur
     public Necromancie() {
-        super("Necromancie", "Ressucite un pokemon mort", 0);
+        super("Necromancie");
     }
 
     //Methodes
