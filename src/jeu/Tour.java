@@ -26,13 +26,13 @@ public class Tour {
             m_jeu.jouer(m_jeu.getJoueur1(), m_jeu.getJoueur2());
             m_jeu.jouer(m_jeu.getJoueur2(), m_jeu.getJoueur1());
         }
-
+        Affichage.finDePartie(this.m_jeu.getVainqueur());
     }
 
     public boolean attaquer(Joueur joueur, Joueur adversaire){
         Affichage.afficher((joueur.getNom()+" attaque :"));
         if(joueur.attaquer(this.m_jeu.getTerrain(), adversaire)){
-            this.m_jeu.partieTerminee();
+            return this.m_jeu.partieTerminee();
         }
         return false;
     }
