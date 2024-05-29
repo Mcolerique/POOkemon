@@ -3,6 +3,7 @@ package affichage;
 import java.util.List;
 import joueurs.*;
 import pokemons.*;
+import jeu.Tour;
 
 public class Affichage {
 
@@ -102,5 +103,16 @@ public class Affichage {
             }
             else {System.out.println((j+1)+"."+list.get(j).getNom()+"");}
         }
+    }
+
+    public static void afficheNbTour(String tour) {
+        int largeurCadre = tour.length() + 2;
+
+        String ligneSuperieure = "+" + "-".repeat(largeurCadre) + "+";
+        String ligneTitre = String.format("| %-" + (largeurCadre - 2) + "s |", tour);
+        String ligneInferieure = "+" + "-".repeat(largeurCadre) + "+";
+        System.out.println(ligneSuperieure);
+        System.out.println(ligneTitre);
+        System.out.println(ligneInferieure);
     }
 }
