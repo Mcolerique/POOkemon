@@ -16,14 +16,14 @@ public class ExtensionTerritoire extends Pouvoir {
     //Methodes redefinies
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon){
-        allie.ajouterPlaceTerrain();
+        allie.modifPlaceTerrain(1);
         allie.placerPokemon(terrain);
         this.m_utilise=true;
     }
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon){
-        allie.enleverPlaceTerrain();
+        allie.modifPlaceTerrain(-1);
         Jeu.getPokemonAvecPouvoir().remove(pokemon);
     }
 }

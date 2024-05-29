@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Jeu {
 
     //Attributs
-    private static Hashtable<Pokemon, Pouvoir> m_pokemonAvecPouvoir;
+    private static Hashtable<Pokemon, Pouvoir> m_pokemonAvecPouvoir = new Hashtable<>();
     private Joueur m_j1;
     private Joueur m_j2;
     private final Terrain m_terrain;
@@ -150,14 +150,6 @@ public class Jeu {
     public static Hashtable<Pokemon, Pouvoir> getPokemonAvecPouvoir() {
         return m_pokemonAvecPouvoir;
     }
-    public static void reinitialiserNom() {
-        Pokemon.getM_nomsDisponibles().addAll(Pokemon.getM_nomsUtilises());
-        Pokemon.getM_nomsUtilises().clear();
-    }
-    public static void reinitialiserPouvoir() {
-        Pokemon.getM_nomsPouvoirs().addAll(Pokemon.getM_pouvoirsUtilises());
-        Pokemon.getM_pouvoirsUtilises().clear();
-    }
 
     public Joueur getVainqueur() {
         if (this.m_j1.aPerdu()) {
@@ -165,5 +157,8 @@ public class Jeu {
         } else {
             return this.m_j1;
         }
+    }
+    public static void ajouterPokeAPouvoir(Pokemon pokemon, Pouvoir pouvoir){
+        m_pokemonAvecPouvoir.put(pokemon,pouvoir);
     }
 }

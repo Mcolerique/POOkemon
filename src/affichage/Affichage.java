@@ -88,7 +88,7 @@ public class Affichage {
             System.out.println("Vous avez gagné !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemon.Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
         }
         else {
-            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon.Pokemon sont en pleine santé, vous êtes vraiment nul");
+            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon Pokemon sont en pleine santé, vous êtes vraiment nul");
         }
         Affichage.accueil();
     }
@@ -100,7 +100,7 @@ public class Affichage {
             {
                 System.out.print((j+1)+"."+list.get(j).getNom() + " / ");
             }
-            else {System.out.println((j+1)+"."+list.get(j).getNom()+"");}
+            else {System.out.println((j+1)+"."+list.get(j).getNom()+" )");}
         }
     }
 }

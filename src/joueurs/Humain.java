@@ -74,14 +74,14 @@ public class Humain extends Joueur{
         if(pokeQuiAttaque.isEmpty()){
             return false;
         }
-        for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
+        for (int i = 0; i<pokeQuiAttaque.size();i++)
         {
-            System.out.print("Choisissez un pouvoir a utiliser (");
+            Affichage.afficher("Choisissez un pouvoir a utiliser (");
             Affichage.selectionPokemon(pokeQuiAttaque);
-            Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
+            Affichage.affichePokemon(pokeQuiAttaque);
             int pokemonAttaquant = selection(pokeQuiAttaque);
-            pokeQuiAttaque.remove(pokemonAttaquant);
             pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
+            pokeQuiAttaque.remove(pokemonAttaquant);
             if (this.mort(terrain)|| adversaire.mort(terrain)){
                 if(Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
                     pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));

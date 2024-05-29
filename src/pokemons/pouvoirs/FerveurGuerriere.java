@@ -21,18 +21,18 @@ public class FerveurGuerriere extends Pouvoir {
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
         ArrayList<Pokemon> pokeAAmeliorer = new ArrayList<>();
         pokeAAmeliorer.addAll(terrain.getPokemonsJoueur(allie));
-        System.out.print("choisissez un pokemon a ameliorer");
+        Affichage.afficher("choisissez un pokemon a ameliorer");
         Affichage.selectionPokemon(pokeAAmeliorer);
         Affichage.affichePokemon(terrain.getPokemonsJoueur(allie));
         int pokemonAmeliorer = allie.selection(pokeAAmeliorer);
-        terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer ).boostAttaque(10);
+        terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer ).modifAttaque(10);
         Terrain.getPouvoirsUtilises().put(this,terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer ));
         this.m_utilise = true;
     }
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
-        Terrain.getPouvoirsUtilises().get(this).boostAttaque(-10);
+        Terrain.getPouvoirsUtilises().get(this).modifAttaque(-10);
         Jeu.getPokemonAvecPouvoir().remove(pokemon);
         Terrain.getPouvoirsUtilises().remove(this);
     }

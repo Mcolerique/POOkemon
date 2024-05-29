@@ -98,12 +98,8 @@ public abstract class Joueur {
         }
     }
 
-    public void ajouterPlaceTerrain(){
-        this.m_tailleTerrain++;
-    }
-
-    public void enleverPlaceTerrain(){
-        this.m_tailleTerrain--;
+    public void modifPlaceTerrain(int modif){
+        this.m_tailleTerrain+=modif;
     }
 
     public boolean aPerdu() {

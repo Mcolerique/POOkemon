@@ -1,4 +1,7 @@
 package pokemons;
+
+import pokemons.pouvoirs.Pouvoir;
+
 public class Affinite {
     private final String m_elements;
     private final String m_avantage;
