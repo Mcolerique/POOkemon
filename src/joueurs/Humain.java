@@ -17,7 +17,7 @@ public class Humain extends Joueur{
 
     //Methodes
     public void placerPokemon(Terrain terrain){
-        for (int i = 0; i < this.m_tailleTerrain; i++) {
+        while (terrain.getPokemonsJoueur(this).size() < this.m_tailleTerrain){
             try {
                 Thread.sleep(2000);
                 Affichage.afficher("Choisissez un pokemon à placer sur le terrain");
