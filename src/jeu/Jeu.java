@@ -47,11 +47,11 @@ public class Jeu {
             try {
                 Thread.sleep(2000);
                 //Chaque joueur pose 3 pokemons sur le terrain
-                Affichage.afficher(this.m_tour.getNbTourString() + " tour :");
-                Affichage.afficher("C'est à votre tour !");
+                Affichage.afficheNbTour(this.m_tour.getNbTourString() + " tour :");
+                Affichage.afficher("C'est au tour du joueur n°1 !");
                 this.m_j1.placerPokemon(this.m_terrain);
 
-                Affichage.afficher("C'est au tour de l'ordinateur !");
+                Affichage.afficher("C'est au tour du joueur n°2 !");
                 this.m_j2.placerPokemon(this.m_terrain);
             }
             catch (InterruptedException e) {
