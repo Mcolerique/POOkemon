@@ -30,12 +30,18 @@ public class Affinite {
     }
 
     public int getAttaqueAffinite(Affinite elementAttaquant, Affinite elementEnnemi, Pokemon pokemon) {
-        if(elementAttaquant.getAvantage().equals(elementEnnemi.toString()))
+        if(elementAttaquant.getAvantage() == elementEnnemi.getElement())
+        {
             return pokemon.getAttaque()+10;
-        else if(elementAttaquant.getDesavantage().equals(elementEnnemi.toString()))
+        }
+        else if(elementAttaquant.getDesavantage() == elementEnnemi.getElement())
+        {
             return pokemon.getAttaque()-10;
+        }
         else
+        {
             return pokemon.getAttaque();
+        }
     }
 
     public String getElement() { return this.m_elements; }
