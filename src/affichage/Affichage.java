@@ -115,4 +115,10 @@ public class Affichage {
         System.out.println(ligneTitre);
         System.out.println(ligneInferieure);
     }
+    public static void afficheDefausse(Joueur joueur, List<Pokemon> defausse) {
+        System.out.println("Défausse de " + joueur.getNom() + " :");
+        for (int i = 0; i < defausse.size(); i++) {
+            System.out.println((i + 1) + ". " + defausse.get(i).getNom());
+        }
+    }
 }
