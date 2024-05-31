@@ -9,7 +9,7 @@ public class Confusion extends Pouvoir {
 
     //Constructeur
     public Confusion() {
-        super("Confusion");
+        super("Confusion","Confusion, utilisable à chaque tour : le joueur adverse doit défausser toutes les cartes de sa main dans sa pioche, mélanger sa pioche et piocher 5 Pokémons.");
     }
 
 

@@ -12,7 +12,7 @@ public class SoinTotal extends Pouvoir {
 
     //Constructeur
     public SoinTotal(){
-        super("Soin total");
+        super("Soin total","Soin total, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Celui-ci regagne toute sa vie.");
     }
 
 

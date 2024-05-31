@@ -48,6 +48,7 @@ public class Humain extends Joueur{
             Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
             int pokemonAttaquant = selection(pokeQuiAttaque);
             Affichage.afficher("Choisissez un pokemon à attaquer");
+            Affichage.selectionPokemon(terrain.getPokemonsJoueur(adversaire));
             Affichage.affichePokemon(terrain.getPokemonsJoueur(adversaire));
             int pokemonAttaque = selection(pokeQuiAttaque);
             pokeQuiAttaque.get(pokemonAttaquant).attaquer(terrain.getPokemon(adversaire,pokemonAttaque));
@@ -64,18 +65,13 @@ public class Humain extends Joueur{
     @Override
     public boolean utiliserPouvoir(Terrain terrain, Joueur adversaire) {
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
-        for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
-        {
-            if (terrain.getPokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun"&& !terrain.getPokemonsJoueur(this).get(i).getPouvoir().getUtilise())
-            {
-                pokeQuiAttaque.add(terrain.getPokemonsJoueur(this).get(i));
-            }
-        }
+        this.getPokePouvoir(terrain, pokeQuiAttaque);
         if(pokeQuiAttaque.isEmpty()){
             return false;
         }
         for (int i = 0; i<pokeQuiAttaque.size();i++)
         {
+            descriptionPouvoir(pokeQuiAttaque);
             Affichage.afficher("Choisissez un pouvoir a utiliser (");
             Affichage.selectionPokemon(pokeQuiAttaque);
             Affichage.affichePokemon(pokeQuiAttaque);
@@ -96,5 +92,16 @@ public class Humain extends Joueur{
     public int selection(List<Pokemon> list) {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt() - 1;
+    }
+    public void descriptionPouvoir(List<Pokemon> list){
+        Scanner scan = new Scanner(System.in);
+        Affichage.afficher("Voulez vous la description d'un des pouvoirs ?(o/n)");
+        char reponse = scan.next().charAt(0);
+        if (reponse == 'o'){
+            Affichage.afficher("Quel description voulez vous lire ?");
+            Affichage.selectionPokemon(list);
+            int descriptionSelectionner = this.selection(list);
+            Affichage.afficher(list.get(descriptionSelectionner).getPouvoir().getM_desc());
+        }
     }
 }

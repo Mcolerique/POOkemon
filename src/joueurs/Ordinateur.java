@@ -86,15 +86,7 @@ public class Ordinateur extends Joueur {
     @Override
     public boolean utiliserPouvoir(Terrain terrain, Joueur adversaire) {
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
-        for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
-        {
-            if (!terrain.getPokemonsJoueur(this).isEmpty()){
-                if (terrain.getPokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getPokemonsJoueur(this).get(i).getPouvoir().getUtilise())
-                {
-                    pokeQuiAttaque.add(terrain.getPokemonsJoueur(this).get(i));
-                }
-            }
-        }
+        this.getPokePouvoir(terrain, pokeQuiAttaque);
         if(pokeQuiAttaque.isEmpty()){
             return false;
         }
@@ -116,6 +108,6 @@ public class Ordinateur extends Joueur {
     @Override
     public int selection(List<Pokemon> list) {
         Random random = new Random();
-        return random.nextInt(list.size());
+        return random.nextInt(list.size())-1;
     }
 }

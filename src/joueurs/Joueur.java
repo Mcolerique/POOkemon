@@ -142,4 +142,15 @@ public abstract class Joueur {
             return null;
         }
     }
+    public void getPokePouvoir(Terrain terrain, List<Pokemon> list){
+        for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
+        {
+            if (!terrain.getPokemonsJoueur(this).isEmpty()){
+                if (terrain.getPokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getPokemonsJoueur(this).get(i).getPouvoir().getUtilise())
+                {
+                    list.add(terrain.getPokemonsJoueur(this).get(i));
+                }
+            }
+        }
+    }
 }

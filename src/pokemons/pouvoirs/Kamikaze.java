@@ -13,7 +13,7 @@ public class Kamikaze extends Pouvoir {
 
     //Constructeur
     public Kamikaze() {
-        super("Kamikaze");
+        super("Kamikaze","Kamikaze, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Les deux Pokémons sont alors éliminés.");
     }
 
 

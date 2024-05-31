@@ -9,7 +9,7 @@ public class ExtensionTerritoire extends Pouvoir {
 
     //Constructeur
     public ExtensionTerritoire() {
-        super("Extension du territoire");
+        super("Extension du territoire","Extension du territoire, à utilisation unique :  le terrain du joueur gagne un quatrième emplacement sur lequel il peut placer immédiatement un Pokémon de sa main. Lorsque le Pokémon qui a utilisé ce pouvoir meurt, son emplacement est perdu et le terrain possède de nouveau trois emplacements.");
     }
 
 
