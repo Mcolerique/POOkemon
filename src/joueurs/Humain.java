@@ -43,16 +43,16 @@ public class Humain extends Joueur{
         pokeQuiAttaque.addAll(terrain.getPokemonsJoueur(this));
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
-            System.out.print("Choisissez un pokemon avec lequel attaquer (");
+            Affichage.afficher("Choisissez un pokemon avec lequel attaquer (");
             Affichage.selectionPokemon(pokeQuiAttaque);
             Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
             int pokemonAttaquant = selection(pokeQuiAttaque);
-            pokeQuiAttaque.remove(pokemonAttaquant);
-            System.out.println("Choisissez un pokemon à attaquer");
+            Affichage.afficher("Choisissez un pokemon à attaquer");
             Affichage.affichePokemon(terrain.getPokemonsJoueur(adversaire));
             int pokemonAttaque = selection(pokeQuiAttaque);
-            terrain.getPokemon(this,pokemonAttaquant).attaquer(terrain.getPokemon(adversaire,pokemonAttaque));
-            System.out.println(terrain.getPokemon(this,i).getNom()+" a attaquer "+terrain.getPokemon(adversaire,pokemonAttaque).getNom());
+            pokeQuiAttaque.get(pokemonAttaquant).attaquer(terrain.getPokemon(adversaire,pokemonAttaque));
+            Affichage.afficher(pokeQuiAttaque.get(pokemonAttaquant).getNom()+" a attaquer "+terrain.getPokemon(adversaire,pokemonAttaque).getNom());
+            pokeQuiAttaque.remove(pokemonAttaquant);
             // si le pokemon attaqué est mort, le défausser
             if(adversaire.mort(terrain, pokemonAttaque)){
                 return true;
