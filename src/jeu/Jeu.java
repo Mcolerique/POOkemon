@@ -103,7 +103,6 @@ public class Jeu {
     public void jouer(Joueur j1, Joueur j2) {
         //Boucle de jeu
         if (!partieTerminee()) {
-            System.out.println(this.m_tour.getNbTourString()+" tour :");
             //joueurs.Joueur 1
             System.out.println("Tour de " + j1.getNom() + " :\n");
             //Piocher

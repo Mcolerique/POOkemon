@@ -21,7 +21,7 @@ public class Tour {
     public void nouveauTour(){
         this.m_nbTour++;
         while (!this.m_jeu.partieTerminee()) {
-            System.out.println("jeu.Tour n°"+this.m_nbTour+" :\n\n");
+            Affichage.afficheNbTour(this.getNbTourString() + " tour :");
             Affichage.terrain(this.m_jeu.getTerrain(),this.m_jeu.getJoueur1(), this.m_jeu.getJoueur2());
             m_jeu.jouer(m_jeu.getJoueur1(), m_jeu.getJoueur2());
             m_jeu.jouer(m_jeu.getJoueur2(), m_jeu.getJoueur1());
