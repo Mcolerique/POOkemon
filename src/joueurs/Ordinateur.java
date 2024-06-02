@@ -1,5 +1,6 @@
 package joueurs;
 
+import affichage.Affichage;
 import jeu.Jeu;
 import pokemons.Pokemon;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class Ordinateur extends Joueur {
         int pokemonAttaque;
         pokemonAttaque = pokemonAttaquer.get(index);
         if (i < terrain.getNbPokemonsJoueur(this) && pokemonAttaque < terrain.getNbPokemonsJoueur(adversaire)) {
-            System.out.println(terrain.getPokemon(this, i).getNom() + " a attaqué " + terrain.getPokemon(adversaire, pokemonAttaque).getNom());
+            Affichage.afficher(terrain.getPokemon(this, i).getNom() + " a attaqué " + terrain.getPokemon(adversaire, pokemonAttaque).getNom());
             terrain.getPokemon(this, i).attaquer(terrain.getPokemon(adversaire, pokemonAttaque));
         }
         return pokemonAttaque;
@@ -85,15 +86,7 @@ public class Ordinateur extends Joueur {
     @Override
     public boolean utiliserPouvoir(Terrain terrain, Joueur adversaire) {
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
-        for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
-        {
-            if (!terrain.getPokemonsJoueur(this).isEmpty()){
-                if (terrain.getPokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getPokemonsJoueur(this).get(i).getPouvoir().getUtilise())
-                {
-                    pokeQuiAttaque.add(terrain.getPokemonsJoueur(this).get(i));
-                }
-            }
-        }
+        this.getPokePouvoir(terrain, pokeQuiAttaque);
         if(pokeQuiAttaque.isEmpty()){
             return false;
         }
@@ -101,7 +94,7 @@ public class Ordinateur extends Joueur {
             int pokemonAttaquant = selection(pokeQuiAttaque);
             pokeQuiAttaque.remove(pokemonAttaquant);
             pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
-            System.out.println(terrain.getPokemon(this,i).getNom()+" a utilisé "+terrain.getPokemon(this,i).getNomPouvoir());
+            Affichage.afficher(terrain.getPokemon(this,i).getNom()+" a utilisé "+terrain.getPokemon(this,i).getNomPouvoir());
             if (this.mort(terrain)|| adversaire.mort(terrain)){
                 if(Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
                     pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
@@ -115,6 +108,6 @@ public class Ordinateur extends Joueur {
     @Override
     public int selection(List<Pokemon> list) {
         Random random = new Random();
-        return random.nextInt(list.size());
+        return random.nextInt(list.size())-1;
     }
 }

@@ -98,12 +98,8 @@ public abstract class Joueur {
         }
     }
 
-    public void ajouterPlaceTerrain(){
-        this.m_tailleTerrain++;
-    }
-
-    public void enleverPlaceTerrain(){
-        this.m_tailleTerrain--;
+    public void modifPlaceTerrain(int modif){
+        this.m_tailleTerrain+=modif;
     }
 
     public boolean aPerdu() {
@@ -144,6 +140,17 @@ public abstract class Joueur {
             //Gere le cas où l'index est invalide
             System.out.println("L'index du Pokémon est invalide.");
             return null;
+        }
+    }
+    public void getPokePouvoir(Terrain terrain, List<Pokemon> list){
+        for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
+        {
+            if (!terrain.getPokemonsJoueur(this).isEmpty()){
+                if (terrain.getPokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getPokemonsJoueur(this).get(i).getPouvoir().getUtilise())
+                {
+                    list.add(terrain.getPokemonsJoueur(this).get(i));
+                }
+            }
         }
     }
 }

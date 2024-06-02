@@ -89,7 +89,7 @@ public class Affichage {
             System.out.println("Vous avez gagné !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemon.Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
         }
         else {
-            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon.Pokemon sont en pleine santé, vous êtes vraiment nul");
+            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon Pokemon sont en pleine santé, vous êtes vraiment nul");
         }
         Affichage.accueil();
     }
@@ -101,7 +101,7 @@ public class Affichage {
             {
                 System.out.print((j+1)+"."+list.get(j).getNom() + " / ");
             }
-            else {System.out.println((j+1)+"."+list.get(j).getNom()+"");}
+            else {System.out.println((j+1)+"."+list.get(j).getNom()+" )");}
         }
     }
 
@@ -114,5 +114,11 @@ public class Affichage {
         System.out.println(ligneSuperieure);
         System.out.println(ligneTitre);
         System.out.println(ligneInferieure);
+    }
+    public static void afficheDefausse(Joueur joueur, List<Pokemon> defausse) {
+        System.out.println("Défausse de " + joueur.getNom() + " :");
+        for (int i = 0; i < defausse.size(); i++) {
+            System.out.println((i + 1) + ". " + defausse.get(i).getNom());
+        }
     }
 }

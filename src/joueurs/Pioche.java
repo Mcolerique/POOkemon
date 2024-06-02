@@ -1,5 +1,7 @@
 package joueurs;
 
+import jeu.Jeu;
+import pokemons.GenerateurPokemon;
 import pokemons.Pokemon;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +17,7 @@ public class Pioche {
     public Pioche(int taillePioche) {
         this.m_pioche = new ArrayList<>();
         for (int i = 0; i < taillePioche; i++) {
-            this.m_pioche.add(new Pokemon());
+            this.m_pioche.add(GenerateurPokemon.creePokemon());
         }
         Collections.shuffle(m_pioche);
     }
