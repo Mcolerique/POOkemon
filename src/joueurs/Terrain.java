@@ -31,6 +31,13 @@ public class Terrain {
             this.m_pokemonsJoueur2.add(joueur.getPokemon(pokemon));
         }
     }
+    public void placerPokemons(Joueur joueur, Pokemon pokemon) {
+        if (joueur.getNom().equals("Joueur 1")) {
+            this.m_pokemonsJoueur1.add(pokemon);
+        } else {
+            this.m_pokemonsJoueur2.add(pokemon);
+        }
+    }
 
     public void retirerPokemon(Joueur joueur, int pokemon){
         if (joueur.getNom().equals("Joueur 1"))

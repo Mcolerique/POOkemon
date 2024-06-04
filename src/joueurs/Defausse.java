@@ -19,4 +19,8 @@ public class Defausse {
 
     //Getters
     public List<Pokemon> getDefausse() {return m_defausse;}
+
+    public void retirerPokemon(int choix) {
+        m_defausse.remove(choix);
+    }
 }
