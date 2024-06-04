@@ -92,7 +92,6 @@ public class Ordinateur extends Joueur {
         }
         for (int i = 0; i<pokeQuiAttaque.size();i++){
             int pokemonAttaquant = selection(pokeQuiAttaque);
-            System.out.println(pokemonAttaquant);
             if (pokemonAttaquant >= 0 && pokemonAttaquant < pokeQuiAttaque.size()) {
                 pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
                 Affichage.afficher(terrain.getPokemon(this,pokemonAttaquant).getNom()+" a utilisé "+terrain.getPokemon(this,pokemonAttaquant).getNomPouvoir());
@@ -102,8 +101,8 @@ public class Ordinateur extends Joueur {
                     }
                     return true;
                 }
-                pokeQuiAttaque.remove(pokemonAttaquant);
             }
+            pokeQuiAttaque.remove(pokemonAttaquant);
         }
         return false;
     }
