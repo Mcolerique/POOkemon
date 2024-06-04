@@ -146,7 +146,7 @@ public abstract class Joueur {
         for(int i =0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
             if (!terrain.getPokemonsJoueur(this).isEmpty()){
-                if (terrain.getPokemonsJoueur(this).get(i).getNomPouvoir()!="Aucun" && !terrain.getPokemonsJoueur(this).get(i).getPouvoir().getUtilise())
+                if (terrain.getPokemonsJoueur(this).get(i).getPouvoir()!=null && !terrain.getPokemonsJoueur(this).get(i).getPouvoir().getUtilise())
                 {
                     list.add(terrain.getPokemonsJoueur(this).get(i));
                 }
