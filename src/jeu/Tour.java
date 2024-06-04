@@ -1,17 +1,18 @@
 package jeu;
 
 import affichage.Affichage;
+import joueurs.Joueur;
 
 public class Tour {
 
     //Attributs
-    private final Jeu jeu;
+    private final Jeu m_jeu;
     private int m_nbTour;
 
 
     //Constructeur
-    public Tour(Jeu jeu) {
-        this.jeu = jeu;
+    public Tour(Jeu m_jeu) {
+        this.m_jeu = m_jeu;
         this.m_nbTour = 1;
     }
 
@@ -19,13 +20,22 @@ public class Tour {
     //Methodes
     public void nouveauTour(){
         this.m_nbTour++;
-        System.out.println("jeu.Tour n°"+this.m_nbTour+" :\n\n");
-        Affichage.terrain(this.jeu.getTerrain(),this.jeu.getJoueur1(), this.jeu.getJoueur2());
-        jeu.jouer(jeu.getJoueur1(), jeu.getJoueur2());
-        jeu.jouer(jeu.getJoueur2(), jeu.getJoueur1());
-        this.nouveauTour();
+        while (!this.m_jeu.partieTerminee()) {
+            Affichage.afficheNbTour(this.getNbTourString() + " tour :");
+            Affichage.terrain(this.m_jeu.getTerrain(),this.m_jeu.getJoueur1(), this.m_jeu.getJoueur2());
+            m_jeu.jouer(m_jeu.getJoueur1(), m_jeu.getJoueur2());
+            m_jeu.jouer(m_jeu.getJoueur2(), m_jeu.getJoueur1());
+        }
+        Affichage.finDePartie(this.m_jeu.getVainqueur());
     }
 
+    public boolean attaquer(Joueur joueur, Joueur adversaire){
+        Affichage.afficher((joueur.getNom()+" attaque :"));
+        if(joueur.attaquer(this.m_jeu.getTerrain(), adversaire)){
+            return this.m_jeu.partieTerminee();
+        }
+        return false;
+    }
 
     //Getters
     public String getNbTourString(){

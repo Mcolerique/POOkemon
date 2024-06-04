@@ -1,26 +1,30 @@
 package affichage;
 
 import java.util.List;
-import java.util.Scanner;
-import jeu.*;
 import joueurs.*;
 import pokemons.*;
+import jeu.Tour;
 
 public class Affichage {
 
     //Methodes
     public static void accueil(){
-        System.out.println("Nouvelle partie ?(o/n)");
-        Scanner scanner = new Scanner(System.in);
-        char reponse = scanner.next().charAt(0);
-        if (reponse == 'o'){
-            Jeu jeu = new Jeu();
-            jeu.initialisationJeu();
-        }
-        else {
-            System.out.println("Bah casse toi alors");
-            System.exit(0);
-        }
+        System.out.println("\t\t\t\t\t\t\t\t                  ,'\\\n" +
+                "\t\t\t\t    _.----._       ____         ,'  _\\   ___    ___     ____\n" +
+                "\t\t\t\t_,/         \\     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
+                "\t\t\t\t\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
+                "\t\t\t\t \\.    \\ \\    | __  |  |/    ,','_  `.  |          | __  |    \\|  |\n" +
+                "\t\t\t\t   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n" +
+                "\t\t\t\t    \\     ,-'/  / \\ \\   ,'   |  \\/ / ,`.|         /  / \\ \\  |     |\n" +
+                "\t\t\t\t     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\n" +
+                "\t\t\t\t      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n" +
+                "\t\t\t\t       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
+                "\t\t\t\t\t    \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
+                "\t\t\t\t\t\t\t\t                                              '-._|\n");
+    }
+
+    public static void afficher(String message){
+        System.out.println(message);
     }
 
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
@@ -37,45 +41,66 @@ public class Affichage {
 
     public static void affichePokemon(List<Pokemon> list){
         int nombrePokemons = list.size();
-        int largeurCase = 20; // Largeur de chaque case
+        int largeurCase = 22; //Largeur de chaque case
 
-        // affichage.Affichage des noms des Pokémon
-        System.out.print("                       ");
         for (int i = 0; i < nombrePokemons; i++) {
-            String nom = list.get(i).getNom();
-            System.out.print(String.format("%-" + largeurCase + "s", nom));
+            System.out.print("  +----------------------+");
         }
         System.out.println();
 
-        // affichage.Affichage des PV des Pokémon
-        System.out.print("                  pv : ");
+
+        //Affichage.Affichage des noms des Pokémon
+        for (int i = 0; i < nombrePokemons; i++) {
+            String nom = list.get(i).getNom();
+            int longueurNom = list.get(i).getNom().length();
+            if (longueurNom % 2 == 1) {
+                nom = nom + " ";
+            }
+            int espaceDeChaqueCote = (largeurCase - longueurNom) / 2;
+            System.out.print(String.format("  |%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", nom, ""));
+        }
+        System.out.println();
+
+        //Affichage.Affichage des PV des Pokémon
         for (int i = 0; i < nombrePokemons; i++) {
             String pv = list.get(i).getPv() + "/" + list.get(i).getPvMax();
-            System.out.print(String.format("%-" + largeurCase + "s", pv));
+            int longueurPV = pv.length();
+            int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
+            System.out.print(String.format("  | PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pv, ""));
         }
         System.out.println();
 
         //Affichage.Affichage des attaques des Pokémon
-        System.out.print("             attaque : ");
         for (int i = 0; i < nombrePokemons; i++) {
             String attaque = String.valueOf(list.get(i).getAttaque());
-            System.out.print(String.format("%-" + largeurCase + "s", attaque));
+            int longueurAtt = attaque.length();
+            int espaceDeChaqueCote = (largeurCase - longueurAtt) / 2 - 5;
+            System.out.print(String.format("  | Attaque :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", attaque, ""));
         }
         System.out.println();
 
         //Affichage.Affichage des types des Pokémon
-        System.out.print("                type : ");
         for (int i = 0; i < nombrePokemons; i++) {
             String type = list.get(i).getElementString();
-            System.out.print(String.format("%-" + largeurCase + "s", type));
+            int longueurType = type.length();
+            int espaceDeChaqueCote = (largeurCase - longueurType) / 2 - 3;
+            System.out.print(String.format("  | Type :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", type, ""));
         }
         System.out.println();
 
         //Affichage.Affichage des pouvoirs des pokemons
-        System.out.print("             pouvoir : ");
         for (int i = 0; i < nombrePokemons; i++) {
-            String type = list.get(i).getNomPouvoir();
-            System.out.print(String.format("%-" + largeurCase + "s", type));
+            String pouvoir = list.get(i).getNomPouvoir();
+            int longueurPouvoir = pouvoir.length();
+            if (longueurPouvoir % 2 == 1) {
+                pouvoir = pouvoir + " ";
+            }
+            int espaceDeChaqueCote = (largeurCase - longueurPouvoir) / 2 - 4;
+            System.out.print(String.format("  | Type : %" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
+        }
+        System.out.println();
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  +----------------------+");
         }
         System.out.println();
     }
@@ -85,7 +110,7 @@ public class Affichage {
             System.out.println("Vous avez gagné !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemon.Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
         }
         else {
-            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon.Pokemon sont en pleine santé, vous êtes vraiment nul");
+            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon Pokemon sont en pleine santé, vous êtes vraiment nul");
         }
         Affichage.accueil();
     }
@@ -95,9 +120,26 @@ public class Affichage {
         {
             if (j != list.size()-1)
             {
-                System.out.print((j+1)+"."+list.get(j).getNom() + "/");
+                System.out.print((j+1)+"."+list.get(j).getNom() + " / ");
             }
-            else {System.out.println((j+1)+"."+list.get(j).getNom()+")");}
+            else {System.out.println((j+1)+"."+list.get(j).getNom()+" )");}
+        }
+    }
+
+    public static void afficheNbTour(String tour) {
+        int largeurCadre = tour.length() + 2;
+
+        String ligneSuperieure = "+" + "-".repeat(largeurCadre) + "+";
+        String ligneTitre = String.format("| %-" + (largeurCadre - 2) + "s |", tour);
+        String ligneInferieure = "+" + "-".repeat(largeurCadre) + "+";
+        System.out.println(ligneSuperieure);
+        System.out.println(ligneTitre);
+        System.out.println(ligneInferieure);
+    }
+    public static void afficheDefausse(Joueur joueur, List<Pokemon> defausse) {
+        System.out.println("Défausse de " + joueur.getNom() + " :");
+        for (int i = 0; i < defausse.size(); i++) {
+            System.out.println((i + 1) + ". " + defausse.get(i).getNom());
         }
     }
 }

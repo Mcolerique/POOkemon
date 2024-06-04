@@ -13,8 +13,9 @@ public abstract class Pouvoir {
 
 
     //Constucteur
-    public Pouvoir(String nom) {
+    public Pouvoir(String nom, String desc) {
         this.m_nom = nom;
+        this.m_desc = desc;
         this.m_utilise = false;
     }
 
@@ -33,4 +34,5 @@ public abstract class Pouvoir {
     public boolean getUtilise(){
         return this.m_utilise;
     }
+    public String getM_desc(){return this.m_desc;}
 }
