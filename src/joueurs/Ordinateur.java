@@ -102,8 +102,8 @@ public class Ordinateur extends Joueur {
                     }
                     return true;
                 }
-                pokeQuiAttaque.remove(pokemonAttaquant);
             }
+        pokeQuiAttaque.remove(pokemonAttaquant);
         }
         return false;
     }
