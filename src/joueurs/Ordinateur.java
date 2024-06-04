@@ -93,14 +93,16 @@ public class Ordinateur extends Joueur {
         for (int i = 0; i<pokeQuiAttaque.size();i++){
             int pokemonAttaquant = selection(pokeQuiAttaque);
             System.out.println(pokemonAttaquant);
-            pokeQuiAttaque.remove(pokemonAttaquant);
-            pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
-            Affichage.afficher(terrain.getPokemon(this,i).getNom()+" a utilisé "+terrain.getPokemon(this,i).getNomPouvoir());
-            if (this.mort(terrain)|| adversaire.mort(terrain)){
-                if(Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
-                    pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+            if (pokemonAttaquant >= 0 && pokemonAttaquant < pokeQuiAttaque.size()) {
+                pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
+                Affichage.afficher(terrain.getPokemon(this,pokemonAttaquant).getNom()+" a utilisé "+terrain.getPokemon(this,pokemonAttaquant).getNomPouvoir());
+                if (this.mort(terrain)|| adversaire.mort(terrain)){
+                    if(Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
+                        pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+                    }
+                    return true;
                 }
-                return true;
+                pokeQuiAttaque.remove(pokemonAttaquant);
             }
         }
         return false;

@@ -24,6 +24,8 @@ public class Necromancie extends Pouvoir {
         // choix du pokemon à ressusciter
         int choix = allie.selection(defausse);
         Pokemon pokemonARessusciter = defausse.get(choix);
+        // redonner toute sa vie au pokemon choisi
+        pokemonARessusciter.soigner(pokemonARessusciter.getPvMax());
         // tuer le pokemon avec le pouvoir
         terrain.retirerPokemon(allie, intPokemon);
         // ressusciter le pokemon choisi

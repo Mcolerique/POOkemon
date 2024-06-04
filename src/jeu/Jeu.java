@@ -28,7 +28,6 @@ public class Jeu {
         this.m_tour = new Tour(this);
     }
 
-
     //Methodes
     public void initialisationJeu(){
         Scanner scan = new Scanner(System.in);
@@ -123,9 +122,6 @@ public class Jeu {
             Affichage.finDePartie(this.getVainqueur());
         }
     }
-
-
-
 
 
     public boolean partieTerminee() {
