@@ -21,7 +21,6 @@ public class Humain extends Joueur{
             try {
                 Thread.sleep(2000);
                 Affichage.afficher("Choisissez un pokemon à placer sur le terrain");
-                Affichage.selectionPokemon(this.m_main.getListePokemon());
                 Affichage.affichePokemon(this.m_main.getListePokemon());
                 int pokemonaplacer = selection(this.m_main.getListePokemon());
                 terrain.placerPokemons(this, pokemonaplacer);
