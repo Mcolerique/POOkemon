@@ -92,6 +92,7 @@ public class Ordinateur extends Joueur {
         }
         for (int i = 0; i<pokeQuiAttaque.size();i++){
             int pokemonAttaquant = selection(pokeQuiAttaque);
+            System.out.println(pokemonAttaquant);
             pokeQuiAttaque.remove(pokemonAttaquant);
             pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             Affichage.afficher(terrain.getPokemon(this,i).getNom()+" a utilisé "+terrain.getPokemon(this,i).getNomPouvoir());
@@ -108,6 +109,6 @@ public class Ordinateur extends Joueur {
     @Override
     public int selection(List<Pokemon> list) {
         Random random = new Random();
-        return random.nextInt(list.size())-1;
+        return random.nextInt(list.size());
     }
 }
