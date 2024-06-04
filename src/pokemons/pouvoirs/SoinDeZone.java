@@ -9,7 +9,7 @@ public class SoinDeZone extends Pouvoir {
 
     //Constructeur
     public SoinDeZone(){
-        super("Soin de zone","Soin de zone, utilisable à chaque tour : chaque Pokémon de son camp regagne 10 points de vie.");
+        super("Soin zone","Soin de zone, utilisable à chaque tour : chaque Pokémon de son camp regagne 10 points de vie.");
     }
 
 

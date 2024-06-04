@@ -12,7 +12,7 @@ public class Necromancie extends Pouvoir {
 
     //Constructeur
     public Necromancie() {
-        super("Necromancie","Nécromancie, à utilisation unique : le Pokémon choisit un Pokémon mort dans sa défausse. Le Pokémon meurt et est remplacé par le Pokémon choisi dans la défausse.");
+        super("Necrom","Nécromancie, à utilisation unique : le Pokémon choisit un Pokémon mort dans sa défausse. Le Pokémon meurt et est remplacé par le Pokémon choisi dans la défausse.");
     }
 
     //Methodes

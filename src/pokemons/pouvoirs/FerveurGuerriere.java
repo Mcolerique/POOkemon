@@ -12,7 +12,7 @@ public class FerveurGuerriere extends Pouvoir {
 
     //Constructeur
     public FerveurGuerriere(){
-        super("Ferveur guerrière","Ferveur guerrière, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégâts de plus.");
+        super("Ferv guer","Ferveur guerrière, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégâts de plus.");
     }
 
 

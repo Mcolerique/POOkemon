@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Resistance extends Pouvoir{
     public Resistance(){
-        super("Resistance","Résistance, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, à chaque attaque reçue celui-ci subit subit 10 dégâts de moins.");
+        super("Resist","Résistance, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, à chaque attaque reçue celui-ci subit subit 10 dégâts de moins.");
     }
 
     @Override
