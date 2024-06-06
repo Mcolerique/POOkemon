@@ -9,7 +9,9 @@ public class Affichage {
 
     //Methodes
     public static void accueil(){
-        System.out.println("\t\t\t\t\t\t\t\t                  ,'\\\n" +
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_RESET = "\u001B[0m";
+        System.out.println(ANSI_YELLOW +
                 "\t\t\t\t    _.----._       ____         ,'  _\\   ___    ___     ____\n" +
                 "\t\t\t\t_,/         \\     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
                 "\t\t\t\t\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
@@ -20,7 +22,7 @@ public class Affichage {
                 "\t\t\t\t      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n" +
                 "\t\t\t\t       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
                 "\t\t\t\t\t    \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
-                "\t\t\t\t\t\t\t\t                                              '-._|\n");
+                "\t\t\t\t\t\t\t\t                                              '-._|\n" + ANSI_RESET);
     }
 
     public static void afficher(String message){
@@ -28,17 +30,32 @@ public class Affichage {
     }
 
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
-        System.out.println(" \nPokémon du Joueur 1 : ");
-        Affichage.affichePokemon(j1.getMain().getListePokemon());
-        Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j1),j1.getTailleTerrain());
-        System.out.println("pioche : "+j1.getPioche().getPioche().size() + " cartes");
-        System.out.println("défausse : "+j1.getDefausse().getDefausse().size()+" cartes");
-        System.out.println("\n--------------------------------------------------------------------------------\n");
-        System.out.println(" Pokémon du Joueur 2 : ");
-        Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
-        Affichage.affichePokemon(j2.getMain().getListePokemon());
-        System.out.println("pioche : "+j2.getPioche().getPioche().size() + " cartes");
-        System.out.println("défausse : "+j2.getDefausse().getDefausse().size()+" cartes\n");
+        if (j1.getClass().getSimpleName().equals("Ordinateur")) {
+            System.out.println(" \nPokémon du Joueur 1 : ");
+            Affichage.affichePokemon(j1.getMain().getListePokemon());
+            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
+            System.out.println("pioche : " + j1.getPioche().getPioche().size() + " cartes");
+            System.out.println("défausse : " + j1.getDefausse().getDefausse().size() + " cartes");
+            System.out.println("\n--------------------------------------------------------------------------------\n");
+            System.out.println(" Pokémon du Joueur 2 : ");
+            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
+            Affichage.affichePokemon(j2.getMain().getListePokemon());
+            System.out.println("pioche : " + j2.getPioche().getPioche().size() + " cartes");
+            System.out.println("défausse : " + j2.getDefausse().getDefausse().size() + " cartes\n");
+        }
+        else {
+            System.out.println(" Pokémon du Joueur 2 : ");
+            Affichage.affichePokemon(j2.getMain().getListePokemon());
+            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
+            System.out.println("pioche : " + j2.getPioche().getPioche().size() + " cartes");
+            System.out.println("défausse : " + j2.getDefausse().getDefausse().size() + " cartes\n");
+            System.out.println("\n--------------------------------------------------------------------------------\n");
+            System.out.println(" Pokémon du Joueur 1 : ");
+            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
+            Affichage.affichePokemon(j1.getMain().getListePokemon());
+            System.out.println("pioche : " + j1.getPioche().getPioche().size() + " cartes");
+            System.out.println("défausse : " + j1.getDefausse().getDefausse().size() + " cartes");
+        }
     }
 
     public static void affichePokemon(List<Pokemon> list){
