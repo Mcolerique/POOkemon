@@ -223,15 +223,17 @@ public class Affichage {
         Affichage.accueil();
     }
 
-    public static void selectionPokemon(List<Pokemon> list){
+    public static String selectionPokemon(List<Pokemon> list){
+        String txt = "";
         for (int j = 0; j<list.size();j++)
         {
             if (j != list.size()-1)
             {
-                System.out.print((j+1)+"."+list.get(j).getNom() + " / ");
+                txt += j+1+"."+list.get(j).getNom() + " / ";
             }
-            else {System.out.println((j+1)+"."+list.get(j).getNom()+" )");}
+            else {txt+=j+1+"."+list.get(j).getNom()+" / "+(j+2)+".Rien sélectionner";}
         }
+        return txt;
     }
 
     public static void afficheNbTour(String tour) {

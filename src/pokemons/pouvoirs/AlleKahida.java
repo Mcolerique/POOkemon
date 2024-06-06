@@ -9,16 +9,23 @@ import pokemons.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Kamikaze extends Pouvoir{
-    public Kamikaze() {
-        super("Kamikaze","Kamikaze, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Les deux Pokémons sont alors éliminés.");
-    }
+public class AlleKahida extends Pouvoir {
 
+    //Constructeur
+    public AlleKahida() {
+        super("AlleKahida","AlleKahida, utilisable à chaque tour : Permet de kamikaze un pokemon allié ou soit même");
+    }
 
     //Methodes redefinies
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
         try {
+            List<Pokemon> pokeAttaquant = new ArrayList<>();
+            pokeAttaquant.addAll(terrain.getPokemonsJoueur(allie));
+            System.out.println("Choisissez un pokemon à sacrifier"+Affichage.selectionPokemon(pokeAttaquant));
+            Affichage.affichePokemon(terrain.getPokemonsJoueur(adversaire));
+            int pokemonAttaquant = allie.selection(pokeAttaquant.size());
+
             List<Pokemon> pokeAttaquer = new ArrayList<>();
             pokeAttaquer.addAll(terrain.getPokemonsJoueur(adversaire));
             System.out.println("Choisissez un pokemon à attaquer"+Affichage.selectionPokemon(pokeAttaquer));
@@ -26,7 +33,7 @@ public class Kamikaze extends Pouvoir{
             int pokemonAttaque = allie.selection(pokeAttaquer.size());
 
             //Défausser les 2 pokemons avec retirerPokemon()
-            terrain.retirerPokemon(allie, intPokemon);
+            terrain.retirerPokemon(allie, pokemonAttaquant);
             terrain.retirerPokemon(adversaire, pokemonAttaque);
         }
         catch (IndexOutOfBoundsException e){

@@ -17,7 +17,7 @@ public class GenerateurPokemon {
             "Kabuto", "Natu", "Hoothoot", "Cornèbre", "Soporifik",
             "Mysdibule", "Girafarig", "Wattouat", "Toudoudou", "Tarsal", "Evoli"));
     private static ArrayList<String> m_nomsUtilises = new ArrayList<String>();
-    private static ArrayList<Pouvoir> m_nomsPouvoirs = new ArrayList<>(Arrays.asList(new ExtensionTerritoire(), new Kamikaze(), new SoinDeZone(), new FerveurGuerriere(), new SoinTotal(), new Necromancie(), new Confusion(), new Resistance() ));
+    private static ArrayList<Pouvoir> m_nomsPouvoirs = new ArrayList<>(Arrays.asList(new ExtensionTerritoire(), new AlleKahida(), new SoinDeZone(), new FerveurGuerriere(), new SoinTotal(), new Necromancie(), new Confusion(), new Resistance(), new Kamikaze()));
     private static ArrayList<Pouvoir> m_pouvoirsUtilises = new ArrayList<>();
     public static int getIndexAleatoire() {
         if (m_nomsDisponibles.isEmpty()) {

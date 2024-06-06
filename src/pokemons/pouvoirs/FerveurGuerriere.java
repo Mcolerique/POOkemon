@@ -21,10 +21,8 @@ public class FerveurGuerriere extends Pouvoir {
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
         ArrayList<Pokemon> pokeAAmeliorer = new ArrayList<>();
         pokeAAmeliorer.addAll(terrain.getPokemonsJoueur(allie));
-        Affichage.afficher("choisissez un pokemon a ameliorer");
-        Affichage.selectionPokemon(pokeAAmeliorer);
-        Affichage.affichePokemon(terrain.getPokemonsJoueur(allie));
-        int pokemonAmeliorer = allie.selection(pokeAAmeliorer);
+        Affichage.afficher("choisissez un pokemon a ameliorer : " + Affichage.selectionPokemon(pokeAAmeliorer));
+        int pokemonAmeliorer = allie.selection(pokeAAmeliorer.size());
         terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer ).modifAttaque(10);
         Terrain.getPouvoirsUtilises().put(this,terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer ));
         this.m_utilise = true;

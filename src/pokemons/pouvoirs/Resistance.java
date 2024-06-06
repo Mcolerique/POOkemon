@@ -17,13 +17,18 @@ public class Resistance extends Pouvoir{
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
         ArrayList<Pokemon> pokeADefendre = new ArrayList<>();
         pokeADefendre.addAll(terrain.getPokemonsJoueur(allie));
-        System.out.print("choisissez un pokemon a défendre");
-        Affichage.selectionPokemon(pokeADefendre);
-        Affichage.affichePokemon(terrain.getPokemonsJoueur(allie));
-        int pokemonAmeliorer = allie.selection(pokeADefendre);
-        terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer).modifDefense(10);
-        Terrain.getPouvoirsUtilises().put(this,terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer ));
-        this.m_utilise = true;
+        try
+        {
+            System.out.print("choisissez un pokemon a défendre : "+Affichage.selectionPokemon(pokeADefendre));
+            int pokemonAmeliorer = allie.selection(pokeADefendre.size());
+            terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer).modifDefense(10);
+            Terrain.getPouvoirsUtilises().put(this,terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer ));
+            this.m_utilise = true;
+        }
+        catch (IndexOutOfBoundsException e){
+
+        }
+
     }
 
     @Override

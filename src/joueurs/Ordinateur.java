@@ -90,27 +90,31 @@ public class Ordinateur extends Joueur {
         if(pokeQuiAttaque.isEmpty()){
             return false;
         }
-        for (int i = 0; i<pokeQuiAttaque.size();i++){
-            int pokemonAttaquant = selection(pokeQuiAttaque);
-            System.out.println(pokemonAttaquant);
-            if (pokemonAttaquant >= 0 && pokemonAttaquant < pokeQuiAttaque.size()) {
-                pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
-                Affichage.afficher(terrain.getPokemon(this,pokemonAttaquant).getNom()+" a utilisé "+terrain.getPokemon(this,pokemonAttaquant).getNomPouvoir());
-                if (this.mort(terrain)|| adversaire.mort(terrain)){
-                    if(Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
-                        pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+        try {
+            for (int i = 0; i<pokeQuiAttaque.size();i++){
+                int pokemonAttaquant = selection(pokeQuiAttaque.size()+1);
+                if (pokemonAttaquant >= 0 && pokemonAttaquant < pokeQuiAttaque.size()) {
+                    pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
+                    Affichage.afficher(terrain.getPokemon(this,pokemonAttaquant).getNom()+" a utilisé "+terrain.getPokemon(this,pokemonAttaquant).getNomPouvoir());
+                    if (this.mort(terrain)|| adversaire.mort(terrain)){
+                        if(Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
+                            pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
+                        }
+                        return true;
                     }
-                    return true;
                 }
+                pokeQuiAttaque.remove(pokemonAttaquant);
             }
-        pokeQuiAttaque.remove(pokemonAttaquant);
+        }
+        catch (IndexOutOfBoundsException e){
+            return false;
         }
         return false;
     }
 
     @Override
-    public int selection(List<Pokemon> list) {
+    public int selection(int borne) {
         Random random = new Random();
-        return random.nextInt(list.size());
+        return random.nextInt(borne);
     }
 }

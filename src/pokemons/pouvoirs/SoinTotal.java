@@ -21,12 +21,15 @@ public class SoinTotal extends Pouvoir {
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon) {
         ArrayList<Pokemon> pokeSoigner = new ArrayList<>();
         pokeSoigner.addAll(terrain.getPokemonsJoueur(allie));
-        System.out.print("choisissez un pokemon a soigner");
-        Affichage.selectionPokemon(pokeSoigner);
-        Affichage.affichePokemon(terrain.getPokemonsJoueur(allie));
-        int pokemonSoigne = allie.selection(pokeSoigner);
-        pokeSoigner.get(pokemonSoigne).soigner(pokeSoigner.get(pokemonSoigne).getPvMax());
-        this.m_utilise = true;
+        try{
+            System.out.print("choisissez un pokemon a soigner : "+Affichage.selectionPokemon(pokeSoigner));
+            int pokemonSoigne = allie.selection(pokeSoigner.size());
+            pokeSoigner.get(pokemonSoigne).soigner(pokeSoigner.get(pokemonSoigne).getPvMax());
+            this.m_utilise = true;
+        }
+        catch (IndexOutOfBoundsException e){
+
+        }
     }
 
     @Override

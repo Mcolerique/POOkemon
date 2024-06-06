@@ -28,7 +28,7 @@ public abstract class Joueur {
 
     public abstract boolean utiliserPouvoir(Terrain terrain, Joueur adversaire);
 
-    public abstract int selection(List<Pokemon> list);
+    public abstract int selection(int borne);
 
     public abstract void placerPokemon(Terrain terrain);
 
