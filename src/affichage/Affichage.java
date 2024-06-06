@@ -108,7 +108,7 @@ public class Affichage {
                 espaceDeChaqueCote = 0;
             }
 
-            System.out.print(String.format("  | Pouvoir :% " + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
+            System.out.print(String.format("  | Pouvoir :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
         }
         System.out.println();
         for (int i = 0; i < nombrePokemons; i++) {
