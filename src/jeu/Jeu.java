@@ -41,11 +41,12 @@ public class Jeu {
             initialiserJoueur();
 
             // remplissage des mains des joueurs
-            m_j1.piocherPokemon();
-            m_j2.piocherPokemon();
+            this.m_j1.piocherPokemon();
+            this.m_j2.piocherPokemon();
             try {
                 Thread.sleep(2000);
                 //Chaque joueur pose 3 pokemons sur le terrain
+                Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
                 Affichage.afficheNbTour(this.m_tour.getNbTourString() + " tour :");
                 Affichage.afficher("C'est au tour du joueur n°1 !");
                 this.m_j1.placerPokemon(this.m_terrain);
@@ -55,17 +56,6 @@ public class Jeu {
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
-            }
-
-            //Attaque j1
-            Affichage.afficher(this.m_j1.getNom()+ " attaque : ");
-            if(this.m_j1.attaquer(this.m_terrain, this.m_j2)){
-                partieTerminee();
-            }
-            //Attaque j2
-            System.out.println((this.m_j2.getNom()+" attaque :"));
-            if(this.m_j2.attaquer(this.m_terrain, this.m_j1)){
-                partieTerminee();
             }
             Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
             this.m_tour.nouveauTour();

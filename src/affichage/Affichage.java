@@ -95,10 +95,20 @@ public class Affichage {
             String pouvoir = list.get(i).getNomPouvoir();
             int longueurPouvoir = pouvoir.length();
             if (longueurPouvoir % 2 == 1) {
-                pouvoir = pouvoir + " ";
+                pouvoir += " ";
+                longueurPouvoir = pouvoir.length();
             }
-            int espaceDeChaqueCote = (largeurCase - longueurPouvoir) / 2 - 6;
-            System.out.print(String.format("  | Pouvoir : %" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
+            int espaceDisponible = largeurCase - longueurPouvoir - 9; // 9 est la longueur de " Pouvoir : "
+            int espaceDeChaqueCote = espaceDisponible / 2;
+            espaceDeChaqueCote = Math.max(espaceDeChaqueCote, 0); // S'assurer que l'espace est au moins 0
+
+            // Gestion du cas où l'espace est insuffisant
+            if (espaceDisponible < 0) {
+                pouvoir = pouvoir.substring(0, largeurCase - 9 - 1) + ".";
+                espaceDeChaqueCote = 0;
+            }
+
+            System.out.print(String.format("  | Pouvoir :% " + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
         }
         System.out.println();
         for (int i = 0; i < nombrePokemons; i++) {
@@ -108,11 +118,10 @@ public class Affichage {
     }
 
     public static void afficheTerrainJoueur(List<Pokemon> list, int tailleTerrain){
-        int nombrePokemons = list.size();
         int largeurCase = 22; //Largeur de chaque case
 
         for (int i = 0; i < tailleTerrain; i++) {
-            System.out.print("  +----------------------+");
+            System.out.print("  +----------------------+  ");
         }
         System.out.println();
 
@@ -180,9 +189,18 @@ public class Affichage {
                 String pouvoir = list.get(i).getNomPouvoir();
                 int longueurPouvoir = pouvoir.length();
                 if (longueurPouvoir % 2 == 1) {
-                    pouvoir = pouvoir + " ";
+                    pouvoir += " ";
+                    longueurPouvoir = pouvoir.length();
                 }
-                int espaceDeChaqueCote = (largeurCase - longueurPouvoir) / 2 - 6;
+                int espaceDisponible = largeurCase - longueurPouvoir - 9; // 9 est la longueur de " Pouvoir : "
+                int espaceDeChaqueCote = espaceDisponible / 2;
+                espaceDeChaqueCote = Math.max(espaceDeChaqueCote, 0); // S'assurer que l'espace est au moins 0
+
+                // Gestion du cas où l'espace est insuffisant
+                if (espaceDisponible < 0) {
+                    pouvoir = pouvoir.substring(0, largeurCase - 9 - 1) + ".";
+                    espaceDeChaqueCote = 0;
+                }
                 System.out.print(String.format("  | Pouvoir : %" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
             } catch (IndexOutOfBoundsException e) {
                 System.out.print("  |                      |  ");
@@ -190,7 +208,7 @@ public class Affichage {
         }
         System.out.println();
         for (int i = 0; i < tailleTerrain; i++) {
-            System.out.print("  +----------------------+");
+            System.out.print("  +----------------------+  ");
         }
         System.out.println();
     }

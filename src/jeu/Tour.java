@@ -13,7 +13,7 @@ public class Tour {
     //Constructeur
     public Tour(Jeu m_jeu) {
         this.m_jeu = m_jeu;
-        this.m_nbTour = 1;
+        this.m_nbTour = 0;
     }
 
 
@@ -21,10 +21,10 @@ public class Tour {
     public void nouveauTour(){
         this.m_nbTour++;
         while (!this.m_jeu.partieTerminee()) {
-            Affichage.afficheNbTour(this.getNbTourString() + " tour :");
             Affichage.terrain(this.m_jeu.getTerrain(),this.m_jeu.getJoueur1(), this.m_jeu.getJoueur2());
-            m_jeu.jouer(m_jeu.getJoueur1(), m_jeu.getJoueur2());
-            m_jeu.jouer(m_jeu.getJoueur2(), m_jeu.getJoueur1());
+            Affichage.afficheNbTour(this.getNbTourString() + " tour :");
+            m_jeu.jouer(this.m_jeu.getJoueur1(), this.m_jeu.getJoueur2());
+            m_jeu.jouer(this.m_jeu.getJoueur2(), this.m_jeu.getJoueur1());
         }
         Affichage.finDePartie(this.m_jeu.getVainqueur());
     }

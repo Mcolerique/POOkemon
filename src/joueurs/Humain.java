@@ -21,11 +21,11 @@ public class Humain extends Joueur{
             try {
                 Thread.sleep(2000);
                 Affichage.afficher("Choisissez un pokemon à placer sur le terrain");
-                Affichage.affichePokemon(this.m_main.getListePokemon());
+                //Affichage.affichePokemon(this.m_main.getListePokemon());
                 int pokemonaplacer = selection(this.m_main.getListePokemon());
                 terrain.placerPokemons(this, pokemonaplacer);
                 //Afficher le terrain
-                Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
+                //Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
@@ -44,11 +44,11 @@ public class Humain extends Joueur{
         {
             Affichage.afficher("Choisissez un pokemon avec lequel attaquer (");
             Affichage.selectionPokemon(pokeQuiAttaque);
-            Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
+            //Affichage.affichePokemon(terrain.getPokemonsJoueur(this));
             int pokemonAttaquant = selection(pokeQuiAttaque);
             Affichage.afficher("Choisissez un pokemon à attaquer");
             Affichage.selectionPokemon(terrain.getPokemonsJoueur(adversaire));
-            Affichage.affichePokemon(terrain.getPokemonsJoueur(adversaire));
+            //Affichage.affichePokemon(terrain.getPokemonsJoueur(adversaire));
             int pokemonAttaque = selection(pokeQuiAttaque);
             pokeQuiAttaque.get(pokemonAttaquant).attaquer(terrain.getPokemon(adversaire,pokemonAttaque));
             Affichage.afficher(pokeQuiAttaque.get(pokemonAttaquant).getNom()+" a attaquer "+terrain.getPokemon(adversaire,pokemonAttaque).getNom());
@@ -73,7 +73,7 @@ public class Humain extends Joueur{
             descriptionPouvoir(pokeQuiAttaque);
             Affichage.afficher("Choisissez un pouvoir a utiliser (");
             Affichage.selectionPokemon(pokeQuiAttaque);
-            Affichage.affichePokemon(pokeQuiAttaque);
+            //Affichage.affichePokemon(pokeQuiAttaque);
             int pokemonAttaquant = selection(pokeQuiAttaque);
             pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
             pokeQuiAttaque.remove(pokemonAttaquant);
