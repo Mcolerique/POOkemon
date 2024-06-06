@@ -9,7 +9,9 @@ public class Affichage {
 
     //Methodes
     public static void accueil(){
-        System.out.println("\t\t\t\t\t\t\t\t                  ,'\\\n" +
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_RESET = "\u001B[0m";
+        System.out.println(ANSI_YELLOW +
                 "\t\t\t\t    _.----._       ____         ,'  _\\   ___    ___     ____\n" +
                 "\t\t\t\t_,/         \\     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
                 "\t\t\t\t\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
@@ -20,7 +22,7 @@ public class Affichage {
                 "\t\t\t\t      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n" +
                 "\t\t\t\t       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
                 "\t\t\t\t\t    \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
-                "\t\t\t\t\t\t\t\t                                              '-._|\n");
+                "\t\t\t\t\t\t\t\t                                              '-._|\n" + ANSI_RESET);
     }
 
     public static void afficher(String message){
