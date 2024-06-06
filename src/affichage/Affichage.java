@@ -28,17 +28,32 @@ public class Affichage {
     }
 
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
-        System.out.println(" \nPokémon du Joueur 1 : ");
-        Affichage.affichePokemon(j1.getMain().getListePokemon());
-        Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j1),j1.getTailleTerrain());
-        System.out.println("pioche : "+j1.getPioche().getPioche().size() + " cartes");
-        System.out.println("défausse : "+j1.getDefausse().getDefausse().size()+" cartes");
-        System.out.println("\n--------------------------------------------------------------------------------\n");
-        System.out.println(" Pokémon du Joueur 2 : ");
-        Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
-        Affichage.affichePokemon(j2.getMain().getListePokemon());
-        System.out.println("pioche : "+j2.getPioche().getPioche().size() + " cartes");
-        System.out.println("défausse : "+j2.getDefausse().getDefausse().size()+" cartes\n");
+        if (j1.getClass().getSimpleName().equals("Ordinateur")) {
+            System.out.println(" \nPokémon du Joueur 1 : ");
+            Affichage.affichePokemon(j1.getMain().getListePokemon());
+            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
+            System.out.println("pioche : " + j1.getPioche().getPioche().size() + " cartes");
+            System.out.println("défausse : " + j1.getDefausse().getDefausse().size() + " cartes");
+            System.out.println("\n--------------------------------------------------------------------------------\n");
+            System.out.println(" Pokémon du Joueur 2 : ");
+            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
+            Affichage.affichePokemon(j2.getMain().getListePokemon());
+            System.out.println("pioche : " + j2.getPioche().getPioche().size() + " cartes");
+            System.out.println("défausse : " + j2.getDefausse().getDefausse().size() + " cartes\n");
+        }
+        else {
+            System.out.println(" Pokémon du Joueur 2 : ");
+            Affichage.affichePokemon(j2.getMain().getListePokemon());
+            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
+            System.out.println("pioche : " + j2.getPioche().getPioche().size() + " cartes");
+            System.out.println("défausse : " + j2.getDefausse().getDefausse().size() + " cartes\n");
+            System.out.println("\n--------------------------------------------------------------------------------\n");
+            System.out.println(" Pokémon du Joueur 1 : ");
+            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
+            Affichage.affichePokemon(j1.getMain().getListePokemon());
+            System.out.println("pioche : " + j1.getPioche().getPioche().size() + " cartes");
+            System.out.println("défausse : " + j1.getDefausse().getDefausse().size() + " cartes");
+        }
     }
 
     public static void affichePokemon(List<Pokemon> list){
