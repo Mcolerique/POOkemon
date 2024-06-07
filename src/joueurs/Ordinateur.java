@@ -19,57 +19,65 @@ public class Ordinateur extends Joueur {
     @Override
     public void placerPokemon(Terrain terrain) {
         while (terrain.getPokemonsJoueur(this).size() < this.m_tailleTerrain) {
-            terrain.placerPokemons(this, 0);
+            terrain.placerPokemons(this, this.getPokemon(0));
         }
     }
 
     @Override
     public boolean attaquer(Terrain terrain, Joueur adversaire) {
-        List<Integer> pokemonAttaquer = new ArrayList<>();
-        int pokemonAttaque;
         for (int i = 0; i < terrain.getNbPokemonsJoueur(this); i++) {
-            for (int j = 0; j < terrain.getNbPokemonsJoueur(adversaire); j++) {
-                if (terrain.getPokemon(this, i).avantageSur(terrain.getPokemon(adversaire, j))) {
-                    pokemonAttaquer.add(j);
-                }
-            }
+            List<Integer> pokemonAttaquer = trouverCiblesPotentielles(terrain, adversaire, i);
+            int pokemonAttaque = choisirCibleEtAttaquer(pokemonAttaquer, i, terrain, adversaire);
 
-            if (pokemonAttaquer.isEmpty()) {
-                for (int j = 0; j < terrain.getNbPokemonsJoueur(adversaire); j++) {
-                    pokemonAttaquer.add(j);
-                }
-            }
-
-            if (pokemonAttaquer.size() > 1) {
-                for (int j = 0; j < pokemonAttaquer.size() - 1; j++) {
-                    int firstIndex = pokemonAttaquer.get(j);
-                    int secondIndex = pokemonAttaquer.get(j + 1);
-
-                    if (firstIndex < terrain.getNbPokemonsJoueur(adversaire) && secondIndex < terrain.getNbPokemonsJoueur(adversaire)) {
-                        if (terrain.getPokemon(adversaire, firstIndex).getPv() <= terrain.getPokemon(adversaire, secondIndex).getPv()) {
-                            pokemonAttaquer.remove(j + 1);
-                        }
-                    }
-                }
-
-                if (pokemonAttaquer.size() > 1) {
-                    Random random = new Random();
-                    int randomIndex = random.nextInt(pokemonAttaquer.size());
-                    pokemonAttaque = attaqueJoueur(randomIndex, i, terrain, adversaire, pokemonAttaquer);
-                } else {
-                    pokemonAttaque = attaqueJoueur(0, i, terrain, adversaire, pokemonAttaquer);
-                }
-            } else {
-                pokemonAttaque = attaqueJoueur(0, i, terrain, adversaire, pokemonAttaquer);
-            }
-
-            // Si le pokemon attaqué est mort, le défausser
             if (adversaire.mort(terrain, pokemonAttaque)) {
                 return true;
             }
-            pokemonAttaquer.clear();
         }
         return false;
+    }
+    private List<Integer> trouverCiblesPotentielles(Terrain terrain, Joueur adversaire, int indexAttaquant) {
+        List<Integer> pokemonAttaquer = new ArrayList<>();
+
+        for (int j = 0; j < terrain.getNbPokemonsJoueur(adversaire); j++) {
+            if (terrain.getPokemon(this, indexAttaquant).avantageSur(terrain.getPokemon(adversaire, j))) {
+                pokemonAttaquer.add(j);
+            }
+        }
+
+        if (pokemonAttaquer.isEmpty()) {
+            for (int j = 0; j < terrain.getNbPokemonsJoueur(adversaire); j++) {
+                pokemonAttaquer.add(j);
+            }
+        }
+
+        return pokemonAttaquer;
+    }
+    private int choisirCibleEtAttaquer(List<Integer> pokemonAttaquer, int indexAttaquant, Terrain terrain, Joueur adversaire) {
+        if (pokemonAttaquer.size() > 1) {
+            pokemonAttaquer = filtrerCiblesParPv(pokemonAttaquer, terrain, adversaire);
+
+            if (pokemonAttaquer.size() > 1) {
+                int randomIndex = this.selection(pokemonAttaquer.size());
+                return attaqueJoueur(randomIndex, indexAttaquant, terrain, adversaire, pokemonAttaquer);
+            }
+        }
+        return attaqueJoueur(0, indexAttaquant, terrain, adversaire, pokemonAttaquer);
+    }
+    private List<Integer> filtrerCiblesParPv(List<Integer> pokemonAttaquer, Terrain terrain, Joueur adversaire) {
+        for (int j = 0; j < pokemonAttaquer.size() - 1; j++) {
+            int firstIndex = pokemonAttaquer.get(j);
+            int secondIndex = pokemonAttaquer.get(j + 1);
+
+            if (firstIndex < terrain.getNbPokemonsJoueur(adversaire) && secondIndex < terrain.getNbPokemonsJoueur(adversaire)) {
+                if (terrain.getPokemon(adversaire, firstIndex).getPv() < terrain.getPokemon(adversaire, secondIndex).getPv()) {
+                    pokemonAttaquer.remove(secondIndex);
+                }
+                else {
+                    pokemonAttaquer.remove(firstIndex);
+                }
+            }
+        }
+        return pokemonAttaquer;
     }
 
     private int attaqueJoueur(int index, int i, Terrain terrain, Joueur adversaire, List<Integer> pokemonAttaquer) {
