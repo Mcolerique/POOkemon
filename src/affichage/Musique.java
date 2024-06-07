@@ -40,5 +40,4 @@ public class Musique {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
-
 }
