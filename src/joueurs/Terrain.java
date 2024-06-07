@@ -24,13 +24,6 @@ public class Terrain {
 
 
     //Methodes
-    public void placerPokemons(Joueur joueur, int pokemon) {
-        if (joueur.getNom().equals("Joueur 1")) {
-            this.m_pokemonsJoueur1.add(joueur.getPokemon(pokemon));
-        } else {
-            this.m_pokemonsJoueur2.add(joueur.getPokemon(pokemon));
-        }
-    }
     public void placerPokemons(Joueur joueur, Pokemon pokemon) {
         if (joueur.getNom().equals("Joueur 1")) {
             this.m_pokemonsJoueur1.add(pokemon);

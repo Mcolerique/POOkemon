@@ -137,8 +137,6 @@ public abstract class Joueur {
             this.m_main.retirerPokemon(pokemon);
             return pokemon;
         } else {
-            //Gere le cas où l'index est invalide
-            System.out.println("L'index du Pokémon est invalide.");
             return null;
         }
     }

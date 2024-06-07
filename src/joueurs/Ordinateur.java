@@ -19,7 +19,7 @@ public class Ordinateur extends Joueur {
     @Override
     public void placerPokemon(Terrain terrain) {
         while (terrain.getPokemonsJoueur(this).size() < this.m_tailleTerrain) {
-            terrain.placerPokemons(this, 0);
+            terrain.placerPokemons(this, this.getPokemon(0));
         }
     }
 

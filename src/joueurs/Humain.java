@@ -22,7 +22,14 @@ public class Humain extends Joueur{
                 Thread.sleep(2000);
                 Affichage.afficher("Choisissez un pokemon à placer sur le terrain : "+Affichage.selectionPokemon(this.m_main.getListePokemon()));
                 int pokemonaplacer = selection(this.m_main.getListePokemon().size());
-                terrain.placerPokemons(this, pokemonaplacer);
+                Pokemon poke = this.getPokemon(pokemonaplacer);
+                if (poke == null)
+                {
+                    Affichage.afficher("Vous devez placer un pokemon");
+                }
+                else {
+                    terrain.placerPokemons(this, poke);
+                }
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
@@ -42,10 +49,11 @@ public class Humain extends Joueur{
             try {
                 Affichage.afficher("Choisissez un pokemon avec lequel attaquer : " + Affichage.selectionPokemon(pokeQuiAttaque));
                 int pokemonAttaquant = selection(pokeQuiAttaque.size());
+                Pokemon attaquant = pokeQuiAttaque.get(pokemonAttaquant);
                 Affichage.afficher("Choisissez un pokemon à attaquer : " + Affichage.selectionPokemon(terrain.getPokemonsJoueur(adversaire)));
                 int pokemonAttaque = selection(pokeQuiAttaque.size());
-                pokeQuiAttaque.get(pokemonAttaquant).attaquer(terrain.getPokemon(adversaire, pokemonAttaque));
-                Affichage.afficher(pokeQuiAttaque.get(pokemonAttaquant).getNom() + " a attaquer " + terrain.getPokemon(adversaire, pokemonAttaque).getNom());
+                attaquant.attaquer(terrain.getPokemon(adversaire, pokemonAttaque));
+                Affichage.afficher(attaquant.getNom() + " a attaquer " + terrain.getPokemon(adversaire, pokemonAttaque).getNom());
                 pokeQuiAttaque.remove(pokemonAttaquant);
                 // si le pokemon attaqué est mort, le défausser
                 if (adversaire.mort(terrain, pokemonAttaque)) {
@@ -99,8 +107,7 @@ public class Humain extends Joueur{
         Affichage.afficher("Voulez vous la description d'un des pouvoirs ?(o/n)");
         char reponse = scan.next().charAt(0);
         if (reponse == 'o'){
-            Affichage.afficher("Quel description voulez vous lire ?");
-            Affichage.selectionPokemon(list);
+            Affichage.afficher("Quel description voulez vous lire ? "+Affichage.selectionPokemon(list));
             int descriptionSelectionner = this.selection(list.size());
             Affichage.afficher(list.get(descriptionSelectionner).getPouvoir().getM_desc());
         }
