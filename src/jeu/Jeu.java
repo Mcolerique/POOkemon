@@ -118,6 +118,9 @@ public class Jeu {
         return this.m_j1.aPerdu() || this.m_j2.aPerdu();
     }
 
+    public static void ajouterPokeAPouvoir(Pokemon pokemon, Pouvoir pouvoir){
+        m_pokemonAvecPouvoir.put(pokemon,pouvoir);
+    }
 
     //Getters
     public Joueur getJoueur1() {
@@ -142,8 +145,5 @@ public class Jeu {
         } else {
             return this.m_j1;
         }
-    }
-    public static void ajouterPokeAPouvoir(Pokemon pokemon, Pouvoir pouvoir){
-        m_pokemonAvecPouvoir.put(pokemon,pouvoir);
     }
 }

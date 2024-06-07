@@ -24,11 +24,11 @@ public class Pioche {
 
 
     //Methodes
-    public void piocherMain(Main Main) {
+    public void piocherMain(Main main) {
         //Si la pioche n'est pas vide
         if (!this.m_pioche.isEmpty()) {
             //Ajout du premier pokemon de la pioche dans la main
-            Main.ajouterPokemon(this.m_pioche.getFirst());
+            main.ajouterPokemon(this.m_pioche.getFirst());
             //Retrait du premier pokemon de la pioche
             this.m_pioche.removeFirst();
         }

@@ -35,11 +35,11 @@ public class GenerateurPokemon {
         return nom;
     }
 
-    public static ArrayList<String> getM_nomsDisponibles() {
+    public static ArrayList<String> getNomsDisponibles() {
         return m_nomsDisponibles;
     }
 
-    public static ArrayList<String> getM_nomsUtilises() {
+    public static ArrayList<String> getNomsUtilises() {
         return m_nomsUtilises;
     }
     public static int getIndexPouvoirAleatoire() {
@@ -70,18 +70,18 @@ public class GenerateurPokemon {
             return pouvoir;
         }
     }
-    public static ArrayList<Pouvoir> getM_nomsPouvoirs() {
+    public static ArrayList<Pouvoir> getNomsPouvoirs() {
         return m_nomsPouvoirs;
     }
 
-    public static ArrayList<Pouvoir> getM_pouvoirsUtilises() {
+    public static ArrayList<Pouvoir> getPouvoirsUtilises() {
         return m_pouvoirsUtilises;
     }
     public static void reinitialiser() {
-        getM_nomsDisponibles().addAll(getM_nomsUtilises());
-        getM_nomsUtilises().clear();
-        getM_nomsPouvoirs().addAll(getM_pouvoirsUtilises());
-        getM_pouvoirsUtilises().clear();
+        getNomsDisponibles().addAll(getNomsUtilises());
+        getNomsUtilises().clear();
+        getNomsPouvoirs().addAll(getPouvoirsUtilises());
+        getPouvoirsUtilises().clear();
     }
     public static Pokemon creePokemon(){
         return new Pokemon(attribuerNom(), attribuerPouvoir());

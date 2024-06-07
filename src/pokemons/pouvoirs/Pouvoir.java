@@ -34,5 +34,5 @@ public abstract class Pouvoir {
     public boolean getUtilise(){
         return this.m_utilise;
     }
-    public String getM_desc(){return this.m_desc;}
+    public String getDesc(){return this.m_desc;}
 }

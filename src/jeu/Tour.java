@@ -11,8 +11,8 @@ public class Tour {
 
 
     //Constructeur
-    public Tour(Jeu m_jeu) {
-        this.m_jeu = m_jeu;
+    public Tour(Jeu jeu) {
+        this.m_jeu = jeu;
         this.m_nbTour = 0;
     }
 

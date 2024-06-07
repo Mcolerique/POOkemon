@@ -102,7 +102,7 @@ public class Humain extends Joueur{
             Affichage.afficher("Quel description voulez vous lire ?");
             Affichage.selectionPokemon(list);
             int descriptionSelectionner = this.selection(list.size());
-            Affichage.afficher(list.get(descriptionSelectionner).getPouvoir().getM_desc());
+            Affichage.afficher(list.get(descriptionSelectionner).getPouvoir().getDesc());
         }
     }
 }
