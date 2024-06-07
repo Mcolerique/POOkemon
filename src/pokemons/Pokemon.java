@@ -50,7 +50,7 @@ public class Pokemon {
   }
 
   public boolean avantageSur(Pokemon pokemon) {
-    return this.m_element.getAvantage().equals(pokemon.m_element.toString());
+    return this.m_element.getAvantage().equals(pokemon.m_element.getElement());
   }
 
   public void soigner(int soin){
