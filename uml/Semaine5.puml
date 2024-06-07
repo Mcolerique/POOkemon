@@ -23,7 +23,6 @@ package affichage {
     }
 
     class Musique {
-        - clip: Clip
         - isLooping: Boolean
         + <<Create>> Musique(path: String)
         + play()
@@ -35,11 +34,6 @@ package affichage {
 package jeu {
 
     class Jeu {
-        - {static} m_pokemonAvecPouvoir: Hashtable<Pokemon, Pouvoir>
-        - m_j1: Joueur
-        - m_j2: Joueur
-        - m_terrain: Terrain
-        - m_tour: Tour
         + <<Create>> Jeu()
         + initialisationJeu()
         + initialiserJoueur()
@@ -58,7 +52,6 @@ package jeu {
     }
 
     class Tour {
-        - m_jeu: Jeu
         - m_nbTour: Integer
         + <<Create>> Tour(jeu: Jeu)
         + nouveauTour()
@@ -80,9 +73,6 @@ package joueurs {
 
     abstract class Joueur <<abstract>> {
         ~ m_nom: String
-        ~ m_pioche: Pioche
-        ~ m_main: Main
-        ~ m_defausse: Defausse
         ~ m_tailleTerrain: Integer
         + <<Create>> Joueur(nom: String, taillePioche: Integer)
         + {abstract} attaquer(terrain: Terrain, adversaire: Joueur): Boolean
@@ -108,7 +98,6 @@ package joueurs {
     }
 
     class Defausse {
-        - m_defausse: Pokemon[*]
         + <<Create>> Defausse()
         + defausser(pokemon: Pokemon)
         + getDefausse(): Pokemon[*]
@@ -116,7 +105,6 @@ package joueurs {
     }
 
     class Main {
-        - m_listePokemon: Pokemon[*]
         + <<Create>> Main()
         + ajouterPokemon(pokemon: Pokemon)
         + retirerPokemon(pokemon: Pokemon)
@@ -126,16 +114,12 @@ package joueurs {
     }
 
     class Pioche {
-        - m_pioche: Pokemon[*]
         + <<Create>> Pioche(taillePioche: Integer)
         + piocherMain(main: Main)
         + getPioche(): Pokemon[*]
     }
 
     class Terrain {
-        - m_pokemonJoueur1 : Pokemon[*]
-        - m_pokemonJoueur2 : Pokemon[*]
-        - {static} m_pouvoirsUtilises : Hashtable<Pouvoir, Pokemon>
         + <<Create>> Terrain()
         + placerPokemons(joueur: Joueur, pokemon: Integer)
         + placerPokemon(joueur: Joueur, pokemon: Pokemon)
@@ -231,8 +215,6 @@ package pokemons {
     class GenerateurPokemon {
         - {static} m_nomsDisponibles: String[*]
         - {static} m_nomsUtilises: String[*]
-        - {static} m_nomsPouvoirs: Pouvoir[*]
-        - {static} m_nomsPouvoirsUtilises: Pouvoir[*]
         + {static} reinitialiser()
         + {static} getIndexAleatoire() : Integer
         + {static} getNom(): String
@@ -269,8 +251,6 @@ package pokemons {
         - m_pvMax: Integer
         - m_pv: Integer
         - m_attaque: Integer
-        - m_element: Affinite
-        - m_pouvoir: Pouvoir
         - m_defense: Integer
         + <<Create>> Pokemon(nom: String, pouvoir: Pouvoir)
         + attaquer(pokemonCible: Pokemon)
@@ -292,31 +272,52 @@ package pokemons {
 
 
 
+Start .> Jeu : <<instantiate>>
 
-Start .> Affichage : <<uses>>
-Affichage ..> Jeu : <<uses>>
-Jeu *-u--> "1  \n" Tour : > contient
-Jeu ..> Tour : <<uses>>
-Tour ..> Jeu : <<uses>>
+Jeu *---> "1\n- m_j1" Joueur : > contient
+Jeu *---> "1\n- m_J2" Joueur : > contient
+Jeu o---> "*\n- m_pokemonAvecPouvoir" Pouvoir : > possède
+Jeu *---> "1\n- m_terrain" Terrain : > contient
+Jeu *---> "*\n- m_tour" Tour : > contient
+Jeu .> Humain : <<instantiate>>
+Jeu .> Ordinateur : <<instantiate>>
+Jeu .> Affichage : <<uses>>
 
+Tour o--> "1\n- m_jeu" Jeu : > est dans
+Tour .> Affichage : <<uses>>
 
+Musique o--> "1\n- clip" Clip : > utilise
 
-Pokemon -[dashed]--> ListePokemons : uses
-Pokemon -[dashed]--> ListePouvoirs : uses
-Pokemon "1  " *---> Elements : > est du type
-Pokemon "1  " *----> Pouvoir : > possède
+Affichage .> Affichage : <<uses>>
 
-Terrain "3" o---> "-m_pokemonsJoueur1\n-m_pokemonsJoueur2\n-m_pouvoirsUtilises\n [3]" Pokemon : > est constitué de
-Main "1" o----> "-m_listePokemon\n [0..5]" Pokemon : > est constitué de
-Pioche "1" o----> "-m_pioche\n [0..21] "Pokemon : > est constitué de
-Defausse "1" o----> "-m_defausse\n [0..21] "Pokemon : > est constitué de
+Defausse *---> "0..21\n- m_defausse" Pokemon : > contient
 
-Joueur "1" *---> Main : > possède
-Joueur "1" *---> Pioche : > possède
-Joueur "1" *---> Defausse: > possède
+Humain .> Pokemon : <<instantiate>>
 
-Jeu *---> Joueur : > contient
-Jeu *---> Terrain : > contient
+Joueur *---> "1\n- m_pioche" Pioche : > possède
+Joueur *---> "1\n- m_main" Main : > possède
+Joueur *---> "1\n- m_defausse" Defausse : > possède
+
+Main *---> "0..5\n- m_listePokemon" Pokemon : > possède
+
+Ordinateur .> Pokemon : <<instantiate>>
+
+Pioche *---> "0..21\n- m_pioche" Pokemon : > possède
+
+Terrain *---> "0..4\n- m_pokemonsJoueur1" Pokemon : > possède
+Terrain *---> "0..4\n- m_pokemonsJoueur2" Pokemon : > possède
+Terrain *---> "*\n- m_pouvoirsUtilises" Pokemon : > possède
+
+Affinite .> Elements : <<uses>>
+Affinite .> Pokemon : <<uses>>
+
+GenerateurPokemon *---> "*\n- m_nomsPouvoirs" Pouvoir : > utilise
+GenerateurPokemon *---> "*\n- m_pouvoirsUtilises" Pouvoir : > utilise
+GenerateurPokemon .> Pokemon : <<instantiate>>
+
+Pokemon *---> "1\n- m_affinite" Affinite : > possède
+Pokemon o---> "0..1\n- m_pouvoir" Pouvoir : > possède
+
 
 @enduml
 
