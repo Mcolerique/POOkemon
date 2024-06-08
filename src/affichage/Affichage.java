@@ -62,43 +62,125 @@ public class Affichage {
     }
 
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
+        String piocheJ1 = Integer.toString(j1.getPioche().getPioche().size());
+        String defausseJ1 = Integer.toString(j1.getDefausse().getDefausse().size());
+        String piocheJ2 = Integer.toString(j2.getPioche().getPioche().size());
+        String defausseJ2 = Integer.toString(j2.getDefausse().getDefausse().size());
+
+        if (j1.getPioche().getPioche().size() < 10) {
+            piocheJ1 = "0" + piocheJ1;
+        }
+        if (j1.getDefausse().getDefausse().size() < 10) {
+            defausseJ1 = "0" + defausseJ1;
+        }
+        if (j2.getPioche().getPioche().size() < 10) {
+            piocheJ2 = "0" + piocheJ2;
+        }
+        if (j2.getDefausse().getDefausse().size() < 10) {
+            defausseJ2 = "0" + defausseJ2;
+        }
+
         if (j1.getClass().getSimpleName().equals("Ordinateur")) {
-            System.out.println(" \nPokémon du Joueur 1 : ");
-            Affichage.affichePokemon(j1.getMain().getListePokemon());
-            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
-            System.out.println("pioche : " + j1.getPioche().getPioche().size() + " cartes");
-            System.out.println("défausse : " + j1.getDefausse().getDefausse().size() + " cartes");
-            System.out.println("\n--------------------------------------------------------------------------------\n");
-            System.out.println(" Pokémon du Joueur 2 : ");
-            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
-            Affichage.affichePokemon(j2.getMain().getListePokemon());
-            System.out.println("pioche : " + j2.getPioche().getPioche().size() + " cartes");
-            System.out.println("défausse : " + j2.getDefausse().getDefausse().size() + " cartes\n");
+            afficherTexteCentre("+----- Pioche -----+            +---- Défausse ----+", largeurTerminal);
+            afficherTexteCentre("|        " + piocheJ1 + "        |            |        " + defausseJ1 + "        |", largeurTerminal);
+            afficherTexteCentre("+------------------+            +------------------+", largeurTerminal);
+            afficherTexteCentre("\nMain du Joueur 1", largeurTerminal);
+            afficheMainOrdinateur(j1.getMain().getListePokemon());
+            afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
+            afficherTexteCentre("+------------------------------------------------------------- TERRAIN JOUEUR 1 -------------------------------------------------------------+\n", largeurTerminal);
+            System.out.println();
+            afficherTexteCentre("+------------------------------------------------------------- TERRAIN JOUEUR 2 -------------------------------------------------------------+\n", largeurTerminal);
+            afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
+            affichePokemon(j2.getMain().getListePokemon());
+            afficherTexteCentre("Main du Joueur 2", largeurTerminal);
+            afficherTexteCentre("\n+----- Pioche -----+            +---- Défausse ----+", largeurTerminal);
+            afficherTexteCentre("|        " + piocheJ2 + "        |            |        " + defausseJ2 + "        |", largeurTerminal);
+            afficherTexteCentre("+------------------+            +------------------+", largeurTerminal);
         }
         else {
-            System.out.println(" Pokémon du Joueur 2 : ");
-            Affichage.affichePokemon(j2.getMain().getListePokemon());
-            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
-            System.out.println("pioche : " + j2.getPioche().getPioche().size() + " cartes");
-            System.out.println("défausse : " + j2.getDefausse().getDefausse().size() + " cartes\n");
-            System.out.println("\n--------------------------------------------------------------------------------\n");
-            System.out.println(" Pokémon du Joueur 1 : ");
-            Affichage.afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
-            Affichage.affichePokemon(j1.getMain().getListePokemon());
-            System.out.println("pioche : " + j1.getPioche().getPioche().size() + " cartes");
-            System.out.println("défausse : " + j1.getDefausse().getDefausse().size() + " cartes");
+            afficherTexteCentre("+----- Pioche -----+            +---- Défausse ----+", largeurTerminal);
+            afficherTexteCentre("|        " + piocheJ2 + "        |            |        " + defausseJ2 + "        |", largeurTerminal);
+            afficherTexteCentre("+------------------+            +------------------+", largeurTerminal);
+            afficherTexteCentre("Main du Joueur 2", largeurTerminal);
+            afficheMainOrdinateur(j2.getMain().getListePokemon());
+            afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
+            afficherTexteCentre("+------------------------------------------------------------- TERRAIN JOUEUR 2 -------------------------------------------------------------+\n", largeurTerminal);
+            System.out.println();
+            afficherTexteCentre("+------------------------------------------------------------- TERRAIN JOUEUR 1 -------------------------------------------------------------+\n", largeurTerminal);
+            afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
+            affichePokemon(j1.getMain().getListePokemon());
+            afficherTexteCentre("Main du Joueur 1\n", largeurTerminal);
+
+            afficherTexteCentre("\n+----- Pioche -----+            +---- Défausse ----+", largeurTerminal);
+            afficherTexteCentre("|        " + piocheJ1 + "        |            |        " + defausseJ1 + "        |", largeurTerminal);
+            afficherTexteCentre("+------------------+            +------------------+", largeurTerminal);
         }
+    }
+
+    public static void afficheMainOrdinateur(List<Pokemon> list){
+        int nombrePokemons = list.size();
+
+        System.out.print("    ");
+
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  +----------------------+");
+        }
+        System.out.println();
+        System.out.print("    ");
+
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  |    ▕▔▔╲       ╱▔▔▏   |");
+        }
+        System.out.println();
+        System.out.print("    ");
+
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  |     ╲┈┈╲╱▔▔▔╲╱┈┈╱    |");
+        }
+        System.out.println();
+        System.out.print("    ");
+
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  |      ╲┈╭╮┈┈┈╭╮┈╱     |");
+        }
+        System.out.println();
+        System.out.print("    ");
+
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  |      ╱┈╰╯┈▂┈╰╯┈╲     |");
+        }
+        System.out.println();
+        System.out.print("    ");
+
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  |      ▏╭╮▕━┻━▏╭╮▕     |");
+        }
+        System.out.println();
+        System.out.print("    ");
+
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  |      ╲╰╯┈╲▂╱┈╰╯╱     |");
+        }
+        System.out.println();
+        System.out.print("    ");
+
+        for (int i = 0; i < nombrePokemons; i++) {
+            System.out.print("  +----------------------+");
+        }
+        System.out.println();
     }
 
     public static void affichePokemon(List<Pokemon> list){
         int nombrePokemons = list.size();
         int largeurCase = 22; //Largeur de chaque case
 
+        System.out.print("    ");
+
         for (int i = 0; i < nombrePokemons; i++) {
             System.out.print("  +----------------------+");
         }
         System.out.println();
-
+        System.out.print("    ");
 
         //Affichage.Affichage des noms des Pokémon
         for (int i = 0; i < nombrePokemons; i++) {
@@ -111,6 +193,7 @@ public class Affichage {
             System.out.print(String.format("  |%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", nom, ""));
         }
         System.out.println();
+        System.out.print("    ");
 
         //Affichage.Affichage des PV des Pokémon
         for (int i = 0; i < nombrePokemons; i++) {
@@ -120,6 +203,7 @@ public class Affichage {
             System.out.print(String.format("  | PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pv, ""));
         }
         System.out.println();
+        System.out.print("    ");
 
         //Affichage.Affichage des attaques des Pokémon
         for (int i = 0; i < nombrePokemons; i++) {
@@ -129,6 +213,7 @@ public class Affichage {
             System.out.print(String.format("  | Attaque :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", attaque, ""));
         }
         System.out.println();
+        System.out.print("    ");
 
         //Affichage.Affichage des types des Pokémon
         for (int i = 0; i < nombrePokemons; i++) {
@@ -138,6 +223,7 @@ public class Affichage {
             System.out.print(String.format("  | Type :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", type, ""));
         }
         System.out.println();
+        System.out.print("    ");
 
         //Affichage.Affichage des pouvoirs des pokemons
         for (int i = 0; i < nombrePokemons; i++) {
@@ -160,6 +246,8 @@ public class Affichage {
             System.out.print(String.format("  | Pouvoir :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
         }
         System.out.println();
+        System.out.print("    ");
+
         for (int i = 0; i < nombrePokemons; i++) {
             System.out.print("  +----------------------+");
         }
@@ -168,12 +256,13 @@ public class Affichage {
 
     public static void afficheTerrainJoueur(List<Pokemon> list, int tailleTerrain){
         int largeurCase = 22; //Largeur de chaque case
+        System.out.print("                                ");
 
         for (int i = 0; i < tailleTerrain; i++) {
-            System.out.print("  +----------------------+  ");
+            System.out.print("+----------------------+  ");
         }
         System.out.println();
-
+        System.out.print("                                ");
 
         //Affichage.Affichage des noms des Pokémon
         for (int i = 0; i < tailleTerrain; i++) {
@@ -184,12 +273,13 @@ public class Affichage {
                     nom = nom + " ";
                 }
                 int espaceDeChaqueCote = (largeurCase - longueurNom) / 2;
-                System.out.print(String.format("  |%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", nom, ""));
+                System.out.print(String.format("|%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", nom, ""));
             } catch (IndexOutOfBoundsException e) {
-                System.out.print("  |                      |  ");
+                System.out.print("|                      |  ");
             }
         }
         System.out.println();
+        System.out.print("                                ");
 
         //Affichage.Affichage des PV des Pokémon
         for (int i = 0; i < tailleTerrain; i++) {
@@ -197,12 +287,13 @@ public class Affichage {
                 String pv = list.get(i).getPv() + "/" + list.get(i).getPvMax();
                 int longueurPV = pv.length();
                 int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
-                System.out.print(String.format("  | PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pv, ""));
+                System.out.print(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pv, ""));
             } catch (IndexOutOfBoundsException e) {
-                System.out.print("  |                      |  ");
+                System.out.print("|                      |  ");
             }
         }
         System.out.println();
+        System.out.print("                                ");
 
         //Affichage.Affichage des attaques des Pokémon
         for (int i = 0; i < tailleTerrain; i++) {
@@ -210,13 +301,14 @@ public class Affichage {
                 String attaque = String.valueOf(list.get(i).getAttaque());
                 int longueurAtt = attaque.length();
                 int espaceDeChaqueCote = (largeurCase - longueurAtt) / 2 - 5;
-                System.out.print(String.format("  | Attaque :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", attaque, ""));
+                System.out.print(String.format("| Attaque :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", attaque, ""));
             }
             catch (IndexOutOfBoundsException e) {
-                System.out.print("  |                      |  ");
+                System.out.print("|                      |  ");
             }
         }
         System.out.println();
+        System.out.print("                                ");
 
         //Affichage.Affichage des types des Pokémon
         for (int i = 0; i < tailleTerrain; i++) {
@@ -224,13 +316,14 @@ public class Affichage {
             String type = list.get(i).getElementString();
             int longueurType = type.length();
             int espaceDeChaqueCote = (largeurCase - longueurType) / 2 - 3;
-            System.out.print(String.format("  | Type :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", type, ""));
+            System.out.print(String.format("| Type :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", type, ""));
             }
             catch (IndexOutOfBoundsException e) {
-                System.out.print("  |                      |  ");
+                System.out.print("|                      |  ");
             }
         }
         System.out.println();
+        System.out.print("                                ");
 
         //Affichage.Affichage des pouvoirs des pokemons
         for (int i = 0; i < tailleTerrain; i++) {
@@ -250,14 +343,16 @@ public class Affichage {
                     pouvoir = pouvoir.substring(0, largeurCase - 9 - 1) + ".";
                     espaceDeChaqueCote = 0;
                 }
-                System.out.print(String.format("  | Pouvoir : %" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
+                System.out.print(String.format("| Pouvoir : %" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
             } catch (IndexOutOfBoundsException e) {
-                System.out.print("  |                      |  ");
+                System.out.print("|                      |  ");
             }
         }
         System.out.println();
+        System.out.print("                                ");
+
         for (int i = 0; i < tailleTerrain; i++) {
-            System.out.print("  +----------------------+  ");
+            System.out.print("+----------------------+  ");
         }
         System.out.println();
     }
@@ -269,7 +364,7 @@ public class Affichage {
         else {
             System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon Pokemon sont en pleine santé, vous êtes vraiment nul");
         }
-        Affichage.accueil();
+        accueil();
     }
 
     public static String selectionPokemon(List<Pokemon> list){
