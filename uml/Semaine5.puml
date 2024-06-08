@@ -279,45 +279,36 @@ Jeu *---> "1\n- m_J2" Joueur : > contient
 Jeu o---> "*\n- m_pokemonAvecPouvoir" Pouvoir : > possède
 Jeu *---> "1\n- m_terrain" Terrain : > contient
 Jeu *---> "*\n- m_tour" Tour : > contient
-Jeu .> Humain : <<instantiate>>
-Jeu .> Ordinateur : <<instantiate>>
 Jeu .> Affichage : <<uses>>
 
 Tour o--> "1\n- m_jeu" Jeu : > est dans
-Tour .> Affichage : <<uses>>
+Tour ..> Affichage : <<uses>>
 
-Musique o--> "1\n- clip" Clip : > utilise
-
-Affichage .> Affichage : <<uses>>
-
-Defausse *---> "0..21\n- m_defausse" Pokemon : > contient
+Defausse *----> "0..21\n- m_defausse" Pokemon : > contient
 
 Humain .> Pokemon : <<instantiate>>
 
-Joueur *---> "1\n- m_pioche" Pioche : > possède
-Joueur *---> "1\n- m_main" Main : > possède
-Joueur *---> "1\n- m_defausse" Defausse : > possède
+Joueur *----> "1\n- m_pioche" Pioche : > possède
+Joueur *----> "1\n- m_main" Main : > possède
+Joueur *----> "1\n- m_defausse" Defausse : > possède
+Joueur .left.> Terrain : <<uses>>
 
-Main *---> "0..5\n- m_listePokemon" Pokemon : > possède
+Main *----> "0..5\n- m_listePokemon" Pokemon : > possède
 
 Ordinateur .> Pokemon : <<instantiate>>
 
-Pioche *---> "0..21\n- m_pioche" Pokemon : > possède
+Pioche *----> "0..21\n- m_pioche" Pokemon : > possède
 
-Terrain *---> "0..4\n- m_pokemonsJoueur1" Pokemon : > possède
-Terrain *---> "0..4\n- m_pokemonsJoueur2" Pokemon : > possède
-Terrain *---> "*\n- m_pouvoirsUtilises" Pokemon : > possède
+Terrain *---> "*\n- m_pokemonsJoueur1\n- m_pokemonsJoueur2\n- m_pouvoirsUtilises" Pokemon : > possède
 
 Affinite .> Elements : <<uses>>
-Affinite .> Pokemon : <<uses>>
 
 GenerateurPokemon *---> "*\n- m_nomsPouvoirs" Pouvoir : > utilise
 GenerateurPokemon *---> "*\n- m_pouvoirsUtilises" Pouvoir : > utilise
 GenerateurPokemon .> Pokemon : <<instantiate>>
 
-Pokemon *---> "1\n- m_affinite" Affinite : > possède
+Pokemon *-right-> "1\n- m_affinite" Affinite : > possède
 Pokemon o---> "0..1\n- m_pouvoir" Pouvoir : > possède
-
 
 @enduml
 
