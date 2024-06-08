@@ -73,13 +73,15 @@ public class Jeu {
             Random random = new Random();
             int randomInt = random.nextInt(2);
             if (randomInt == 0) {
-                Affichage.afficher("Vous êtes le joueur 1");
+                Affichage.afficher(Affichage.mettreEnGras(Affichage.mettreEnCouleur("Vous êtes le joueur 1 !", "\u001B[38;5;13m")));
                 this.m_j1 = new Humain("Joueur 1", 20);
                 this.m_j2 = new Ordinateur("Joueur 2", 21);
+                Thread.sleep(1000);
             } else {
-                Affichage.afficher("Vous êtes le joueur 2");
+                Affichage.afficher(Affichage.mettreEnGras(Affichage.mettreEnCouleur("Vous êtes le joueur 2 !", "\u001B[38;5;13m")));
                 this.m_j1 = new Ordinateur("Joueur 1", 20);
                 this.m_j2 = new Humain("Joueur 2", 21);
+                Thread.sleep(1000);
             }
         }
         catch (InterruptedException e) {

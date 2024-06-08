@@ -3,26 +3,58 @@ package affichage;
 import java.util.List;
 import joueurs.*;
 import pokemons.*;
-import jeu.Tour;
 
 public class Affichage {
 
+    static int largeurTerminal = 140;
+
+
+    public static String mettreEnCouleur(String texte, String couleur) {
+        String ANSI_RESET = "\u001B[0m";
+        return couleur + texte + ANSI_RESET;
+    }
+
+
+    public static void afficherTexteCentre(String texte, int largeurTerminal) {
+        String[] lignes = texte.split("\n");
+        for (String ligne : lignes) {
+            // Nettoyer la ligne de ses tabulations initiales mais conserver les séquences ANSI
+            String ligneNettoyee = ligne.replaceAll("\t", "");
+
+            // Calculer la longueur sans les séquences ANSI
+            int longueurTexte = ligneNettoyee.replaceAll("\u001B\\[[;\\d]*m", "").length();
+            int espacesAvant = (largeurTerminal - longueurTexte) / 2;
+
+            if (espacesAvant > 0) {
+                System.out.print(" ".repeat(espacesAvant));
+            }
+
+            System.out.println(ligneNettoyee);
+        }
+    }
+
+    public static String mettreEnGras(String texte) {
+        String ANSI_BOLD = "\u001B[1m";
+        String ANSI_RESET = "\u001B[0m";
+        return ANSI_BOLD + texte + ANSI_RESET;
+    }
+
+
     //Methodes
     public static void accueil(){
-        String ANSI_YELLOW = "\u001B[33m";
-        String ANSI_RESET = "\u001B[0m";
-        System.out.println(ANSI_YELLOW +
-                "\t\t\t\t    _.----._       ____         ,'  _\\   ___    ___     ____\n" +
-                "\t\t\t\t_,/         \\     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
-                "\t\t\t\t\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
-                "\t\t\t\t \\.    \\ \\    | __  |  |/    ,','_  `.  |          | __  |    \\|  |\n" +
-                "\t\t\t\t   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n" +
-                "\t\t\t\t    \\     ,-'/  / \\ \\   ,'   |  \\/ / ,`.|         /  / \\ \\  |     |\n" +
-                "\t\t\t\t     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\n" +
-                "\t\t\t\t      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n" +
-                "\t\t\t\t       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
-                "\t\t\t\t\t    \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
-                "\t\t\t\t\t\t\t\t                                              '-._|\n" + ANSI_RESET);
+        String titre =
+                "_.----._       ____         ,'  _\\   ___    ___     ____\n" +
+                "\t\t\t\t   _,/         \\     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
+                "\t\t\t\t   \\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
+                "\t\t\t\t    \\.    \\ \\    | __  |  |/    ,','_  `.  |          | __  |    \\|  |\n" +
+                "\t\t\t\t      \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n" +
+                "\t\t\t\t       \\     ,-'/  / \\ \\   ,'   |  \\/ / ,`.|         /  / \\ \\  |     |\n" +
+                "\t\t\t\t        \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\n" +
+                "\t\t\t\t         \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n" +
+                "\t\t\t\t          \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
+                "\t\t\t\t\t           \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
+                "\t\t\t\t\t\t\t\t                                                                 '-._|\n";
+        afficherTexteCentre(mettreEnCouleur(titre,"\u001B[33m"),largeurTerminal);
     }
 
     public static void afficher(String message){
