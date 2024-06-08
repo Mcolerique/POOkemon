@@ -47,17 +47,23 @@ public class Jeu {
                 Thread.sleep(2000);
                 //Chaque joueur pose 3 pokemons sur le terrain
                 Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
+                Thread.sleep(2000);
                 Affichage.afficheNbTour(this.m_tour.getNbTourString() + " tour :");
                 Affichage.afficher("C'est au tour du joueur n°1 !");
+                Thread.sleep(1000);
                 this.m_j1.placerPokemon(this.m_terrain);
-
+                Thread.sleep(1000);
+                Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
+                Thread.sleep(2000);
                 Affichage.afficher("C'est au tour du joueur n°2 !");
+                Thread.sleep(2000);
                 this.m_j2.placerPokemon(this.m_terrain);
+                Thread.sleep(2000);
+                Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
             this.m_tour.nouveauTour();
         }
         else {
@@ -95,19 +101,37 @@ public class Jeu {
         //Boucle de jeu
         if (!partieTerminee()) {
             //joueurs.Joueur 1
-            System.out.println("Tour de " + j1.getNom() + " :\n");
-            //Piocher
-            j1.piocherPokemon();
+            try {
+                Thread.sleep(2000);
+                System.out.println("\nC'est au tour de " + j1.getNom() + " !\n");
+                //Piocher
+                Thread.sleep(2000);
+                j1.piocherPokemon();
+                System.out.println("...la main s'est remplie\n");
+                Thread.sleep(2000);
+                Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
 
-            //Tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
-            j1.placerPokemon(this.m_terrain);
-            //Utilisation des pouvoir
-            if(j1.utiliserPouvoir(this.m_terrain,j2)){
-                partieTerminee();
-            }
-            //Attaquer
-            if (!partieTerminee()) {
-                m_tour.attaquer(j1,j2);
+                Thread.sleep(2000);
+                //Tant qu'il n'y a pas 3 pokemons du joueur sur le terrain
+                j1.placerPokemon(this.m_terrain);
+                Thread.sleep(2000);
+                System.out.println("Terrain rempli : \n");
+                Thread.sleep(1000);
+                Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
+
+
+                //Utilisation des pouvoir
+                Thread.sleep(2000);
+                if (j1.utiliserPouvoir(this.m_terrain, j2)) {
+                    partieTerminee();
+                }
+                //Attaquer
+                Thread.sleep(2000);
+                if (!partieTerminee()) {
+                    m_tour.attaquer(j1, j2);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
         else if (partieTerminee()){

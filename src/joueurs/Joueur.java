@@ -1,5 +1,6 @@
 package joueurs;
 
+import affichage.Affichage;
 import pokemons.Pokemon;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public abstract class Joueur {
 
     public boolean mort(Terrain terrain, int attaque) {
         if (!(terrain.getPokemon(this, attaque)).estVivant()) {
-            System.out.println("Le pokemon " + (terrain.getPokemon(this, attaque)).getNom() + " est mort");
+            Affichage.afficher(Affichage.mettreEnGras(Affichage.mettreEnCouleur("\nLe pokemon " + (terrain.getPokemon(this, attaque)).getNom() + " est mort...\n", "\u001B[36m")));
             this.defausser(terrain.getPokemon(this, attaque));
             //Retire le pokemon du terrain
             terrain.retirerPokemon(this, attaque);

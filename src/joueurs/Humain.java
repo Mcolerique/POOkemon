@@ -19,8 +19,8 @@ public class Humain extends Joueur{
     public void placerPokemon(Terrain terrain){
         while (terrain.getPokemonsJoueur(this).size() < this.m_tailleTerrain){
             try {
-                Thread.sleep(2000);
-                Affichage.afficher("Choisissez un pokemon à placer sur le terrain : "+Affichage.selectionPokemon(this.m_main.getListePokemon()));
+                Thread.sleep(1000);
+                Affichage.afficher("Choisissez un pokemon à placer sur le terrain :         " + Affichage.selectionPokemon(this.m_main.getListePokemon()));
                 int pokemonaplacer = selection(this.m_main.getListePokemon().size());
                 Pokemon poke = this.getPokemon(pokemonaplacer);
                 if (poke == null)
@@ -47,21 +47,22 @@ public class Humain extends Joueur{
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
         {
             try {
-                Affichage.afficher("Choisissez un pokemon avec lequel attaquer : " + Affichage.selectionPokemon(pokeQuiAttaque));
+                Thread.sleep(1000);
+                Affichage.afficher("Choisissez un pokemon avec lequel attaquer :       " + Affichage.selectionPokemon(pokeQuiAttaque));
                 int pokemonAttaquant = selection(pokeQuiAttaque.size());
                 Pokemon attaquant = pokeQuiAttaque.get(pokemonAttaquant);
-                Affichage.afficher("Choisissez un pokemon à attaquer : " + Affichage.selectionPokemon(terrain.getPokemonsJoueur(adversaire)));
+                Affichage.afficher("Choisissez un pokemon à attaquer :       " + Affichage.selectionPokemon(terrain.getPokemonsJoueur(adversaire)));
                 int pokemonAttaque = selection(pokeQuiAttaque.size());
                 attaquant.attaquer(terrain.getPokemon(adversaire, pokemonAttaque));
-                Affichage.afficher(attaquant.getNom() + " a attaquer " + terrain.getPokemon(adversaire, pokemonAttaque).getNom());
+                Thread.sleep(1000);
+                Affichage.afficher(Affichage.mettreEnGras(Affichage.mettreEnCouleur(attaquant.getNom() + " a attaqué " + terrain.getPokemon(adversaire, pokemonAttaque).getNom(),"\u001B[31m")));
                 pokeQuiAttaque.remove(pokemonAttaquant);
                 // si le pokemon attaqué est mort, le défausser
                 if (adversaire.mort(terrain, pokemonAttaque)) {
                     return true;
                 }
-            }
-            catch (IndexOutOfBoundsException e){
-                return false;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
         return false;
@@ -77,7 +78,7 @@ public class Humain extends Joueur{
         for (int i = 0; i<pokeQuiAttaque.size();i++)
         {
             descriptionPouvoir(pokeQuiAttaque);
-            Affichage.afficher("Choisissez un pouvoir a utiliser : "+Affichage.selectionPokemon(pokeQuiAttaque));
+            Affichage.afficher("Choisissez un pouvoir a utiliser :      " + Affichage.selectionPokemon(pokeQuiAttaque) + "\n");
             try {
                 int pokemonAttaquant = selection(pokeQuiAttaque.size());
                 pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
@@ -104,12 +105,12 @@ public class Humain extends Joueur{
     }
     public void descriptionPouvoir(List<Pokemon> list){
         Scanner scan = new Scanner(System.in);
-        Affichage.afficher("Voulez vous la description d'un des pouvoirs ?(o/n)");
+        Affichage.afficher("Voulez vous la description d'un des pouvoirs ?   (o/n)");
         char reponse = scan.next().charAt(0);
         if (reponse == 'o'){
-            Affichage.afficher("Quel description voulez vous lire ? "+Affichage.selectionPokemon(list));
+            Affichage.afficher("Quel description voulez vous lire ?      "+Affichage.selectionPokemon(list));
             int descriptionSelectionner = this.selection(list.size());
-            Affichage.afficher(list.get(descriptionSelectionner).getPouvoir().getDesc());
+            Affichage.afficher(list.get(descriptionSelectionner).getPouvoir().getDesc() + "\n");
         }
     }
 }

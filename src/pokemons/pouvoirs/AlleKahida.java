@@ -13,7 +13,7 @@ public class AlleKahida extends Pouvoir {
 
     //Constructeur
     public AlleKahida() {
-        super("AlleKahida","AlleKahida, utilisable à chaque tour : Permet de kamikaze un pokemon allié ou soit même");
+        super("AllKahida","AlleKahida, utilisable à chaque tour : Permet de kamikaze un pokemon allié ou soit même");
     }
 
     //Methodes redefinies

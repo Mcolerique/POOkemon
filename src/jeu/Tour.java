@@ -13,15 +13,14 @@ public class Tour {
     //Constructeur
     public Tour(Jeu jeu) {
         this.m_jeu = jeu;
-        this.m_nbTour = 0;
+        this.m_nbTour = 1;
     }
 
 
     //Methodes
     public void nouveauTour(){
-        this.m_nbTour++;
         while (!this.m_jeu.partieTerminee()) {
-            Affichage.terrain(this.m_jeu.getTerrain(),this.m_jeu.getJoueur1(), this.m_jeu.getJoueur2());
+            this.m_nbTour++;
             Affichage.afficheNbTour(this.getNbTourString() + " tour :");
             m_jeu.jouer(this.m_jeu.getJoueur1(), this.m_jeu.getJoueur2());
             m_jeu.jouer(this.m_jeu.getJoueur2(), this.m_jeu.getJoueur1());
@@ -30,7 +29,7 @@ public class Tour {
     }
 
     public boolean attaquer(Joueur joueur, Joueur adversaire){
-        Affichage.afficher((joueur.getNom()+" attaque :"));
+        Affichage.afficher(Affichage.mettreEnGras(Affichage.mettreEnCouleur("Le " + joueur.getNom()+" attaque !", "\u001B[31m")));
         if(joueur.attaquer(this.m_jeu.getTerrain(), adversaire)){
             return this.m_jeu.partieTerminee();
         }

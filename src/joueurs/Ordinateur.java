@@ -18,8 +18,14 @@ public class Ordinateur extends Joueur {
     //Methodes refefinies
     @Override
     public void placerPokemon(Terrain terrain) {
-        while (terrain.getPokemonsJoueur(this).size() < this.m_tailleTerrain) {
-            terrain.placerPokemons(this, this.getPokemon(0));
+        try {
+            Thread.sleep(2000);
+            while (terrain.getPokemonsJoueur(this).size() < this.m_tailleTerrain) {
+                terrain.placerPokemons(this, this.getPokemon(0));
+            }
+            Affichage.afficher("Le joueur n°2 a rempli son terrain\n");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -83,9 +89,14 @@ public class Ordinateur extends Joueur {
     private int attaqueJoueur(int index, int i, Terrain terrain, Joueur adversaire, List<Integer> pokemonAttaquer) {
         int pokemonAttaque;
         pokemonAttaque = pokemonAttaquer.get(index);
-        if (i < terrain.getNbPokemonsJoueur(this) && pokemonAttaque < terrain.getNbPokemonsJoueur(adversaire)) {
-            Affichage.afficher(terrain.getPokemon(this, i).getNom() + " a attaqué " + terrain.getPokemon(adversaire, pokemonAttaque).getNom());
-            terrain.getPokemon(this, i).attaquer(terrain.getPokemon(adversaire, pokemonAttaque));
+        try {
+            if (i < terrain.getNbPokemonsJoueur(this) && pokemonAttaque < terrain.getNbPokemonsJoueur(adversaire)) {
+                Thread.sleep(1000);
+                Affichage.afficher(terrain.getPokemon(this, i).getNom() + " a attaqué " + terrain.getPokemon(adversaire, pokemonAttaque).getNom());
+                terrain.getPokemon(this, i).attaquer(terrain.getPokemon(adversaire, pokemonAttaque));
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         return pokemonAttaque;
     }

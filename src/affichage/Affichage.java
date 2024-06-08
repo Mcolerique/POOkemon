@@ -9,10 +9,10 @@ public class Affichage {
     static int largeurTerminal = 140;
 
 
-    public static String mettreEnCouleur(String texte, String couleur) {
-        String ANSI_RESET = "\u001B[0m";
-        return couleur + texte + ANSI_RESET;
-    }
+        public static String mettreEnCouleur(String texte, String couleur) {
+            String ANSI_RESET = "\u001B[0m";
+            return couleur + texte + ANSI_RESET;
+        }
 
 
     public static void afficherTexteCentre(String texte, int largeurTerminal) {
@@ -61,6 +61,7 @@ public class Affichage {
         System.out.println(message);
     }
 
+
     public static void terrain(Terrain terrain, Joueur j1, Joueur j2){
         String piocheJ1 = Integer.toString(j1.getPioche().getPioche().size());
         String defausseJ1 = Integer.toString(j1.getDefausse().getDefausse().size());
@@ -81,39 +82,39 @@ public class Affichage {
         }
 
         if (j1.getClass().getSimpleName().equals("Ordinateur")) {
-            afficherTexteCentre("+----- Pioche -----+            +---- Défausse ----+", largeurTerminal);
-            afficherTexteCentre("|        " + piocheJ1 + "        |            |        " + defausseJ1 + "        |", largeurTerminal);
-            afficherTexteCentre("+------------------+            +------------------+", largeurTerminal);
-            afficherTexteCentre("\nMain du Joueur 1", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("\n+----- Pioche -----+            +---- Défausse ----+", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("|        " + piocheJ1 + "        |            |        " + defausseJ1 + "        |", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+------------------+            +------------------+", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("\nMain du Joueur 1", "\u001B[36m"), largeurTerminal);
             afficheMainOrdinateur(j1.getMain().getListePokemon());
             afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
-            afficherTexteCentre("+------------------------------------------------------------- TERRAIN JOUEUR 1 -------------------------------------------------------------+\n", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+------------------------------------------------------------- TERRAIN JOUEUR 1 -------------------------------------------------------------+\n", "\u001B[31m"), largeurTerminal);
             System.out.println();
-            afficherTexteCentre("+------------------------------------------------------------- TERRAIN JOUEUR 2 -------------------------------------------------------------+\n", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+------------------------------------------------------------- TERRAIN JOUEUR 2 -------------------------------------------------------------+\n", "\u001B[31m"), largeurTerminal);
             afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
             affichePokemon(j2.getMain().getListePokemon());
-            afficherTexteCentre("Main du Joueur 2", largeurTerminal);
-            afficherTexteCentre("\n+----- Pioche -----+            +---- Défausse ----+", largeurTerminal);
-            afficherTexteCentre("|        " + piocheJ2 + "        |            |        " + defausseJ2 + "        |", largeurTerminal);
-            afficherTexteCentre("+------------------+            +------------------+", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("Main du Joueur 2", "\u001B[36m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("\n+----- Pioche -----+            +---- Défausse ----+", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("|        " + piocheJ2 + "        |            |        " + defausseJ2 + "        |", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+------------------+            +------------------+\n","\u001B[32m"), largeurTerminal);
         }
         else {
-            afficherTexteCentre("+----- Pioche -----+            +---- Défausse ----+", largeurTerminal);
-            afficherTexteCentre("|        " + piocheJ2 + "        |            |        " + defausseJ2 + "        |", largeurTerminal);
-            afficherTexteCentre("+------------------+            +------------------+", largeurTerminal);
-            afficherTexteCentre("Main du Joueur 2", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+----- Pioche -----+            +---- Défausse ----+", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("|        " + piocheJ2 + "        |            |        " + defausseJ2 + "        |", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+------------------+            +------------------+\n","\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("\nMain du Joueur 2", "\u001B[36m"), largeurTerminal);
             afficheMainOrdinateur(j2.getMain().getListePokemon());
             afficheTerrainJoueur(terrain.getPokemonsJoueur(j2), j2.getTailleTerrain());
-            afficherTexteCentre("+------------------------------------------------------------- TERRAIN JOUEUR 2 -------------------------------------------------------------+\n", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+------------------------------------------------------------- TERRAIN JOUEUR 2 -------------------------------------------------------------+\n", "\u001B[31m"), largeurTerminal);
             System.out.println();
-            afficherTexteCentre("+------------------------------------------------------------- TERRAIN JOUEUR 1 -------------------------------------------------------------+\n", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+------------------------------------------------------------- TERRAIN JOUEUR 1 -------------------------------------------------------------+\n","\u001B[31m"), largeurTerminal);
             afficheTerrainJoueur(terrain.getPokemonsJoueur(j1), j1.getTailleTerrain());
             affichePokemon(j1.getMain().getListePokemon());
-            afficherTexteCentre("Main du Joueur 1\n", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("Main du Joueur 1\n", "\u001B[36m"), largeurTerminal);
 
-            afficherTexteCentre("\n+----- Pioche -----+            +---- Défausse ----+", largeurTerminal);
-            afficherTexteCentre("|        " + piocheJ1 + "        |            |        " + defausseJ1 + "        |", largeurTerminal);
-            afficherTexteCentre("+------------------+            +------------------+", largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+----- Pioche -----+            +---- Défausse ----+", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("|        " + piocheJ1 + "        |            |        " + defausseJ1 + "        |", "\u001B[32m"), largeurTerminal);
+            afficherTexteCentre(mettreEnCouleur("+------------------+            +------------------+\n", "\u001B[32m"), largeurTerminal);
         }
     }
 
@@ -122,50 +123,50 @@ public class Affichage {
 
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  +----------------------+");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  +----------------------+", "\u001B[36m"));
         }
         System.out.println();
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  |    ▕▔▔╲       ╱▔▔▏   |");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  |    ▕▔▔╲       ╱▔▔▏   |", "\u001B[36m"));
         }
         System.out.println();
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  |     ╲┈┈╲╱▔▔▔╲╱┈┈╱    |");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  |     ╲┈┈╲╱▔▔▔╲╱┈┈╱    |", "\u001B[36m"));
         }
         System.out.println();
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  |      ╲┈╭╮┈┈┈╭╮┈╱     |");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  |      ╲┈╭╮┈┈┈╭╮┈╱     |", "\u001B[36m"));
         }
         System.out.println();
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  |      ╱┈╰╯┈▂┈╰╯┈╲     |");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  |      ╱┈╰╯┈▂┈╰╯┈╲     |", "\u001B[36m"));
         }
         System.out.println();
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  |      ▏╭╮▕━┻━▏╭╮▕     |");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  |      ▏╭╮▕━┻━▏╭╮▕     |", "\u001B[36m"));
         }
         System.out.println();
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  |      ╲╰╯┈╲▂╱┈╰╯╱     |");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  |      ╲╰╯┈╲▂╱┈╰╯╱     |", "\u001B[36m"));
         }
         System.out.println();
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  +----------------------+");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  +----------------------+", "\u001B[36m"));
         }
         System.out.println();
     }
@@ -176,96 +177,14 @@ public class Affichage {
 
         System.out.print("    ");
 
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  +----------------------+");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  +----------------------+", "\u001B[36m"));
         }
         System.out.println();
-        System.out.print("    ");
+        System.out.print("      ");
 
         //Affichage.Affichage des noms des Pokémon
-        for (int i = 0; i < nombrePokemons; i++) {
-            String nom = list.get(i).getNom();
-            int longueurNom = list.get(i).getNom().length();
-            if (longueurNom % 2 == 1) {
-                nom = nom + " ";
-            }
-            int espaceDeChaqueCote = (largeurCase - longueurNom) / 2;
-            System.out.print(String.format("  |%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", nom, ""));
-        }
-        System.out.println();
-        System.out.print("    ");
-
-        //Affichage.Affichage des PV des Pokémon
-        for (int i = 0; i < nombrePokemons; i++) {
-            String pv = list.get(i).getPv() + "/" + list.get(i).getPvMax();
-            int longueurPV = pv.length();
-            int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
-            System.out.print(String.format("  | PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pv, ""));
-        }
-        System.out.println();
-        System.out.print("    ");
-
-        //Affichage.Affichage des attaques des Pokémon
-        for (int i = 0; i < nombrePokemons; i++) {
-            String attaque = String.valueOf(list.get(i).getAttaque());
-            int longueurAtt = attaque.length();
-            int espaceDeChaqueCote = (largeurCase - longueurAtt) / 2 - 5;
-            System.out.print(String.format("  | Attaque :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", attaque, ""));
-        }
-        System.out.println();
-        System.out.print("    ");
-
-        //Affichage.Affichage des types des Pokémon
-        for (int i = 0; i < nombrePokemons; i++) {
-            String type = list.get(i).getElementString();
-            int longueurType = type.length();
-            int espaceDeChaqueCote = (largeurCase - longueurType) / 2 - 3;
-            System.out.print(String.format("  | Type :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", type, ""));
-        }
-        System.out.println();
-        System.out.print("    ");
-
-        //Affichage.Affichage des pouvoirs des pokemons
-        for (int i = 0; i < nombrePokemons; i++) {
-            String pouvoir = list.get(i).getNomPouvoir();
-            int longueurPouvoir = pouvoir.length();
-            if (longueurPouvoir % 2 == 1) {
-                pouvoir += " ";
-                longueurPouvoir = pouvoir.length();
-            }
-            int espaceDisponible = largeurCase - longueurPouvoir - 9; // 9 est la longueur de " Pouvoir : "
-            int espaceDeChaqueCote = espaceDisponible / 2;
-            espaceDeChaqueCote = Math.max(espaceDeChaqueCote, 0); // S'assurer que l'espace est au moins 0
-
-            // Gestion du cas où l'espace est insuffisant
-            if (espaceDisponible < 0) {
-                pouvoir = pouvoir.substring(0, largeurCase - 9 - 1) + ".";
-                espaceDeChaqueCote = 0;
-            }
-
-            System.out.print(String.format("  | Pouvoir :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
-        }
-        System.out.println();
-        System.out.print("    ");
-
-        for (int i = 0; i < nombrePokemons; i++) {
-            System.out.print("  +----------------------+");
-        }
-        System.out.println();
-    }
-
-    public static void afficheTerrainJoueur(List<Pokemon> list, int tailleTerrain){
-        int largeurCase = 22; //Largeur de chaque case
-        System.out.print("                                ");
-
-        for (int i = 0; i < tailleTerrain; i++) {
-            System.out.print("+----------------------+  ");
-        }
-        System.out.println();
-        System.out.print("                                ");
-
-        //Affichage.Affichage des noms des Pokémon
-        for (int i = 0; i < tailleTerrain; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 String nom = list.get(i).getNom();
                 int longueurNom = list.get(i).getNom().length();
@@ -273,60 +192,58 @@ public class Affichage {
                     nom = nom + " ";
                 }
                 int espaceDeChaqueCote = (largeurCase - longueurNom) / 2;
-                System.out.print(String.format("|%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", nom, ""));
+                System.out.print(mettreEnCouleur(String.format("|%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", nom, ""), "\u001B[36m"));
             } catch (IndexOutOfBoundsException e) {
-                System.out.print("|                      |  ");
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[36m"));
             }
         }
         System.out.println();
-        System.out.print("                                ");
+        System.out.print("      ");
 
         //Affichage.Affichage des PV des Pokémon
-        for (int i = 0; i < tailleTerrain; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 String pv = list.get(i).getPv() + "/" + list.get(i).getPvMax();
                 int longueurPV = pv.length();
                 int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
-                System.out.print(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pv, ""));
+                System.out.print(mettreEnCouleur(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pv, ""), "\u001B[36m"));
             } catch (IndexOutOfBoundsException e) {
-                System.out.print("|                      |  ");
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[36m"));
             }
         }
         System.out.println();
-        System.out.print("                                ");
+        System.out.print("      ");
 
         //Affichage.Affichage des attaques des Pokémon
-        for (int i = 0; i < tailleTerrain; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 String attaque = String.valueOf(list.get(i).getAttaque());
                 int longueurAtt = attaque.length();
                 int espaceDeChaqueCote = (largeurCase - longueurAtt) / 2 - 5;
-                System.out.print(String.format("| Attaque :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", attaque, ""));
-            }
-            catch (IndexOutOfBoundsException e) {
-                System.out.print("|                      |  ");
+                System.out.print(mettreEnCouleur(String.format("| Attaque :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", attaque, ""), "\u001B[36m"));
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[36m"));
             }
         }
         System.out.println();
-        System.out.print("                                ");
+        System.out.print("      ");
 
         //Affichage.Affichage des types des Pokémon
-        for (int i = 0; i < tailleTerrain; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
-            String type = list.get(i).getElementString();
-            int longueurType = type.length();
-            int espaceDeChaqueCote = (largeurCase - longueurType) / 2 - 3;
-            System.out.print(String.format("| Type :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", type, ""));
-            }
-            catch (IndexOutOfBoundsException e) {
-                System.out.print("|                      |  ");
+                String type = list.get(i).getElementString();
+                int longueurType = type.length();
+                int espaceDeChaqueCote = (largeurCase - longueurType) / 2 - 3;
+                System.out.print(mettreEnCouleur(String.format("| Type :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", type, ""), "\u001B[36m"));
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[36m"));
             }
         }
         System.out.println();
-        System.out.print("                                ");
+        System.out.print("      ");
 
         //Affichage.Affichage des pouvoirs des pokemons
-        for (int i = 0; i < tailleTerrain; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 String pouvoir = list.get(i).getNomPouvoir();
                 int longueurPouvoir = pouvoir.length();
@@ -343,28 +260,137 @@ public class Affichage {
                     pouvoir = pouvoir.substring(0, largeurCase - 9 - 1) + ".";
                     espaceDeChaqueCote = 0;
                 }
-                System.out.print(String.format("| Pouvoir : %" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|", "", pouvoir, ""));
+
+                System.out.print(mettreEnCouleur(String.format("| Pouvoir :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pouvoir, ""), "\u001B[36m"));
             } catch (IndexOutOfBoundsException e) {
-                System.out.print("|                      |  ");
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[36m"));
+            }
+        }
+        System.out.println();
+        System.out.print("    ");
+
+        for (int i = 0; i < 5; i++) {
+            System.out.print(mettreEnCouleur("  +----------------------+", "\u001B[36m"));
+        }
+        System.out.println();
+    }
+
+    public static void afficheTerrainJoueur(List<Pokemon> list, int tailleTerrain){
+        int largeurCase = 22; //Largeur de chaque case
+        System.out.print("                                ");
+
+        for (int i = 0; i < tailleTerrain; i++) {
+            System.out.print(mettreEnCouleur("+----------------------+  ", "\u001B[31m"));
+        }
+        System.out.println();
+        System.out.print("                                ");
+
+        //Affichage.Affichage des noms des Pokémon
+        for (int i = 0; i < tailleTerrain; i++) {
+            try {
+                String nom = list.get(i).getNom();
+                int longueurNom = list.get(i).getNom().length();
+                if (longueurNom % 2 == 1) {
+                    nom = nom + " ";
+                }
+                int espaceDeChaqueCote = (largeurCase - longueurNom) / 2;
+                System.out.print(mettreEnCouleur(String.format("|%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", nom, ""), "\u001B[31m"));
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[31m"));
+            }
+        }
+        System.out.println();
+        System.out.print("                                ");
+
+        //Affichage.Affichage des PV des Pokémon
+        for (int i = 0; i < tailleTerrain; i++) {
+            try {
+                String pv = list.get(i).getPv() + "/" + list.get(i).getPvMax();
+                int longueurPV = pv.length();
+                int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
+                System.out.print(mettreEnCouleur(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pv, ""), "\u001B[31m"));
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[31m"));
+            }
+        }
+        System.out.println();
+        System.out.print("                                ");
+
+        //Affichage.Affichage des attaques des Pokémon
+        for (int i = 0; i < tailleTerrain; i++) {
+            try {
+                String attaque = String.valueOf(list.get(i).getAttaque());
+                int longueurAtt = attaque.length();
+                int espaceDeChaqueCote = (largeurCase - longueurAtt) / 2 - 5;
+                System.out.print(mettreEnCouleur(String.format("| Attaque :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", attaque, ""), "\u001B[31m"));
+            }
+            catch (IndexOutOfBoundsException e) {
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[31m"));
+            }
+        }
+        System.out.println();
+        System.out.print("                                ");
+
+        //Affichage.Affichage des types des Pokémon
+        for (int i = 0; i < tailleTerrain; i++) {
+            try {
+            String type = list.get(i).getElementString();
+            int longueurType = type.length();
+            int espaceDeChaqueCote = (largeurCase - longueurType) / 2 - 3;
+            System.out.print(mettreEnCouleur(String.format("| Type :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", type, ""), "\u001B[31m"));
+            }
+            catch (IndexOutOfBoundsException e) {
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[31m"));
+            }
+        }
+        System.out.println();
+        System.out.print("                                ");
+
+        //Affichage.Affichage des pouvoirs des pokemons
+        for (int i = 0; i < tailleTerrain; i++) {
+            try {
+                String pouvoir = list.get(i).getNomPouvoir();
+                int longueurPouvoir = pouvoir.length();
+                if (longueurPouvoir % 2 == 0) {
+                    pouvoir += " ";
+                    longueurPouvoir = pouvoir.length();
+                }
+                int espaceDisponible = largeurCase - longueurPouvoir - 10; // 9 est la longueur de " Pouvoir : "
+                int espaceDeChaqueCote = espaceDisponible / 2;
+                espaceDeChaqueCote = Math.max(espaceDeChaqueCote, 0); // S'assurer que l'espace est au moins 0
+
+                // Gestion du cas où l'espace est insuffisant
+                if (espaceDisponible < 0) {
+                    pouvoir = pouvoir.substring(0, largeurCase - 9 - 1) + ".";
+                    espaceDeChaqueCote = 0;
+                }
+                System.out.print(mettreEnCouleur(String.format("| Pouvoir : %" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pouvoir, ""), "\u001B[31m"));
+            } catch (IndexOutOfBoundsException e) {
+                System.out.print(mettreEnCouleur("|                      |  ", "\u001B[31m"));
             }
         }
         System.out.println();
         System.out.print("                                ");
 
         for (int i = 0; i < tailleTerrain; i++) {
-            System.out.print("+----------------------+  ");
+            System.out.print(mettreEnCouleur("+----------------------+  ", "\u001B[31m"));
         }
         System.out.println();
     }
 
     public static void finDePartie(Joueur gagnant){
-        if (gagnant.getClass() == Humain.class) {
-            System.out.println("Vous avez gagné !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemon.Pokemon sont en pleine santé, vous la petez pas trop c'est pas dur");
+        try {
+            Thread.sleep(2000);
+            if (gagnant.getClass() == Humain.class) {
+                afficherTexteCentre(mettreEnGras(mettreEnCouleur("Vous avez gagné !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemons sont en pleine santé, vous la petez pas trop c'est pas dur", "[38;5;13m")), largeurTerminal);
+            }
+            else {
+                afficherTexteCentre(mettreEnGras(mettreEnCouleur("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemons sont en pleine santé, vous êtes vraiment nul", "[38;5;13m")), largeurTerminal);
+            }
+            accueil();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        else {
-            System.out.println("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemon Pokemon sont en pleine santé, vous êtes vraiment nul");
-        }
-        accueil();
     }
 
     public static String selectionPokemon(List<Pokemon> list){
@@ -373,9 +399,9 @@ public class Affichage {
         {
             if (j != list.size()-1)
             {
-                txt += j+1+"."+list.get(j).getNom() + " / ";
+                txt += j+1+"."+list.get(j).getNom() + "   ";
             }
-            else {txt+=j+1+"."+list.get(j).getNom()+" / "+(j+2)+".Rien sélectionner";}
+            else {txt+=j+1+"."+list.get(j).getNom()+"   "+(j+2)+".Rien sélectionner";}
         }
         return txt;
     }
@@ -383,13 +409,20 @@ public class Affichage {
     public static void afficheNbTour(String tour) {
         int largeurCadre = tour.length() + 2;
 
-        String ligneSuperieure = "+" + "-".repeat(largeurCadre) + "+";
-        String ligneTitre = String.format("| %-" + (largeurCadre - 2) + "s |", tour);
-        String ligneInferieure = "+" + "-".repeat(largeurCadre) + "+";
-        System.out.println(ligneSuperieure);
-        System.out.println(ligneTitre);
-        System.out.println(ligneInferieure);
+        try {
+            Thread.sleep(3000);
+            String ligneSuperieure = "+" + "-".repeat(largeurCadre) + "+";
+            String ligneTitre = String.format("| %-" + (largeurCadre - 2) + "s |", tour);
+            String ligneInferieure = "+" + "-".repeat(largeurCadre) + "+";
+            System.out.println("-".repeat(140));
+            afficherTexteCentre(mettreEnGras(mettreEnCouleur(ligneSuperieure, "[38;5;13m")), largeurTerminal);
+            afficherTexteCentre(mettreEnGras(mettreEnCouleur(ligneTitre, "[38;5;13m")), largeurTerminal);
+            afficherTexteCentre(mettreEnGras(mettreEnCouleur(ligneInferieure, "[38;5;13m")), largeurTerminal);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+
     public static void afficheDefausse(Joueur joueur, List<Pokemon> defausse) {
         System.out.println("Défausse de " + joueur.getNom() + " :");
         for (int i = 0; i < defausse.size(); i++) {
