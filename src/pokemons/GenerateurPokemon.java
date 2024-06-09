@@ -47,7 +47,7 @@ public class GenerateurPokemon {
             return -1;
         }
         Random random = new Random();
-        int index = random.nextInt(m_nomsPouvoirs.size())+2;
+        int index = random.nextInt(m_nomsPouvoirs.size())+m_pouvoirsUtilises.size();
         try {
             m_nomsPouvoirs.get(index);
         }

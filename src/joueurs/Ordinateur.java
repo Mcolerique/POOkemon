@@ -132,18 +132,18 @@ public class Ordinateur extends Joueur {
             for (int i = 0; i < pokeQuiAttaque.size(); i++) {
                 int pokemonAttaquant = selection(pokeQuiAttaque.size() + 1);
 
-                if (pokemonAttaquant >= 0 && pokemonAttaquant < pokeQuiAttaque.size()) {
-                    // Utiliser le pouvoir du Pokémon
-                    pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire, pokeQuiAttaque.get(pokemonAttaquant), pokemonAttaquant);
-                    Affichage.afficher(terrain.getPokemon(this, pokemonAttaquant).getNom() + " a utilisé " + terrain.getPokemon(this, pokemonAttaquant).getNomPouvoir());
+                // Utiliser le pouvoir du Pokémon
+                pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire, pokeQuiAttaque.get(pokemonAttaquant), pokemonAttaquant);
+                Affichage.afficher(terrain.getPokemon(this, pokemonAttaquant).getNom() + " a utilisé " + terrain.getPokemon(this, pokemonAttaquant).getNomPouvoir());
 
-                    // Vérifier si l'un des joueurs est mort après l'utilisation du pouvoir
-                    if (this.mort(terrain) || adversaire.mort(terrain)) {
-                        if (Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null) {
-                            pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire, pokeQuiAttaque.get(pokemonAttaquant));
-                        }
-                        return true;
+                // Vérifier si l'un des joueurs est mort après l'utilisation du pouvoir
+                if (this.mort(terrain) || adversaire.mort(terrain))
+                {
+                    if (Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null)
+                    {
+                        pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire, pokeQuiAttaque.get(pokemonAttaquant));
                     }
+                    return true;
                 }
                 pokeQuiAttaque.remove(pokemonAttaquant);
             }

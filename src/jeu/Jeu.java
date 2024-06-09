@@ -145,7 +145,7 @@ public class Jeu {
 
 
     public boolean partieTerminee() {
-        return this.m_j1.aPerdu() || this.m_j2.aPerdu();
+        return this.m_j1.aPerdu(this.m_terrain) || this.m_j2.aPerdu(this.m_terrain);
     }
 
     public static void ajouterPokeAPouvoir(Pokemon pokemon, Pouvoir pouvoir){
@@ -170,7 +170,7 @@ public class Jeu {
     }
 
     public Joueur getVainqueur() {
-        if (this.m_j1.aPerdu()) {
+        if (this.m_j1.aPerdu(this.m_terrain)) {
             return this.m_j2;
         } else {
             return this.m_j1;
