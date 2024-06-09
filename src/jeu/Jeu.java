@@ -1,6 +1,7 @@
 package jeu;
 
 import affichage.Affichage;
+import affichage.Musique;
 import joueurs.Humain;
 import joueurs.Joueur;
 import joueurs.Ordinateur;
@@ -20,12 +21,14 @@ public class Jeu {
     private Joueur m_j2;
     private final Terrain m_terrain;
     private final Tour m_tour;
-
+    private Musique m_musiqueDeFond;
+    private Musique m_bruitage;
 
     //Constructeur
     public Jeu() {
         this.m_terrain = new Terrain();
         this.m_tour = new Tour(this);
+        this.m_musiqueDeFond = new Musique("musiques/jeu.wav");
     }
 
     //Methodes
@@ -36,11 +39,14 @@ public class Jeu {
 
         if (reponse == 'o'){
             Affichage.accueil();
+            this.m_musiqueDeFond.loop();
 
             //Initialisation des joueurs
             initialiserJoueur();
 
             // remplissage des mains des joueurs
+            m_bruitage = new Musique("musiques/bruitage/pioche.wav");
+            m_bruitage.play();
             this.m_j1.piocherPokemon();
             this.m_j2.piocherPokemon();
             try {
@@ -94,8 +100,6 @@ public class Jeu {
             e.printStackTrace();
         }
     }
-
-
 
     public void jouer(Joueur j1, Joueur j2) {
         //Boucle de jeu
