@@ -205,6 +205,9 @@ public class Affichage {
             try {
                 String pv = list.get(i).getPv() + "/" + list.get(i).getPvMax();
                 int longueurPV = pv.length();
+                if (longueurPV % 2 == 0) {
+                    pv = pv + " ";
+                }
                 int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
                 System.out.print(mettreEnCouleur(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pv, ""), "\u001B[36m"));
             } catch (IndexOutOfBoundsException e) {
@@ -307,6 +310,9 @@ public class Affichage {
             try {
                 String pv = list.get(i).getPv() + "/" + list.get(i).getPvMax();
                 int longueurPV = pv.length();
+                if (longueurPV % 2 == 0) {
+                    pv = pv + " ";
+                }
                 int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
                 System.out.print(mettreEnCouleur(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pv, ""), "\u001B[31m"));
             } catch (IndexOutOfBoundsException e) {
