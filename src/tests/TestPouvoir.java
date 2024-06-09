@@ -1,6 +1,5 @@
 package tests;
 
-import affichage.Affichage;
 import joueurs.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,8 +7,6 @@ import pokemons.Pokemon;
 import pokemons.pouvoirs.*;
 import joueurs.Joueur;
 import joueurs.Terrain;
-import jeu.Jeu;
-import joueurs.*;
 
 import java.util.ArrayList;
 import java.util.List;

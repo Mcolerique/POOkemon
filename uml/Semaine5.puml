@@ -12,12 +12,16 @@ package affichage {
 
     class Affichage {
         + {static} accueil()
-        + {static} afficher(message: String)
-        + {static} terrain(terrain: Terrain, j1: Joueur, j2: Joueur)
-        + {static} affichePokemon(list: Pokemon[*])
-        + {static} afficheTerrainJoueur(list: Pokemon[*], tailleTerrain: Integer)
         + {static} finDePartie(gagnant: Joueur)
         + {static} selectionPokemon(list:Pokemon[*]): String
+        + {static} terrain(terrain: Terrain, j1: Joueur, j2: Joueur)
+        + {static} mettreEnCouleur(texte: String, couleur: String): String
+        + {static} mettreEnGras(texte: String): String
+        + {static} afficher(message: String)
+        + {static} afficherTexteCentre(texte: String, largeurTerminal: Integer)
+        + {static} afficheMainOrdinateur(list: Pokemon[*])
+        + {static} affichePokemon(list: Pokemon[*])
+        + {static} afficheTerrainJoueur(list: Pokemon[*], tailleTerrain: Integer)
         + {static} afficheNbTour(tour: String)
         + {static} afficheDefausse(joueur: Joueur, defausse: Pokemon[*])
     }
@@ -65,10 +69,10 @@ package joueurs {
     class Humain extends Joueur {
         + <<Create>> Humain(nom: String, taillePioche: Integer)
         + placerPokemon(terrain: Terrain)
+        + descriptionPouvoir(list: Pokemon[*])
         + attaquer(terrain: Terrain, adversaire: Joueur): Boolean {redefines}
         + utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean {redefines}
         + selection(borne: Interger): Integer {redefines}
-        + descriptionPouvoir(list: Pokemon[*])
     }
 
     abstract class Joueur <<abstract>> {
@@ -79,13 +83,13 @@ package joueurs {
         + {abstract} utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean
         + {abstract} selection(borne: Interger): Integer
         + {abstract} placerPokemon(terrain: Terrain)
+        + melangerPioche()
         + piocherPokemon()
         + defausser(pokemon: Pokemon)
         + mort(terrain: Terrain, attaque: Integer): Boolean
         + mort(terrain: Terrain): Boolean
         + viderMain()
         + remplirMain()
-        + melangerPioche()
         + modifPlaceTerrain(modif: Integer)
         + aPerdu(): Boolean
         + getNom(): String
@@ -99,9 +103,10 @@ package joueurs {
 
     class Defausse {
         + <<Create>> Defausse()
+        + ajouterPokemon(pokemon2: Pokemon)
+        + retirerPokemon(choix: Integer)
         + defausser(pokemon: Pokemon)
         + getDefausse(): Pokemon[*]
-        + retirerPokemon(choix: Integer)
     }
 
     class Main {
@@ -121,7 +126,6 @@ package joueurs {
 
     class Terrain {
         + <<Create>> Terrain()
-        + placerPokemons(joueur: Joueur, pokemon: Integer)
         + placerPokemon(joueur: Joueur, pokemon: Pokemon)
         + retirerPokemons(joueur: Joueur, pokemon: Integer)
         + estVide(joueur: Joueur): Boolean
@@ -133,11 +137,14 @@ package joueurs {
 
     class Ordinateur extends Joueur {
         + <<Create>> Ordinateur(nom: String, taillePioche: Integer)
+        + trouverCiblesPotentielles(terrain: Terrain, adversaire: Joueur, indexAttaquant: int): Integer[*]
+        + choisirCibleAttaquer(pokemonAttaquer: Integer[*], indexAttaquant: Integer, terrain: Terrain, adversaire: Joueur): Integer
+        + filtrerCiblesParPv(pokemonAttaquer, Integer[*], terrain: Terrain, adversaire: Joueur): Integer[*]
+        + attaquerJoueur(index: Integer, i: Integer, terrain: Terrain, adversaire: Joueur, pokemonAttaquer: Interger[*]): Interger
         + placerPokemon(terrain: Terrain) {redefines}
         + attaquer(terrain: Terrain, adversaire: Joueur): Boolean {redefines}
-        + attaquerJoueur(index: Integer, i: Integer, terrain: Terrain, adversaire: Joueur, pokemonAttaquer: Interger[*]): Interger
-        + utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean {redefines}
         + selection(borne: Integer): Integer {redefines}
+        + utiliserPouvoir(terrain: Terrain, adversaire: Joueur): Boolean {redefines}
     }
 }
 
@@ -148,36 +155,42 @@ package pokemons {
         class AlleKahida extends Pouvoir {
             + <<Create>> AlleKahida()
             + utiliser(terrain: Terrain, allie Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+            + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
             + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
         }
 
         class Confusion extends Pouvoir {
             + <<Create>> Confusion()
             + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+            + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
             + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
         }
 
         class ExtensionTerritoire extends Pouvoir {
             + <<Create>> ExtensionTerritoire()
             + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+            + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
             + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
         }
 
         class FerveurGuerriere extends Pouvoir {
             + <<Create>> FerveurGuerriere()
             + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+            + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
             + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
         }
 
         class Kamikaze extends Pouvoir {
             + <<Create>> Kamikaze()
             + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+            + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
             + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
         }
 
         class Necromancie extends Pouvoir {
             + <<Create>> Necromancie()
             + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+            + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
             + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
         }
 
@@ -186,8 +199,9 @@ package pokemons {
             ~ m_utilise: Boolean
             - m_desc: String
             + <<Create>> Pouvoir(nom: String, desc String)
-            + {abstract} utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
-            + {abstract} annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
+            + {abstract} utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer)
+            + {abstract} utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer)
+            + {abstract} annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon)
             + getNom(): String
             + getUtilise(): Boolean
             + getDesc(): String
@@ -196,18 +210,21 @@ package pokemons {
         class Resistance extends Pouvoir {
            + <<Create>> Resistance()
            + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+           + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
            + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
        }
 
         class SoinDeZone extends Pouvoir {
            + <<Create>> SoinDeZone()
            + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+           + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
            + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
        }
 
        class SoinTotal extends Pouvoir {
            + <<Create>> SoinTotal()
            + utiliser(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer) {redefines}
+           + utilisertest(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon, intPokemon: Integer, choix: Integer) {redefines}
            + annulerPouvoir(terrain: Terrain, allie: Joueur, adversaire: Joueur, pokemon: Pokemon) {redefines}
        }
     }
@@ -215,17 +232,19 @@ package pokemons {
     class GenerateurPokemon {
         - {static} m_nomsDisponibles: String[*]
         - {static} m_nomsUtilises: String[*]
-        + {static} reinitialiser()
         + {static} getIndexAleatoire() : Integer
-        + {static} getNom(): String
         + {static} attribuerNom(): String
+        + {static} attribuerPouvoir(): Pouvoir
+        + {static} reinitialiser()
+        + {static} creePokemon(): Pokemon
+
+
+
         + {static} getNomsDisponibles(): String[*]
         + {static} getNomsUtilises(): String[*]
         + {static} getIndexPouvoirAleatoire(): Integer
-        + {static} attribuerPouvoir(): Pouvoir
         + {static} getNomsPouvoirs(): Pouvoir[*]
         + {static} getPouvoirsUtilises(): Pouvoir[*]
-        + {static} creePokemon(): Pokemon
     }
 
     enum Elements {
@@ -259,6 +278,7 @@ package pokemons {
         + avantageSur(pokemon: Pokemon): Boolean
         + soigner(soin: Integer)
         + modifAttaque(boost: Integer)
+        + modifDefense(defense: Integer)
         + getNom(): String
         + getPv(): Integer
         + getPvMax(): Integer
@@ -266,7 +286,22 @@ package pokemons {
         + getElementString(): String
         + getNomPouvoir(): String
         + getPouvoir(): Pouvoir
-        + modifDefense(defense: Integer)
+        + getDefense(): Integer
+    }
+}
+
+package tests {
+    class TestPouvoir {
+        + setUp()
+        + testAlleKahida()
+        + testConfusion()
+        + testExtensionTerritoire()
+        + testFerveurGuerriere()
+        + testKamikaze()
+        + testNecromancie()
+        + testResistance()
+        + testSoinDeZone()
+        + testSoinTotal()
     }
 }
 
@@ -280,6 +315,8 @@ Jeu o---> "*\n- m_pokemonAvecPouvoir" Pouvoir : > possède
 Jeu *---> "1\n- m_terrain" Terrain : > contient
 Jeu *---> "*\n- m_tour" Tour : > contient
 Jeu .> Affichage : <<uses>>
+Jeu *---> "*\n- m_musiqueDeFond\n- m_bruitage" Musique : > utilise
+
 
 Tour o--> "1\n- m_jeu" Jeu : > est dans
 Tour ..> Affichage : <<uses>>
@@ -309,6 +346,22 @@ GenerateurPokemon .> Pokemon : <<instantiate>>
 
 Pokemon *-right-> "1\n- m_affinite" Affinite : > possède
 Pokemon o---> "0..1\n- m_pouvoir" Pouvoir : > possède
+
+TestPouvoir *---> "*\n- joueur1\n- joueur2" Joueur : > teste
+TestPouvoir *---> "*\n- terrain" Terrain : > teste
+TestPouvoir *---> "*\n- pokemon1\n- pokemon" Pokemon : > teste
+TestPouvoir .> Pouvoir : <<instantiate>>
+
+
+AlleKahida *---> "*\n- m_bruitage" Musique : > utilise
+Confusion *---> "*\n- m_bruitage" Musique : > utilise
+ExtensionTerritoire *---> "*\n- m_bruitage" Musique : > utilise
+FerveurGuerriere *---> "*\n- m_bruitage" Musique : > utilise
+Kamikaze *---> "*\n- m_bruitage" Musique : > utilise
+Necromancie *---> "*\n- m_bruitage" Musique : > utilise
+Resistance *---> "*\n- m_bruitage" Musique : > utilise
+SoinDeZone *---> "*\n- m_bruitage" Musique : > utilise
+SoinTotal *---> "*\n- m_bruitage" Musique : > utilise
 
 @enduml
 
