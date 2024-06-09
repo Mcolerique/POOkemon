@@ -312,9 +312,13 @@ public class Affichage {
                 int longueurPV = pv.length();
                 if (longueurPV % 2 == 0) {
                     pv = pv + " ";
+                    int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 3;
+                    System.out.print(mettreEnCouleur(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pv, ""), "\u001B[31m"));
                 }
-                int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
-                System.out.print(mettreEnCouleur(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pv, ""), "\u001B[31m"));
+                else {
+                    int espaceDeChaqueCote = (largeurCase - longueurPV) / 2 - 2;
+                    System.out.print(mettreEnCouleur(String.format("| PV :%" + espaceDeChaqueCote + "s%s%" + espaceDeChaqueCote + "s|  ", "", pv, ""), "\u001B[31m"));
+                }
             } catch (IndexOutOfBoundsException e) {
                 System.out.print(mettreEnCouleur("|                      |  ", "\u001B[31m"));
             }
