@@ -102,6 +102,10 @@ public class Humain extends Joueur{
                 Thread.sleep(1000);
                 Affichage.afficher("Choisissez un pokemon avec lequel attaquer :       " + Affichage.selectionPokemon(pokeQuiAttaque));
                 int pokemonAttaquant = selection(pokeQuiAttaque.size());
+                if (pokemonAttaquant < 0 || pokemonAttaquant >= pokeQuiAttaque.size()) {
+                    Affichage.afficher("Invalid selection. Please choose a valid pokemon.");
+                    continue;
+                }
                 Pokemon attaquant = pokeQuiAttaque.get(pokemonAttaquant);
                 Affichage.afficher("Choisissez un pokemon à attaquer :       " + Affichage.selectionPokemon(terrain.getPokemonsJoueur(adversaire)));
                 int pokemonAttaque = selection(pokeQuiAttaque.size());
@@ -144,16 +148,15 @@ public class Humain extends Joueur{
             try {
                 int pokemonAttaquant = selection(pokeQuiAttaque.size());
                 pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().utiliser(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant),pokemonAttaquant);
-                pokeQuiAttaque.remove(pokemonAttaquant);
                 if (this.mort(terrain)|| adversaire.mort(terrain)){
                     if(Jeu.getPokemonAvecPouvoir().get(pokeQuiAttaque.get(pokemonAttaquant)) != null){
                         pokeQuiAttaque.get(pokemonAttaquant).getPouvoir().annulerPouvoir(terrain, this, adversaire,pokeQuiAttaque.get(pokemonAttaquant));
                     }
                     return true;
                 }
+                pokeQuiAttaque.remove(pokemonAttaquant);
             }
-            catch (IndexOutOfBoundsException e)
-            {
+            catch (IndexOutOfBoundsException e) {
                 return false;
             }
         }

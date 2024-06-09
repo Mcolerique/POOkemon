@@ -46,14 +46,12 @@ public class AlleKahida extends Pouvoir {
             m_bruitage.play();
             List<Pokemon> pokeAttaquant = new ArrayList<>();
             pokeAttaquant.addAll(terrain.getPokemonsJoueur(allie));
-            System.out.println("Choisissez un pokemon à sacrifier"+Affichage.selectionPokemon(pokeAttaquant));
-            Affichage.affichePokemon(terrain.getPokemonsJoueur(adversaire));
+            Affichage.afficher("Choisissez un pokemon à sacrifier"+Affichage.selectionPokemon(pokeAttaquant));
             int pokemonAttaquant = allie.selection(pokeAttaquant.size());
 
             List<Pokemon> pokeAttaquer = new ArrayList<>();
             pokeAttaquer.addAll(terrain.getPokemonsJoueur(adversaire));
-            System.out.println("Choisissez un pokemon à attaquer"+Affichage.selectionPokemon(pokeAttaquer));
-            Affichage.affichePokemon(terrain.getPokemonsJoueur(adversaire));
+            Affichage.afficher("Choisissez un pokemon à attaquer"+Affichage.selectionPokemon(pokeAttaquer));
             int pokemonAttaque = allie.selection(pokeAttaquer.size());
 
             //Défausser les 2 pokemons avec retirerPokemon()

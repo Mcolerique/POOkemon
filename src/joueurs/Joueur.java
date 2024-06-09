@@ -197,8 +197,8 @@ public abstract class Joueur {
      *
      * @return true si le joueur a perdu (sa main et sa pioche sont vides), sinon false.
      */
-    public boolean aPerdu() {
-        return this.m_main.getListePokemon().isEmpty() && this.m_pioche.getPioche().isEmpty();
+    public boolean aPerdu(Terrain terrain) {
+        return this.m_main.getListePokemon().isEmpty() && this.m_pioche.getPioche().isEmpty()&&terrain.getPokemonsJoueur(this).isEmpty();
     }
 
 

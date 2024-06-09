@@ -189,7 +189,7 @@ public class Jeu {
      * @see Joueur#aPerdu()
      */
     public boolean partieTerminee() {
-        return this.m_j1.aPerdu() || this.m_j2.aPerdu();
+        return this.m_j1.aPerdu(this.m_terrain) || this.m_j2.aPerdu(this.m_terrain);
     }
 
 
@@ -255,7 +255,7 @@ public class Jeu {
      * @return Le joueur gagnant.
      */
     public Joueur getVainqueur() {
-        if (this.m_j1.aPerdu()) {
+        if (this.m_j1.aPerdu(this.m_terrain)) {
             return this.m_j2;
         } else {
             return this.m_j1;

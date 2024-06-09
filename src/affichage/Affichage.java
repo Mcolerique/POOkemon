@@ -54,10 +54,10 @@ public class Affichage {
         try {
             Thread.sleep(2000);
             if (gagnant.getClass() == Humain.class) {
-                afficherTexteCentre(mettreEnGras(mettreEnCouleur("Vous avez gagné !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de vos pokemons sont en pleine santé, vous la petez pas trop c'est pas dur", "[38;5;13m")), largeurTerminal);
+                afficherTexteCentre(mettreEnGras(mettreEnCouleur("Vous avez gagné !! "+(gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon())+" de vos pokemons sont en pleine santé, vous la petez pas trop c'est pas dur", "[38;5;13m")), largeurTerminal);
             }
             else {
-                afficherTexteCentre(mettreEnGras(mettreEnCouleur("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemons sont en pleine santé, vous êtes vraiment nul", "[38;5;13m")), largeurTerminal);
+                afficherTexteCentre(mettreEnGras(mettreEnCouleur("Vous avez perdu !! "+(gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon())+" de ses pokemons sont en pleine santé, vous êtes vraiment nul", "[38;5;13m")), largeurTerminal);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
