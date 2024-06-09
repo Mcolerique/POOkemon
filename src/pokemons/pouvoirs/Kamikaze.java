@@ -1,6 +1,7 @@
 package pokemons.pouvoirs;
 
 import affichage.Affichage;
+import affichage.Musique;
 import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
@@ -10,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kamikaze extends Pouvoir{
+
+    Musique m_bruitage = new Musique("musiques/bruitage/kamikaze.wav");
+
     public Kamikaze() {
         super("Kamikaze","Kamikaze, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Les deux Pokémons sont alors éliminés.");
     }
@@ -19,6 +23,7 @@ public class Kamikaze extends Pouvoir{
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
         try {
+            m_bruitage.play();
             List<Pokemon> pokeAttaquer = new ArrayList<>();
             pokeAttaquer.addAll(terrain.getPokemonsJoueur(adversaire));
             System.out.println("Choisissez un pokemon à attaquer"+Affichage.selectionPokemon(pokeAttaquer));

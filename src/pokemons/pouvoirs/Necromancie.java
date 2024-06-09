@@ -1,5 +1,6 @@
 package pokemons.pouvoirs;
 
+import affichage.Musique;
 import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
@@ -10,6 +11,8 @@ import java.util.List;
 
 public class Necromancie extends Pouvoir {
 
+    Musique m_bruitage = new Musique("musiques/bruitage/necromancie.wav");
+
     //Constructeur
     public Necromancie() {
         super("Necrom","Nécromancie, à utilisation unique : le Pokémon choisit un Pokémon mort dans sa défausse. Le Pokémon meurt et est remplacé par le Pokémon choisi dans la défausse.");
@@ -18,6 +21,7 @@ public class Necromancie extends Pouvoir {
     //Methodes
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
+        m_bruitage.play();
         // affichage de la défausse du joueur
         List<Pokemon> defausse = allie.getDefausse().getDefausse();
         if(!defausse.isEmpty()) {

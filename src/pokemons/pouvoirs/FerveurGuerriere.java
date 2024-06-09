@@ -1,6 +1,7 @@
 package pokemons.pouvoirs;
 
 import affichage.Affichage;
+import affichage.Musique;
 import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
@@ -9,6 +10,8 @@ import pokemons.Pokemon;
 import java.util.ArrayList;
 
 public class FerveurGuerriere extends Pouvoir {
+
+    Musique m_bruitage = new Musique("musiques/bruitage/ferveur_guerriere.wav");
 
     //Constructeur
     public FerveurGuerriere(){
@@ -19,6 +22,7 @@ public class FerveurGuerriere extends Pouvoir {
     //Methodes redefinies
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
+        m_bruitage.play();
         ArrayList<Pokemon> pokeAAmeliorer = new ArrayList<>();
         pokeAAmeliorer.addAll(terrain.getPokemonsJoueur(allie));
         Affichage.afficher("choisissez un pokemon a ameliorer : " + Affichage.selectionPokemon(pokeAAmeliorer));
