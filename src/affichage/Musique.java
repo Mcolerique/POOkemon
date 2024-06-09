@@ -12,6 +12,7 @@ public class Musique {
     private Clip clip;
     private boolean isLooping;
 
+
     //METHODES
 
     /**
