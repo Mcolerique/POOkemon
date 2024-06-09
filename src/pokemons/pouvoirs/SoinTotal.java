@@ -1,6 +1,7 @@
 package pokemons.pouvoirs;
 
 import affichage.Affichage;
+import affichage.Musique;
 import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
@@ -9,6 +10,8 @@ import pokemons.Pokemon;
 import java.util.ArrayList;
 
 public class SoinTotal extends Pouvoir {
+
+    Musique m_bruitage = new Musique("musiques/bruitage/soin.wav");
 
     //Constructeur
     public SoinTotal(){
@@ -19,6 +22,7 @@ public class SoinTotal extends Pouvoir {
     //Methodes redefinies
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon) {
+        m_bruitage.play();
         ArrayList<Pokemon> pokeSoigner = new ArrayList<>();
         pokeSoigner.addAll(terrain.getPokemonsJoueur(allie));
         try{

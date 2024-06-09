@@ -1,11 +1,14 @@
 package pokemons.pouvoirs;
 
+import affichage.Musique;
 import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
 import pokemons.Pokemon;
 
 public class Confusion extends Pouvoir {
+
+    Musique m_bruitage = new Musique("musiques/bruitage/confusion.wav");
 
     //Constructeur
     public Confusion() {
@@ -15,7 +18,9 @@ public class Confusion extends Pouvoir {
 
     //Methodes redefinies
     @Override
-    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon) {
+    public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon)
+    {
+        m_bruitage.play();
         System.out.println("Confusion !");
         //Vide la main de l'adversaire et la met dans la pioche de l'adversaire
         adversaire.viderMain();

@@ -1,11 +1,14 @@
 package pokemons.pouvoirs;
 
+import affichage.Musique;
 import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
 import pokemons.Pokemon;
 
 public class ExtensionTerritoire extends Pouvoir {
+
+    Musique m_bruitage = new Musique("musiques/bruitage/extension_territoire.wav");
 
     //Constructeur
     public ExtensionTerritoire() {
@@ -16,6 +19,7 @@ public class ExtensionTerritoire extends Pouvoir {
     //Methodes redefinies
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon){
+        m_bruitage.play();
         allie.modifPlaceTerrain(1);
         allie.placerPokemon(terrain);
         this.m_utilise=true;

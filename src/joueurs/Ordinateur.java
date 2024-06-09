@@ -1,6 +1,6 @@
 package joueurs;
 
-import affichage.Affichage;
+import affichage.*;
 import jeu.Jeu;
 import pokemons.Pokemon;
 import java.util.ArrayList;
@@ -33,6 +33,8 @@ public class Ordinateur extends Joueur {
 
     @Override
     public boolean attaquer(Terrain terrain, Joueur adversaire) {
+        Musique m_bruitage = new Musique("musiques/bruitage/attaque.wav");
+        m_bruitage.play();
         // Pour chaque Pokémon de l'ordinateur sur le terrain
         for (int i = 0; i < terrain.getNbPokemonsJoueur(this); i++) {
             // Trouver les cibles potentielles

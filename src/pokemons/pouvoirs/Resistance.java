@@ -1,6 +1,7 @@
 package pokemons.pouvoirs;
 
 import affichage.Affichage;
+import affichage.Musique;
 import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
@@ -9,12 +10,16 @@ import pokemons.Pokemon;
 import java.util.ArrayList;
 
 public class Resistance extends Pouvoir{
+
+    Musique m_bruitage = new Musique("musiques/bruitage/resistance.wav");
+
     public Resistance(){
         super("Resist","Résistance, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, à chaque attaque reçue celui-ci subit subit 10 dégâts de moins.");
     }
 
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
+        m_bruitage.play();
         ArrayList<Pokemon> pokeADefendre = new ArrayList<>();
         pokeADefendre.addAll(terrain.getPokemonsJoueur(allie));
         try
