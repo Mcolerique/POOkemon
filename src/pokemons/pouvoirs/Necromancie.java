@@ -9,33 +9,53 @@ import pokemons.Pokemon;
 
 import java.util.List;
 
+/**
+ * La classe Necromancie représente un pouvoir spécial d'un Pokémon.
+ */
 public class Necromancie extends Pouvoir {
 
     Musique m_bruitage = new Musique("musiques/bruitage/necromancie.wav");
 
-    //Constructeur
+
+    //CONSTRUCTEUR
+
+    /**
+     * Constructeur de la classe Necromancie, qui initialise le pouvoir avec un nom et une description.
+     */
     public Necromancie() {
         super("Necrom","Nécromancie, à utilisation unique : le Pokémon choisit un Pokémon mort dans sa défausse. Le Pokémon meurt et est remplacé par le Pokémon choisi dans la défausse.");
     }
 
-    //Methodes
+
+
+
+    //METHODES REDEFINIES
+
+    /**
+     * Utilise le pouvoir Necromancie.
+     *
+     * @param terrain Le terrain de jeu.
+     * @param allie Le joueur allié utilisant le pouvoir.
+     * @param adversaire Le joueur adverse.
+     * @param pokemon Le Pokémon utilisant le pouvoir.
+     * @param intPokemon L'indice du Pokémon utilisant le pouvoir.
+     */
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
         m_bruitage.play();
-        // affichage de la défausse du joueur
         List<Pokemon> defausse = allie.getDefausse().getDefausse();
         if(!defausse.isEmpty()) {
             Affichage.afficheDefausse(allie, defausse);
-            // choix du pokemon à ressusciter
+            //Choix du pokemon à ressusciter
             int choix = allie.selection(defausse.size());
             Pokemon pokemonARessusciter = defausse.get(choix);
-            // redonner toute sa vie au pokemon choisi
+            //Redonner toute sa vie au pokemon choisi
             pokemonARessusciter.soigner(pokemonARessusciter.getPvMax());
-            // tuer le pokemon avec le pouvoir
+            //Tuer le pokemon avec le pouvoir
             terrain.retirerPokemon(allie, intPokemon);
-            // ressusciter le pokemon choisi
+            //Ressusciter le pokemon choisi
             allie.getDefausse().retirerPokemon(choix);
-            // ajouter le pokemon ressucité sur le terrain
+            //Ajouter le pokemon ressucité sur le terrain
             terrain.placerPokemons(allie, pokemonARessusciter);
         }
         else {
@@ -43,9 +63,20 @@ public class Necromancie extends Pouvoir {
         }
     }
 
+
+
+    /**
+     * Utilise le pouvoir Necromancie dans un test.
+     *
+     * @param terrain Le terrain de jeu.
+     * @param allie Le joueur allié utilisant le pouvoir.
+     * @param adversaire Le joueur adverse.
+     * @param pokemon Le Pokémon utilisant le pouvoir.
+     * @param intPokemon L'indice du Pokémon utilisant le pouvoir.
+     * @param choix L'indice du Pokémon à ressusciter dans la défausse.
+     */
     @Override
     public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix) {
-        // affichage de la défausse du joueur
         List<Pokemon> defausse = allie.getDefausse().getDefausse();
         if (!defausse.isEmpty()) {
             Pokemon pokemonARessusciter = defausse.get(choix);
@@ -53,7 +84,6 @@ public class Necromancie extends Pouvoir {
             // Redonner toute sa vie au pokemon choisi
             pokemonARessusciter.soigner(pokemonARessusciter.getPvMax());
 
-            // Debug: Afficher l'état avant de retirer le Pokémon
             System.out.println("Avant de retirer le Pokémon avec pouvoir:");
             System.out.println("Terrain: " + terrain.getPokemonsJoueur(allie));
             System.out.println("Défausse: " + allie.getDefausse().getDefausse());
@@ -64,7 +94,6 @@ public class Necromancie extends Pouvoir {
             // Ajouter le pokemon sacrifié à la défausse
             allie.getDefausse().ajouterPokemon(pokemon);
 
-            // Debug: Afficher l'état après avoir retiré le Pokémon
             System.out.println("Après avoir retiré le Pokémon avec pouvoir:");
             System.out.println("Terrain: " + terrain.getPokemonsJoueur(allie));
             System.out.println("Défausse: " + allie.getDefausse().getDefausse());
@@ -82,6 +111,16 @@ public class Necromancie extends Pouvoir {
         }
     }
 
+
+
+    /**
+     * Annule l'effet du pouvoir Necromancie.
+     *
+     * @param terrain Le terrain de jeu.
+     * @param allie Le joueur allié utilisant le pouvoir.
+     * @param adversaire Le joueur adverse.
+     * @param pokemon Le Pokémon utilisant le pouvoir.
+     */
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
         Jeu.getPokemonAvecPouvoir().remove(pokemon);
