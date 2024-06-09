@@ -1,21 +1,40 @@
 package joueurs;
 
-import affichage.Affichage;
+import affichage.*;
 import pokemons.Pokemon;
 import jeu.Jeu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * La classe Humain représente un joueur humain dans le jeu Pokémon.
+ */
 public class Humain extends Joueur{
 
-    //Constructeur
+    //CONSTRUCTEUR
+
+    /**
+     * Constructeur de la classe Humain, qui initialise un joueur humain.
+     *
+     * @param nom Le nom du joueur.
+     * @param taillePioche La taille de la pioche du joueur.
+     */
     public Humain(String nom, int taillePioche){
         super(nom, taillePioche);
     }
 
 
-    //Methodes
+
+    //METHODES
+
+    /**
+     * Permet au joueur humain de placer des Pokémons sur le terrain.
+     *
+     * @param terrain Le terrain de jeu.
+     * @see Affichage#selectionPokemon(List)
+     * @see Terrain#placerPokemons(Joueur, Pokemon)
+     */
     public void placerPokemon(Terrain terrain){
         while (terrain.getPokemonsJoueur(this).size() < this.m_tailleTerrain){
             try {
@@ -38,10 +57,43 @@ public class Humain extends Joueur{
     }
 
 
-    //Methodes redefinies
+
+    /**
+     * Affiche une description du pouvoir d'un Pokémon choisi par le joueur.
+     *
+     * @param list La liste des Pokémons pour lesquels le joueur peut voir la description du pouvoir.
+     * @see Affichage#selectionPokemon(List)
+     */
+    public void descriptionPouvoir(List<Pokemon> list){
+        Scanner scan = new Scanner(System.in);
+        Affichage.afficher("Voulez vous la description d'un des pouvoirs ?   (o/n)");
+        char reponse = scan.next().charAt(0);
+        if (reponse == 'o'){
+            Affichage.afficher("Quel description voulez vous lire ?      "+Affichage.selectionPokemon(list));
+            int descriptionSelectionner = this.selection(list.size());
+            Affichage.afficher(list.get(descriptionSelectionner).getPouvoir().getDesc() + "\n");
+        }
+    }
+
+
+
+    //METHODES REDEFINIES
+
+    /**
+     * Gère l'attaque du joueur humain contre un adversaire.
+     *
+     * @param terrain Le terrain de jeu.
+     * @param adversaire Le joueur adverse.
+     * @return true si l'attaque conduit à la fin de la partie, sinon false.
+     * @see Terrain#getPokemonsJoueur(Joueur)
+     * @see Pokemon#attaquer(Pokemon)
+     * @see Joueur#mort(Terrain, int)
+     */
     @Override
     public boolean attaquer(Terrain terrain, Joueur adversaire)
     {
+        Musique m_bruitage = new Musique("musiques/bruitage/attaque.wav");
+        m_bruitage.play();
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
         pokeQuiAttaque.addAll(terrain.getPokemonsJoueur(this));
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
@@ -50,6 +102,10 @@ public class Humain extends Joueur{
                 Thread.sleep(1000);
                 Affichage.afficher("Choisissez un pokemon avec lequel attaquer :       " + Affichage.selectionPokemon(pokeQuiAttaque));
                 int pokemonAttaquant = selection(pokeQuiAttaque.size());
+                if (pokemonAttaquant < 0 || pokemonAttaquant >= pokeQuiAttaque.size()) {
+                    Affichage.afficher("Invalid selection. Please choose a valid pokemon.");
+                    continue;
+                }
                 Pokemon attaquant = pokeQuiAttaque.get(pokemonAttaquant);
                 Affichage.afficher("Choisissez un pokemon à attaquer :       " + Affichage.selectionPokemon(terrain.getPokemonsJoueur(adversaire)));
                 int pokemonAttaque = selection(pokeQuiAttaque.size());
@@ -68,6 +124,16 @@ public class Humain extends Joueur{
         return false;
     }
 
+
+
+    /**
+     * Permet au joueur humain d'utiliser un pouvoir de ses Pokémons.
+     *
+     * @param terrain Le terrain de jeu.
+     * @param adversaire Le joueur adverse.
+     * @return true si l'utilisation du pouvoir conduit à la fin de la partie, sinon false.
+     * @see Pokemon#getPouvoir()
+     */
     @Override
     public boolean utiliserPouvoir(Terrain terrain, Joueur adversaire) {
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
@@ -97,19 +163,18 @@ public class Humain extends Joueur{
         return false;
     }
 
+
+
+    /**
+     * Permet au joueur humain de faire une sélection parmi une liste d'options.
+     *
+     * @param borne La taille de la liste parmi laquelle l'utilisateur peut choisir.
+     * @return L'indice de l'option sélectionnée par l'utilisateur.
+     */
     @Override
     public int selection(int borne) {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt() - 1;
     }
-    public void descriptionPouvoir(List<Pokemon> list){
-        Scanner scan = new Scanner(System.in);
-        Affichage.afficher("Voulez vous la description d'un des pouvoirs ?   (o/n)");
-        char reponse = scan.next().charAt(0);
-        if (reponse == 'o'){
-            Affichage.afficher("Quel description voulez vous lire ?      "+Affichage.selectionPokemon(list));
-            int descriptionSelectionner = this.selection(list.size());
-            Affichage.afficher(list.get(descriptionSelectionner).getPouvoir().getDesc() + "\n");
-        }
-    }
+
 }

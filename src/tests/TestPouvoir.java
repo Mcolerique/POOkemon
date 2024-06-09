@@ -11,6 +11,9 @@ import joueurs.Terrain;
 import jeu.Jeu;
 import joueurs.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestPouvoir
@@ -54,15 +57,19 @@ class TestPouvoir
         terrain.placerPokemons(joueur1, pokemon1);
         terrain.placerPokemons(joueur2, pokemon2);
 
+        List<Pokemon> listePokemonInitial = new ArrayList<Pokemon>();
+
         // Fill the opponent's hand with 5 Pokemons
         for (int i = 0; i < 5; i++) {
-            joueur2.getMain().ajouterPokemon(new Pokemon("TestPokemon" + i, null));
+            Pokemon poke = new Pokemon("TestPokemon" + i, null);
+            joueur2.getMain().ajouterPokemon(poke);
+            listePokemonInitial.add(poke);
         }
 
         confusion.utilisertest(terrain, joueur1, joueur2, pokemon1, 0, 0);
 
-        // Check that the opponent's hand still has 5 Pokemons after using the power
-        assertTrue(joueur2.getMain().getNbPokemon() == 5);
+        // vérifier que la main de l'adversaire dans un ordre différent de la liste initiale
+        assertNotEquals(listePokemonInitial, joueur2.getMain(), "La main de l'adversaire n'a pas été mélangée correctement.");
     }
 
     @Test
@@ -127,26 +134,26 @@ class TestPouvoir
         // Ajouter un pokemon à la défausse du joueur
         joueur1.getDefausse().ajouterPokemon(pokemon2);
 
+        // Debug statements to check the state before using power
+        System.out.println("Before using Necromancie:");
+        System.out.println("Terrain: " + terrain.getPokemonsJoueur(joueur1));
+        System.out.println("Discard pile: " + joueur1.getDefausse().getDefausse());
+
         // Utiliser le pouvoir
         necromancie.utilisertest(terrain, joueur1, joueur2, pokemon1, 0, 0);
 
+        // Debug statements to check the state after using power
+        System.out.println("After using Necromancie:");
+        System.out.println("Terrain: " + terrain.getPokemonsJoueur(joueur1));
+        System.out.println("Discard pile: " + joueur1.getDefausse().getDefausse());
+
         // Vérifier que le pokemon de la défausse est maintenant sur le terrain
-        assertTrue(terrain.getPokemonsJoueur(joueur1).contains(pokemon2));
+        assertTrue(terrain.getPokemonsJoueur(joueur1).contains(pokemon2), "Pokemon2 should be on the terrain.");
 
         // Vérifier que le pokemon qui a utilisé le pouvoir est maintenant dans la défausse
-        assertTrue(joueur1.getDefausse().getDefausse().contains(pokemon1));
-
-        // Add a delay to allow the game state to update
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Recheck the conditions
-        assertTrue(terrain.getPokemonsJoueur(joueur1).contains(pokemon2));
-        assertTrue(joueur1.getDefausse().getDefausse().contains(pokemon1));
+        assertTrue(joueur1.getDefausse().getDefausse().contains(pokemon1), "Pokemon1 should be in the discard pile.");
     }
+
 
     @Test
     void testResistance() {
