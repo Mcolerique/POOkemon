@@ -324,6 +324,7 @@ Tour ..> Affichage : <<uses>>
 Defausse *----> "0..21\n- m_defausse" Pokemon : > contient
 
 Humain .> Pokemon : <<instantiate>>
+Humain .> Musique : <<instantiate>>
 
 Joueur *----> "1\n- m_pioche" Pioche : > possède
 Joueur *----> "1\n- m_main" Main : > possède
@@ -333,6 +334,7 @@ Joueur .left.> Terrain : <<uses>>
 Main *----> "0..5\n- m_listePokemon" Pokemon : > possède
 
 Ordinateur .> Pokemon : <<instantiate>>
+Ordinateur .> Musique : <<instantiate>>
 
 Pioche *----> "0..21\n- m_pioche" Pokemon : > possède
 
