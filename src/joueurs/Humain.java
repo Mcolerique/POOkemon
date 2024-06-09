@@ -1,6 +1,6 @@
 package joueurs;
 
-import affichage.Affichage;
+import affichage.*;
 import pokemons.Pokemon;
 import jeu.Jeu;
 import java.util.ArrayList;
@@ -42,6 +42,8 @@ public class Humain extends Joueur{
     @Override
     public boolean attaquer(Terrain terrain, Joueur adversaire)
     {
+        Musique m_bruitage = new Musique("musiques/bruitage/attaque.wav");
+        m_bruitage.play();
         List<Pokemon> pokeQuiAttaque = new ArrayList<>();
         pokeQuiAttaque.addAll(terrain.getPokemonsJoueur(this));
         for (int i = 0; i<terrain.getNbPokemonsJoueur(this);i++)
