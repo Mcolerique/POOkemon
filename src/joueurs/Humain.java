@@ -102,6 +102,10 @@ public class Humain extends Joueur{
                 Thread.sleep(1000);
                 Affichage.afficher("Choisissez un pokemon avec lequel attaquer :       " + Affichage.selectionPokemon(pokeQuiAttaque));
                 int pokemonAttaquant = selection(pokeQuiAttaque.size());
+                if (pokemonAttaquant < 0 || pokemonAttaquant >= pokeQuiAttaque.size()) {
+                    Affichage.afficher("Invalid selection. Please choose a valid pokemon.");
+                    continue;
+                }
                 Pokemon attaquant = pokeQuiAttaque.get(pokemonAttaquant);
                 Affichage.afficher("Choisissez un pokemon à attaquer :       " + Affichage.selectionPokemon(terrain.getPokemonsJoueur(adversaire)));
                 int pokemonAttaque = selection(pokeQuiAttaque.size());
