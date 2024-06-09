@@ -4,27 +4,64 @@ import pokemons.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La classe Defausse représente la défausse de Pokémons d'un joueur.
+ */
 public class Defausse {
 
-    //Attributs
+    //ATTRIBUTS
     private List<Pokemon> m_defausse;
 
-    //Constructeur
+
+    //CONSTRUCTEUR
+
+    /**
+     * Constructeur de la classe Defausse, qui initialise une nouvelle liste vide pour stocker les Pokémons défaussés.
+     */
     public Defausse() {
         m_defausse = new ArrayList<>();
     }
 
-    //Methodes
-    public void defausser(Pokemon pokemon) {m_defausse.add(pokemon);}
 
-    //Getters
-    public List<Pokemon> getDefausse() {return m_defausse;}
+    //METHODES
 
+    /**
+     * Ajoute un Pokémon à la défausse.
+     *
+     * @param pokemon2 Le Pokémon à ajouter à la défausse.
+     */
+    public void ajouterPokemon(Pokemon pokemon2) {
+        m_defausse.add(pokemon2);
+    }
+
+
+
+    /**
+     * Retire un Pokémon de la défausse.
+     *
+     * @param choix L'indice du Pokémon à retirer de la défausse.
+     */
     public void retirerPokemon(int choix) {
         m_defausse.remove(choix);
     }
 
-    public void ajouterPokemon(Pokemon pokemon2) {
-        m_defausse.add(pokemon2);
-    }
+
+
+    /**
+     * Ajoute un Pokémon à la défausse.
+     *
+     * @param pokemon Le Pokémon à défausser.
+     */
+    public void defausser(Pokemon pokemon) {m_defausse.add(pokemon);}
+
+
+
+    //GETTERS
+
+    /**
+     * Retourne la liste des Pokémons dans la défausse.
+     *
+     * @return La liste des Pokémons défaussés.
+     */
+    public List<Pokemon> getDefausse() {return m_defausse;}
 }
