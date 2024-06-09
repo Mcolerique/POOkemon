@@ -59,7 +59,6 @@ public class Affichage {
             else {
                 afficherTexteCentre(mettreEnGras(mettreEnCouleur("Vous avez perdu !! "+gagnant.getPioche().getPioche().size()+gagnant.getMain().getNbPokemon()+" de ses pokemons sont en pleine santé, vous êtes vraiment nul", "[38;5;13m")), largeurTerminal);
             }
-            accueil();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
