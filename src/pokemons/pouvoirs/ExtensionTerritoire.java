@@ -20,6 +20,15 @@ public class ExtensionTerritoire extends Pouvoir {
         allie.placerPokemon(terrain);
         this.m_utilise=true;
     }
+    @Override
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon,int intPokemon, int choix){
+        allie.modifPlaceTerrain(1);
+        allie.placerPokemon(terrain);
+        this.m_utilise=true;
+        System.out.println("Le joueur a utilisé le pouvoir ExtensionTerritoire");
+        System.out.println(m_utilise);
+    }
+
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon){

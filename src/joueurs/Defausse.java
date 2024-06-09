@@ -23,4 +23,8 @@ public class Defausse {
     public void retirerPokemon(int choix) {
         m_defausse.remove(choix);
     }
+
+    public void ajouterPokemon(Pokemon pokemon2) {
+        m_defausse.add(pokemon2);
+    }
 }

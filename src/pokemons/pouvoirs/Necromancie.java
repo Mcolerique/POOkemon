@@ -40,6 +40,23 @@ public class Necromancie extends Pouvoir {
     }
 
     @Override
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix) {
+        // affichage de la défausse du joueur
+        List<Pokemon> defausse = allie.getDefausse().getDefausse();
+        if (!defausse.isEmpty()) {
+            Pokemon pokemonARessusciter = defausse.get(choix);
+            // redonner toute sa vie au pokemon choisi
+            pokemonARessusciter.soigner(pokemonARessusciter.getPvMax());
+            // tuer le pokemon avec le pouvoir
+            terrain.retirerPokemon(allie, intPokemon);
+            // ressusciter le pokemon choisi
+            allie.getDefausse().retirerPokemon(choix);
+            // ajouter le pokemon ressucité sur le terrain
+            terrain.placerPokemons(allie, pokemonARessusciter);
+        }
+    }
+
+    @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
         Jeu.getPokemonAvecPouvoir().remove(pokemon);
     }

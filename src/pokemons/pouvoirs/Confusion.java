@@ -24,6 +24,16 @@ public class Confusion extends Pouvoir {
     }
 
     @Override
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix) {
+        System.out.println("Confusion !");
+        //Vide la main de l'adversaire et la met dans la pioche de l'adversaire
+        adversaire.viderMain();
+        //Remplit la main de l'adversaire
+        adversaire.remplirMain();
+    }
+
+
+    @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
         Jeu.getPokemonAvecPouvoir().remove(pokemon);
     }

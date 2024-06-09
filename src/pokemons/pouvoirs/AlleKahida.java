@@ -40,6 +40,17 @@ public class AlleKahida extends Pouvoir {
 
         }
     }
+    @Override
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix) {
+        try {
+            //Défausser les 2 pokemons avec retirerPokemon()
+            terrain.retirerPokemon(allie, choix);
+            terrain.retirerPokemon(adversaire, choix);
+        }
+        catch (IndexOutOfBoundsException e){
+
+        }
+    }
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {

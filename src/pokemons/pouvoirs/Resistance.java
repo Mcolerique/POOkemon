@@ -30,6 +30,14 @@ public class Resistance extends Pouvoir{
         }
 
     }
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choixPokemon) {
+        terrain.getPokemonsJoueur(allie).get(choixPokemon).modifDefense(10);
+        Terrain.getPouvoirsUtilises().put(this,terrain.getPokemonsJoueur(allie).get(choixPokemon ));
+        this.m_utilise = true;
+        System.out.println("Le joueur a utilisé le pouvoir Resistance");
+        System.out.println(m_utilise);
+    }
+
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {

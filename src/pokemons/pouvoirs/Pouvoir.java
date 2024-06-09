@@ -22,6 +22,7 @@ public abstract class Pouvoir {
 
     //Methodes abstraites
     public abstract void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon);
+    public abstract void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix);
 
     public abstract void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon);
 

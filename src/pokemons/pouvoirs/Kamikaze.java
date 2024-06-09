@@ -33,6 +33,11 @@ public class Kamikaze extends Pouvoir{
 
         }
     }
+    @Override
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix) {
+        terrain.retirerPokemon(allie, intPokemon);
+        terrain.retirerPokemon(adversaire, choix);
+    }
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {

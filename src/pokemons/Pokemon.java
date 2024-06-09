@@ -103,4 +103,7 @@ public class Pokemon {
   public void modifDefense(int defense){
     this.m_defense+=defense;
   }
+  public int getDefense(){
+    return this.m_defense;
+  }
 }

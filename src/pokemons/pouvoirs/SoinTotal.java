@@ -31,6 +31,17 @@ public class SoinTotal extends Pouvoir {
 
         }
     }
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix) {
+        ArrayList<Pokemon> pokeSoigner = new ArrayList<>();
+        pokeSoigner.addAll(terrain.getPokemonsJoueur(allie));
+        try{
+            pokeSoigner.get(choix).soigner(pokeSoigner.get(choix).getPvMax());
+            this.m_utilise = true;
+        }
+        catch (IndexOutOfBoundsException e){
+
+        }
+    }
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {

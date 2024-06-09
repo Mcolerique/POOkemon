@@ -27,6 +27,14 @@ public class FerveurGuerriere extends Pouvoir {
         Terrain.getPouvoirsUtilises().put(this,terrain.getPokemonsJoueur(allie).get(pokemonAmeliorer ));
         this.m_utilise = true;
     }
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix) {
+        terrain.getPokemonsJoueur(allie).get(choix).modifAttaque(10);
+        Terrain.getPouvoirsUtilises().put(this,terrain.getPokemonsJoueur(allie).get(choix));
+        this.m_utilise = true;
+        System.out.println("Le joueur a utilisé le pouvoir FerveurGuerriere");
+        System.out.println(m_utilise);
+    }
+
 
     @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {

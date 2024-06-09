@@ -22,6 +22,13 @@ public class SoinDeZone extends Pouvoir {
     }
 
     @Override
+    public void utilisertest(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon, int choix) {
+        for (int i = 0; i<terrain.getPokemonsJoueur(allie).size(); i++){
+            terrain.getPokemon(allie,i).soigner(10);
+        }
+    }
+
+    @Override
     public void annulerPouvoir(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon) {
         Jeu.getPokemonAvecPouvoir().remove(pokemon);
     }
