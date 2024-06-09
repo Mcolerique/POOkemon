@@ -21,7 +21,10 @@ public class Defausse {
     public List<Pokemon> getDefausse() {return m_defausse;}
 
     public void retirerPokemon(int choix) {
-        m_defausse.remove(choix);
+        if(choix < m_defausse.size())
+            m_defausse.remove(choix);
+        else
+            System.out.println("Ce pokemon n'existe pas dans la defausse");
     }
 
     public void ajouterPokemon(Pokemon pokemon2) {

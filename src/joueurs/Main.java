@@ -2,6 +2,7 @@ package joueurs;
 
 import pokemons.Pokemon;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Main {
@@ -42,4 +43,5 @@ public class Main {
     public int getNbPokemon() {
         return this.m_listePokemon.size();
     }
+
 }
