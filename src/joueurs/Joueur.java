@@ -162,11 +162,10 @@ public abstract class Joueur {
      */
     public void viderMain()
     {
-        for (int i = 0; i < this.m_main.getListePokemon().size(); i++)
-        {
-            this.m_pioche.getPioche().add(this.m_main.getListePokemon().get(i));
-        }
-        melangerPioche();
+        // Ajoute toutes les cartes de la main à la pioche
+        m_pioche.getPioche().addAll(m_main.getListePokemon());
+        // Vide la main du joueur
+        m_main.getListePokemon().clear();
     }
 
 
