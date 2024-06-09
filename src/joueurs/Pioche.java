@@ -1,19 +1,28 @@
 package joueurs;
 
-import jeu.Jeu;
 import pokemons.GenerateurPokemon;
 import pokemons.Pokemon;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * La classe Pioche représente la pioche de cartes Pokémon d'un joueur.
+ */
 public class Pioche {
 
-    //Attributs
+    //ATTRIBUTS
     private final List<Pokemon> m_pioche;
 
 
-    //Constructeur
+
+    //CONSTRUCTEUR
+
+    /**
+     * Constructeur de la classe Pioche, qui initialise une nouvelle pioche.
+     *
+     * @param taillePioche Le nombre de cartes Pokémon dans la pioche.
+     */
     public Pioche(int taillePioche) {
         this.m_pioche = new ArrayList<>();
         for (int i = 0; i < taillePioche; i++) {
@@ -23,19 +32,30 @@ public class Pioche {
     }
 
 
-    //Methodes
+
+    //METHODES
+
+    /**
+     * Pioche une carte Pokémon et l'ajoute à la main du joueur.
+     *
+     * @param main La main du joueur à laquelle ajouter la carte piochée.
+     */
     public void piocherMain(Main main) {
-        //Si la pioche n'est pas vide
         if (!this.m_pioche.isEmpty()) {
-            //Ajout du premier pokemon de la pioche dans la main
             main.ajouterPokemon(this.m_pioche.getFirst());
-            //Retrait du premier pokemon de la pioche
             this.m_pioche.removeFirst();
         }
     }
 
 
-    //Getters
+
+    //GETTERS
+
+    /**
+     * Retourne la liste des cartes Pokémon dans la pioche.
+     *
+     * @return La liste des cartes Pokémon dans la pioche.
+     */
     public List<Pokemon> getPioche(){
         return this.m_pioche;
     }
