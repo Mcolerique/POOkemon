@@ -49,14 +49,36 @@ public class Necromancie extends Pouvoir {
         List<Pokemon> defausse = allie.getDefausse().getDefausse();
         if (!defausse.isEmpty()) {
             Pokemon pokemonARessusciter = defausse.get(choix);
-            // redonner toute sa vie au pokemon choisi
+
+            // Redonner toute sa vie au pokemon choisi
             pokemonARessusciter.soigner(pokemonARessusciter.getPvMax());
-            // tuer le pokemon avec le pouvoir
+
+            // Debug: Afficher l'état avant de retirer le Pokémon
+            System.out.println("Avant de retirer le Pokémon avec pouvoir:");
+            System.out.println("Terrain: " + terrain.getPokemonsJoueur(allie));
+            System.out.println("Défausse: " + allie.getDefausse().getDefausse());
+
+            // Tuer le pokemon avec le pouvoir
             terrain.retirerPokemon(allie, intPokemon);
-            // ressusciter le pokemon choisi
+
+            // Ajouter le pokemon sacrifié à la défausse
+            allie.getDefausse().ajouterPokemon(pokemon);
+
+            // Debug: Afficher l'état après avoir retiré le Pokémon
+            System.out.println("Après avoir retiré le Pokémon avec pouvoir:");
+            System.out.println("Terrain: " + terrain.getPokemonsJoueur(allie));
+            System.out.println("Défausse: " + allie.getDefausse().getDefausse());
+
+            // Ressusciter le pokemon choisi
             allie.getDefausse().retirerPokemon(choix);
-            // ajouter le pokemon ressucité sur le terrain
+
+            // Ajouter le pokemon ressuscité sur le terrain
             terrain.placerPokemons(allie, pokemonARessusciter);
+
+            // Debug: Afficher l'état final
+            System.out.println("Après avoir ressuscité et placé le Pokémon choisi:");
+            System.out.println("Terrain: " + terrain.getPokemonsJoueur(allie));
+            System.out.println("Défausse: " + allie.getDefausse().getDefausse());
         }
     }
 

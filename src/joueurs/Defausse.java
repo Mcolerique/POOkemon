@@ -42,7 +42,10 @@ public class Defausse {
      * @param choix L'indice du Pokémon à retirer de la défausse.
      */
     public void retirerPokemon(int choix) {
-        m_defausse.remove(choix);
+        if(choix < m_defausse.size())
+            m_defausse.remove(choix);
+        else
+            System.out.println("Ce pokemon n'existe pas dans la defausse");
     }
 
 
