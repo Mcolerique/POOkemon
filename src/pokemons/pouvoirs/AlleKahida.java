@@ -1,6 +1,6 @@
 package pokemons.pouvoirs;
 
-import affichage.Affichage;
+import affichage.*;
 import jeu.Jeu;
 import joueurs.Joueur;
 import joueurs.Terrain;
@@ -11,6 +11,7 @@ import java.util.List;
 
 public class AlleKahida extends Pouvoir {
 
+    Musique m_bruitage = new Musique("musiques/bruitage/alleKahida.wav");
     //Constructeur
     public AlleKahida() {
         super("AllKahida","AlleKahida, utilisable à chaque tour : Permet de kamikaze un pokemon allié ou soit même");
@@ -20,6 +21,7 @@ public class AlleKahida extends Pouvoir {
     @Override
     public void utiliser(Terrain terrain, Joueur allie, Joueur adversaire, Pokemon pokemon, int intPokemon) {
         try {
+            m_bruitage.play();
             List<Pokemon> pokeAttaquant = new ArrayList<>();
             pokeAttaquant.addAll(terrain.getPokemonsJoueur(allie));
             System.out.println("Choisissez un pokemon à sacrifier"+Affichage.selectionPokemon(pokeAttaquant));
