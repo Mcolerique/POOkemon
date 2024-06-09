@@ -111,6 +111,8 @@ public class Jeu {
                 //Piocher
                 Thread.sleep(2000);
                 j1.piocherPokemon();
+                m_bruitage = new Musique("musiques/bruitage/pioche.wav");
+                m_bruitage.play();
                 System.out.println("...la main s'est remplie\n");
                 Thread.sleep(2000);
                 Affichage.terrain(this.m_terrain,this.m_j1,this.m_j2);
@@ -133,6 +135,8 @@ public class Jeu {
                 Thread.sleep(2000);
                 if (!partieTerminee()) {
                     m_tour.attaquer(j1, j2);
+                    m_bruitage = new Musique("musiques/bruitage/attaque.wav");
+                    m_bruitage.play();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
