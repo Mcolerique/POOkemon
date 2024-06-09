@@ -29,5 +29,10 @@ Ces pouvoirs peuvent avoir des effets variés, comme soigner un Pokémon, augmen
 Nous avons un magnifique affichage en console, avec des couleurs et des musiques qui nous plongent dans le jeu.
 Nous avons essayé de varier les pouvoirs des pokemons pour qu'ils soient tous uniques et intéressants à jouer, certains se ressemble mais on a recyclé certains trucs au bout d'un moment.
 
+## Répartition des tâches
+- Gaétan : base du jeu, quelques pouvoirs, réglage de bugs, tests unitaires, rapport, musique (30%)
+- Déborah : affichage, uml, rapports, correction de bugs, éléments des pokemons (30%)
+- Favien : développement du jeu, grosses maj et corrections de bugs, pouvoirs, Ordinateur et son algo... (40%)
+
 ## Conclusion
 On en a beaucoup bavé, on en peut plus des pokemons, mais on a réussi à sortir quelque chose de potable.
