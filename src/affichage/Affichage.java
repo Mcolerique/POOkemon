@@ -4,6 +4,9 @@ import java.util.List;
 import joueurs.*;
 import pokemons.*;
 
+/**
+ * La classe Affichage contient des méthodes statiques pour afficher divers éléments de jeu dans le terminal.
+ */
 public class Affichage {
 
     static int largeurTerminal = 140;
