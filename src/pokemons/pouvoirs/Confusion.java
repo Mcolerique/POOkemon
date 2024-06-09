@@ -24,6 +24,8 @@ public class Confusion extends Pouvoir {
         System.out.println("Confusion !");
         //Vide la main de l'adversaire et la met dans la pioche de l'adversaire
         adversaire.viderMain();
+        // mélangement de la pioche de l'adversaire
+        adversaire.melangerPioche();
         //Remplit la main de l'adversaire
         adversaire.remplirMain();
     }
