@@ -100,7 +100,7 @@ git clone https://github.com/Mcolerique/POOkemon.git
 
 3. Faites clic droit → Run 'Main'
 
-Le jeu se lance dans la console intégrée
+4. Le jeu se lance dans la console intégrée
 
 ### Compilation et exécution manuelle
 
