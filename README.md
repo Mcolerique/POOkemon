@@ -11,7 +11,7 @@ Il s’inscrit dans un cadre académique et vise à appliquer les principes de l
 
 ## 🧩 Organisation
 
-- 👥 Travail en **binôme**, avec **Gaétan H.**
+- 👥 Travail en **binôme**, avec **[Gaétan H.](https://github.com/charnateg)**
 - 🕓 **Durée :** 5 semaines
 - 💻 **Langage principal :** Java
 - 🎯 **Objectif :** Développer un jeu fonctionnel tout en respectant les bonnes pratiques de conception orientée objet (UML, modularité, héritage, polymorphisme).
